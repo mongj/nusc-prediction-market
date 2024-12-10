@@ -1,4 +1,21 @@
-# React + TypeScript + Vite
+# Frontend
+
+### Local Development
+
+1. Use the latest stable version for yarn package manager
+```bash
+yarn set version stable
+```
+
+2. Install dependencies
+```bash
+yarn
+```
+
+3. Start the development server
+```bash
+yarn dev
+```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
