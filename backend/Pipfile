@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dotenv = "*"
+sse-starlette = "*"
+sqlalchemy = "*"
+alembic = "*"
+psycopg2-binary = "*"
+fastapi = {extras = ["all"], version = "*"}
+exceptiongroup = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
