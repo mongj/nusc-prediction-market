@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import ContactUs from './pages/ContactUs/ContactUs';
@@ -7,6 +7,7 @@ import Predict from './pages/Predict/Predict';
 import Reset from "./pages/Reset/Reset.tsx";
 
 function App() {
+
   return (
       <Routes>
         <Route path="/" element={<Dashboard />} />

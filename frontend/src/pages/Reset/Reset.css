@@ -1,0 +1,132 @@
+:root {
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --input-background-color: #fff;
+    --input-border-color: #ccc;
+    --button-background-color: #007bff;
+    --button-hover-background-color: #0056b3;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #333;
+        --text-color: #f5f5f5;
+        --input-background-color: #444;
+        --input-border-color: #555;
+        --button-background-color: #0056b3;
+        --button-hover-background-color: #004085;
+    }
+}
+
+.reset-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.reset-image {
+    width: 800px;
+    height: 900px;
+}
+
+.reset-form {
+    flex: 1;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 48px;
+}
+
+.reset-header {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 480px; /* Set the width to match the reset button */
+    margin-bottom: 20px;
+}
+
+/* Default styles */
+.reset-header h2 {
+    color: #21272A;
+    font-size: 42px;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: 46.2px;
+}
+
+.form-group label {
+    color: black;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .reset-header h2,
+    .form-group label {
+        color: white;
+    }
+}
+
+.form-group input {
+    padding: 8px 12px;
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    color: #A3A3A3;
+    width: 100%; /* Ensure the input fields take the full width of the form group */
+}
+
+.reset-button {
+    width: 480px; /* Decrease the width of the reset button */
+    height: 54px;
+    position: relative;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.reset-button-background {
+    width: 100%;
+    height: 54px;
+    position: absolute;
+    background: #0369A1;
+    border-radius: 16px;
+}
+
+.reset-button-foreground {
+    width: 100%;
+    height: 49.09px;
+    position: absolute;
+    background: #0EA5E9;
+    border-radius: 16px;
+}
+
+.reset-button-text {
+    color: white;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    line-height: 24px;
+    word-wrap: break-word;
+    z-index: 1; /* Ensure the text is above the background layers */
+}

@@ -13,7 +13,7 @@ function Login() {
 
   return (
       <div className="login-container">
-        <img className="login-image" src="/images/login.png" alt="Placeholder" />
+        <img className="login-image" src="/images/poster.png" alt="Placeholder"/>
         <div className="login-form">
           <div className="login-header">
             <h2>Log In</h2>

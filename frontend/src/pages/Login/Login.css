@@ -30,6 +30,16 @@
   gap: 8px;
 }
 
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 480px; /* Set the width to match the login button */
+  margin-bottom: 20px;
+}
+
+/* Default styles */
 .login-header h2 {
   color: #21272A;
   font-size: 42px;
@@ -38,19 +48,20 @@
   line-height: 46.2px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  width: 480px; /* Set the width to match the login button */
-}
-
 .form-group label {
   color: black;
   font-size: 16px;
   font-family: Inter, sans-serif;
   font-weight: 400;
   line-height: 24px;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .login-header h2,
+  .form-group label {
+    color: white;
+  }
 }
 
 .form-group input {
