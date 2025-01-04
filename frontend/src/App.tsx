@@ -5,12 +5,14 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import History from './pages/History/History';
 import Predict from './pages/Predict/Predict';
 import Reset from "./pages/Reset/Reset.tsx";
+import Master from "./pages/Master/Master.tsx";
 
 function App() {
 
   return (
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Master />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/history" element={<History />} />
