@@ -57,15 +57,17 @@ const Progress = ({ progress }) => (
 );
 
 const Surveys = () => (
-    <div className="card surveys-display">
-        <h2>Surveys</h2>
-        <div className="survey-item">
-            <p>Pre-Survey</p>
-            <Button text="Start" onClick={() => alert('Pre-Survey started!')} />
-        </div>
-        <div className="survey-item">
-            <p>Post-Survey</p>
-            <Button text="Start" onClick={() => alert('Post-Survey started!')} />
+    <div className='flex flex-col text-lg space-y-1'>
+        <h2 className='font-bold text-left'>Surveys</h2>
+        <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col justify-between rounded-2xl">
+            <div className="border-gray-300 border-b-2 p-2 p flex justify-between items-center">
+                <p className='font-medium text-base px-2'>Pre-Survey</p>
+                <Button text="Start" onClick={() => alert('Pre-Survey started!')} />
+            </div>
+            <div className="p-2 flex justify-between items-center">
+                <p className='font-medium text-base px-2'>Post-Survey</p>
+                <Button text="Start" onClick={() => alert('Post-Survey started!')} />
+            </div>
         </div>
     </div>
 );
