@@ -16,12 +16,12 @@ const Header = () => (
 );
 
 const CoinDisplay = ({ coins }) => (
-    <div className="card coin-display">
-        <div className="coin-info">
-            <div className="coin-amount">{coins}</div>
-            <div className="coin-label">Total coins</div>
+    <div className="bg-white border-2 p-4 flex justify-between gap-4 rounded-2xl">
+        <div className="flex flex-col text-left">
+            <div className="font-extrabold">{coins}</div>
+            <div className="text-sm text-gray-400">Total coins</div>
         </div>
-        <a href="#" className="coin-link">What is this?</a>
+        <a href="#" className="flex text-xs text-gray-500 items-end underline underline-offset-1 hover:text-gray-400">What is this?</a>
     </div>
 );
 
