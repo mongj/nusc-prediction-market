@@ -5,6 +5,7 @@ import Button from '../../components/Button/Button';
 import SignOutButton from '../../components/SignOutButton/SignOutButton';
 import HelpButton2 from '../../components/HelpButton2/HelpButton2';
 import YetToOpenBox from '../../components/StatusBoxes/YetToOpenBox';
+import PendingBox from '../../components/StatusBoxes/PendingBox';
 
 const Header = () => (
     <div className="flex w-full justify-between items-center">
@@ -76,12 +77,15 @@ const Surveys = () => (
 );
 
 const Prediction = () => (
-    <div className="card prediction-display">
-        <h2>Make Your Prediction</h2>
-        <div className="prediction-item">
-            <p>1 Jan</p>
-            <p>Pollutant Concentration</p>
-            <Button text="Enter" onClick={() => alert('Prediction entered!')} />
+    <div className='flex flex-col text-lg space-y-1'>
+        <h2 className='font-bold text-left'>Make Your Prediction</h2>
+        <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col justify-between rounded-2xl">
+            <div className="border-gray-300 py-2 px-4 flex justify-between items-center">
+                <p className='font-medium text-base'>1 Jan</p>
+                <p className='font-medium text-base'>Pollutant Concentration</p>
+                <PendingBox />
+                <Button text="Enter" onClick={() => alert('Prediction entered!')} />
+            </div>
         </div>
     </div>
 );
