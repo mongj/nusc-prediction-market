@@ -6,6 +6,14 @@ import HelpButton2 from '../../components/HelpButton2/HelpButton2';
 import YetToOpenBox from '../../components/StatusBoxes/YetToOpenBox';
 import PendingBox from '../../components/StatusBoxes/PendingBox';
 import GreyedButton from '../../components/GreyedButton/GreyedButton';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import YetToStartBox from '../../components/StatusBoxes/YetToStartBox';
+
 
 const Header = () => (
     <div className="flex w-full justify-between items-center">
@@ -42,7 +50,10 @@ const Progress = ({ progress }) => (
             <div className="progress-bar">
                 <div className="progress-fill" style={{ width: `${(progress.questionsAnswered / 30) * 100}%` }}></div>
             </div>
-            {progress.milestones.map((milestone, index) => (
+
+
+            {/* this was the original implementation without the dropdown */}
+            {/* {progress.milestones.map((milestone, index) => (
                 <div key={index} className="flex flex-col items-start py-2">
                     <p className='text-sm font-semibold pb-1'>Milestone {index + 1}</p>
                     <div className="milestone-circles">
@@ -54,6 +65,34 @@ const Progress = ({ progress }) => (
                         ))}
                     </div>
                     <p className="text-sm text-left text-gray-500 pt-1">{(milestone.answered + 1) < 5 ? `Answer ${4 - milestone.answered} more question(s) to get the bonus for this milestone` : 'You have achieved the bonus for this milestone!'}</p>
+                </div>
+            ))} */}
+
+
+            {/* this is with the dropdown */}
+            {progress.milestones.map((milestone, index) => (
+                <div key={index} className="flex flex-col items-start py-2">
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                        >
+                            <p className='text-md font-medium pr-10'>Milestone {index + 1}</p>
+                            <YetToStartBox />
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <div className="flex justify-start space-x-2">
+                                {[...Array(6)].map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className={`milestone-circle ${i < milestone.answered ? 'completed' : ''}`}
+                                    >{i + 1}</div>
+                                ))}
+                            </div>
+                            <p className="text-sm text-left text-gray-500 pt-1">{(milestone.answered + 1) < 5 ? `Answer ${4 - milestone.answered} more question(s) to get the bonus for this milestone` : 'You have achieved the bonus for this milestone!'}</p>
+                        </AccordionDetails>
+                    </Accordion>
                 </div>
             ))}
         </div>

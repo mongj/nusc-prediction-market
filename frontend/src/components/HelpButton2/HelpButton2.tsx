@@ -1,11 +1,11 @@
 import React from 'react';
 
-interface HelpButtonProps {
+interface HelpButton2Props {
     text: string;
     onClick?: () => void;
 }
 
-const HelpButton2: React.FC<HelpButtonProps> = ({ text, onClick }) => (
+const HelpButton2: React.FC<HelpButton2Props> = ({ text, onClick }) => (
     <div
         className="relative h-full cursor-pointer hover:brightness-90"
         onClick={onClick}
