@@ -2,20 +2,19 @@
 // nusc-prediction-market/frontend/src/pages/Dashboard/Dashboard.tsx
 import './Dashboard.css';
 import Button from '../../components/Button/Button';
-import HelpButton from '../../components/HelpButton/HelpButton';
 import SignOutButton from '../../components/SignOutButton/SignOutButton';
+import HelpButton2 from '../../components/HelpButton2/HelpButton2';
 
 const Header = () => (
-    <div className="dashboard-header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <h1 style={{ marginRight: '20px' }}>NUSC Prediction Market Study</h1>
-            <div className="header-buttons">
-                <HelpButton text="Help" onClick={() => alert('Help button clicked!')} />
-                <SignOutButton text="Sign Out" onClick={() => alert('Sign Out button clicked!')} />
-            </div>
+    <div className="flex w-full justify-between items-center">
+        <h1 className="text-4xl font-bold">NUSC Prediction Market Study</h1>
+        <div className='flex-row flex space-x-4'>
+            <HelpButton2 text="Help" onClick={() => alert('Help button clicked!')} />
+            <SignOutButton text="Sign Out" onClick={() => alert('Sign Out button clicked!')} />
         </div>
     </div>
 );
+
 const CoinDisplay = ({ coins }) => (
     <div className="card coin-display">
         <div className="coin-info">
