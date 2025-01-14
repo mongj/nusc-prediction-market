@@ -9,8 +9,6 @@ import GreyedButton from '../../components/GreyedButton/GreyedButton';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import YetToStartBox from '../../components/StatusBoxes/YetToStartBox';
 
