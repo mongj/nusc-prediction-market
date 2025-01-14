@@ -1,11 +1,11 @@
 // nusc-prediction-market/frontend/src/pages/Dashboard/Dashboard.tsx
 // nusc-prediction-market/frontend/src/pages/Dashboard/Dashboard.tsx
 import './Dashboard.css';
-import SignOutButton from '../../components/SignOutButton/SignOutButton';
-import HelpButton2 from '../../components/HelpButton2/HelpButton2';
+import SignOutButton from '../../components/Buttons/SignOutButton/SignOutButton';
+import HelpButton2 from '../../components/Buttons/HelpButton2/HelpButton2';
 import YetToOpenBox from '../../components/StatusBoxes/YetToOpenBox';
 import PendingBox from '../../components/StatusBoxes/PendingBox';
-import GreyedButton from '../../components/GreyedButton/GreyedButton';
+import GreyedButton from '../../components/Buttons/GreyedButton/GreyedButton';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';

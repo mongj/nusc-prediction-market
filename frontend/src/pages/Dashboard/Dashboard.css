@@ -87,12 +87,6 @@ body {
     transition: width 0.3s ease;
 }
 
-.milestone-circles {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-}
-
 .milestone-circle {
     width: 32px;
     height: 32px;

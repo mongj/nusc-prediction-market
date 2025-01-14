@@ -1,11 +1,64 @@
+import { useState } from "react";
+import BackButton from "../../components/Buttons/BackButton/BackButton";
+import ConfirmButton from "../../components/Buttons/ConfirmButton/ConfirmButton";
+import NoButton from "../../components/Buttons/NoButton/NoButton";
+import YesButton from "../../components/Buttons/YesButton/YesButton";
+import CoinSlider from "../../components/CoinSlider/CoinSlider";
 
-function Predict() {
-  return (
-    <div className="predict-container">
-      <h2>Predict</h2>
-      <p>Display prediction data here.</p>
+// const [UserAnswer, setUserAnswer] = useState<String>('');
+
+const Question = () => (
+  <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col items-center rounded-2xl p-6">
+    <p className="text-xl font-bold text-center pb-2 max-w-2xl">Will the average sulphur dioxide concentration reading in Singapore exceed [number] on [date]?</p>
+    <div className="flex flex-row justify-between space-x-2 pb-4">
+      <YesButton onClick={() => setUserAnswer('Yes')} />
+      <NoButton onClick={() => setUserAnswer('No')} />
     </div>
-  );
-}
+    <p className="text-base font-semibold text-center pb-4">How many coins will you wager on your answer?</p>
+    <CoinSlider />
+    <ConfirmWager />
+  </div>
+);
+
+const ConfirmWager = () => (
+  <div className="bg-blue-50 border-2 border-blue-500 shadow-sm flex flex-row justify-between rounded-2xl p-4 space-x-6">
+    <div className="flex flex-col">
+      {/* <p className="text-sm">You answered: {UserAnswer}</p> */}
+      <span className="flex flex-row space-x-1 pt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#D4AF37" class="bi bi-coin" viewBox="0 0 16 16">
+          <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z" />
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+          <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
+        </svg>
+        <div className="text-sm">x coins</div>
+      </span>
+    </div>
+    <ConfirmButton />
+  </div>
+);
+
+const OtherVotes = () => (
+  <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col items-center justify-between rounded-2xl p-6">
+    <p className="font-semibold">See how others have voted</p>
+    <div>insert circle here</div>
+    <div className="flex flex-row w-full justify-between">
+      <div className="font-semibold">23 Yes</div>
+      <div className="font-semibold">69 No</div>
+    </div>
+  </div>
+);
+
+const Predict = () => (
+  <div className="bg-white flex flex-col">
+    <div className="pb-4">
+      <BackButton />
+      <h1 className="text-left pt-4 font-bold">Q1: Pollutant Concentration</h1>
+    </div>
+    <div className="flex flex-row justify-between space-x-6">
+      <Question />
+      <OtherVotes />
+    </div>
+  </div>
+);
 
 export default Predict;
