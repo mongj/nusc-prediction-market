@@ -132,29 +132,6 @@ body {
     color: white;
 }
 
-.prediction-display {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: auto;
-}
-
-.prediction-display h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
-}
-
-.prediction-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px; /* Adjust padding for alignment */
-    background: var(--card-background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
-}
-
 .start-button.disabled {
     background-color: var(--button-disabled-color);
     cursor: not-allowed;

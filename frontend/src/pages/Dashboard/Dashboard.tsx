@@ -6,6 +6,7 @@ import SignOutButton from '../../components/SignOutButton/SignOutButton';
 import HelpButton2 from '../../components/HelpButton2/HelpButton2';
 import YetToOpenBox from '../../components/StatusBoxes/YetToOpenBox';
 import PendingBox from '../../components/StatusBoxes/PendingBox';
+import GreyedButton from '../../components/GreyedButton/GreyedButton';
 
 const Header = () => (
     <div className="flex w-full justify-between items-center">
@@ -65,12 +66,13 @@ const Surveys = () => (
             <div className="border-gray-300 border-b-2 py-2 px-4 flex justify-between items-center">
                 <p className='font-medium text-base'>Pre-Survey</p>
                 <YetToOpenBox />
-                <Button text="Start" onClick={() => alert('Pre-Survey started!')} />
+                <GreyedButton text="Start" />
+                {/* <Button text="Start" onClick={() => alert('Pre-Survey started!')} /> */}
             </div>
             <div className="p-2 flex justify-between items-center py-2 px-4">
                 <p className='font-medium text-base'>Post-Survey</p>
                 <YetToOpenBox />
-                <Button text="Start" onClick={() => alert('Post-Survey started!')} />
+                <GreyedButton text="Start" />
             </div>
         </div>
     </div>
@@ -84,7 +86,8 @@ const Prediction = () => (
                 <p className='font-medium text-base'>1 Jan</p>
                 <p className='font-medium text-base'>Pollutant Concentration</p>
                 <PendingBox />
-                <Button text="Enter" onClick={() => alert('Prediction entered!')} />
+                <GreyedButton text="Enter" />
+                {/* <Button text="Enter" onClick={() => alert('Prediction entered!')} /> */}
             </div>
         </div>
     </div>
