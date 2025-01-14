@@ -44,7 +44,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    width: 100%;
+    width: 100&;
     background-color: var(--background-color);
     padding: 40px 20px; /* Increase padding for better spacing */
     gap: 20px; /* Add spacing between components */
@@ -62,14 +62,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px; /* Consistent spacing between components */
-}
-
-.card {
-    background: var(--card-background);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border-radius: var(--border-radius);
-    padding: 24px; /* Uniform padding */
-    text-align: center; /* Center-align text inside cards */
 }
 
 /* Progress Section */
@@ -95,20 +87,6 @@ body {
     transition: width 0.3s ease;
 }
 
-.milestone {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 0;
-    align-items: start;
-}
-
-.milestone-status {
-    font-size: 14px;
-    color: var(--secondary-color);
-    text-align: center;
-}
-
 .milestone-circles {
     display: flex;
     justify-content: center;
@@ -131,39 +109,4 @@ body {
 .milestone-circle.completed {
     background: var(--primary-color);
     color: white;
-}
-
-.start-button.disabled {
-    background-color: var(--button-disabled-color);
-    cursor: not-allowed;
-}
-
-.start-button {
-    background-color: var(--button-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    margin-left: auto; /* Align the button to the right */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match button shadow */
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.start-button:hover {
-    background-color: var(--button-hover-background-color);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
-
-/* Adjust Button Alignment */
-.enter-button {
-    margin-left: auto; /* Align buttons to the right */
-    background-color: var(--button-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
 }

@@ -1,7 +1,6 @@
 // nusc-prediction-market/frontend/src/pages/Dashboard/Dashboard.tsx
 // nusc-prediction-market/frontend/src/pages/Dashboard/Dashboard.tsx
 import './Dashboard.css';
-import Button from '../../components/Button/Button';
 import SignOutButton from '../../components/SignOutButton/SignOutButton';
 import HelpButton2 from '../../components/HelpButton2/HelpButton2';
 import YetToOpenBox from '../../components/StatusBoxes/YetToOpenBox';
