@@ -58,10 +58,18 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
 }));
 
 
-export default function CustomizedSlider() {
+export default function CustomizedSlider({ value, onChange }) {
   return (
     <Box sx={{ width: 320 }}>
-      <IOSSlider aria-label="ios slider" defaultValue={1} valueLabelDisplay="on" min={1} max={20} />
+      <IOSSlider
+        aria-label="ios slider"
+        defaultValue={1}
+        value={value}
+        onChange={onChange}
+        valueLabelDisplay="on"
+        min={1}
+        max={20}
+      />
     </Box>
   );
 }
