@@ -44,51 +44,10 @@ body {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    width: 100%;
+    width: 100&;
     background-color: var(--background-color);
     padding: 40px 20px; /* Increase padding for better spacing */
     gap: 20px; /* Add spacing between components */
-}
-
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: var(--max-width);
-    padding: 20px;
-    background-color: var(--card-background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
-}
-
-.dashboard-header h1 {
-    font-size: 28px; /* Slightly smaller text */
-    font-weight: 700;
-    color: var(--text-color);
-    margin: 0;
-}
-
-.header-buttons {
-    display: flex;
-    gap: 300px; /* Adjust the gap as needed */
-    margin-left: auto;
-}
-
-.help-button, .signout-button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--primary-color);
-    cursor: pointer;
-}
-
-.signout-button {
-    background-color: #FF4D4F;
-    color: white;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
 }
 
 .dashboard-content {
@@ -103,40 +62,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px; /* Consistent spacing between components */
-}
-
-.card {
-    background: var(--card-background);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border-radius: var(--border-radius);
-    padding: 24px; /* Uniform padding */
-    text-align: center; /* Center-align text inside cards */
-}
-
-/* Coin Display */
-.coin-display .coin-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px; /* Reduce gap for compactness */
-}
-
-.coin-display .coin-amount {
-    font-size: 36px; /* Adjust size for balance */
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.coin-display .coin-label {
-    font-size: 14px;
-    color: var(--secondary-color);
-}
-
-.coin-link {
-    font-size: 12px; /* Smaller text for link */
-    color: var(--secondary-color);
-    text-decoration: underline;
-    margin-top: 8px;
 }
 
 /* Progress Section */
@@ -162,25 +87,6 @@ body {
     transition: width 0.3s ease;
 }
 
-.milestone {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 0;
-}
-
-.milestone-status {
-    font-size: 14px;
-    color: var(--secondary-color);
-    text-align: center;
-}
-
-.milestone-circles {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-}
-
 .milestone-circle {
     width: 32px;
     height: 32px;
@@ -197,93 +103,4 @@ body {
 .milestone-circle.completed {
     background: var(--primary-color);
     color: white;
-}
-
-.surveys-display {
-    display: flex;
-    flex-direction: column;
-    gap: 12px; /* Match gap size with prediction display */
-}
-
-.surveys-display h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 16px;
-    text-align: center; /* Center-align the title */
-}
-
-.survey-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px; /* Match padding with prediction item */
-    background: var(--card-background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Match shadow with prediction item */
-    border-radius: var(--border-radius);
-}
-
-.survey-item p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500; /* Match font weight with prediction item */
-    color: var(--text-color);
-}
-
-.prediction-display {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: auto;
-}
-
-.prediction-display h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
-}
-
-.prediction-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px; /* Adjust padding for alignment */
-    background: var(--card-background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
-}
-
-.start-button.disabled {
-    background-color: var(--button-disabled-color);
-    cursor: not-allowed;
-}
-
-.start-button {
-    background-color: var(--button-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    margin-left: auto; /* Align the button to the right */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match button shadow */
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.start-button:hover {
-    background-color: var(--button-hover-background-color);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
-
-/* Adjust Button Alignment */
-.enter-button {
-    margin-left: auto; /* Align buttons to the right */
-    background-color: var(--button-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
 }
