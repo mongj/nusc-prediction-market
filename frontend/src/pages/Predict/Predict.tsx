@@ -6,6 +6,7 @@ import NoButton from "../../components/Buttons/NoButton/NoButton";
 import YesButton from "../../components/Buttons/YesButton/YesButton";
 import CoinSlider from "../../components/CoinSlider/CoinSlider";
 import GaugeComponent from "../../components/GaugeComponent/GaugeComponent";
+import climateQns from "../../storage/ClimateQuestionBank.json"
 
 const Question = ({ question }) => {
     const [UserAnswer, setUserAnswer] = useState('');
@@ -54,8 +55,6 @@ const OtherVotes = ({ yesCount, noCount }) => (
 );
 
 const Predict = () => {
-    const questionHeader = "Q1: Pollutant Concentration";
-    const question = "Will the average sulphur dioxide concentration reading in Singapore exceed [number] on [date]?";
     const yesCount = 69;
     const noCount = 23;
 
@@ -68,10 +67,10 @@ const Predict = () => {
         <div className="bg-white flex flex-col">
             <div className="pb-4">
                 <BackButton onClick={handleBackClick} />
-                <h1 className="text-left pt-4 font-bold">{questionHeader}</h1>
+                <h1 className="text-left pt-4 font-bold">Q{climateQns[0].id}: {climateQns[0].title}</h1>
             </div>
             <div className="flex flex-row justify-between space-x-6">
-                <Question question={question} />
+                <Question question={climateQns[0].question} />
                 <OtherVotes yesCount={yesCount} noCount={noCount} />
             </div>
         </div>
