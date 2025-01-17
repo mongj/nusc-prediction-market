@@ -1,9 +1,9 @@
-import Slider, { SliderThumb, SliderValueLabelProps } from '@mui/material/Slider';
+import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
 const iOSBoxShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+    '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
 const IOSSlider = styled(Slider)(({ theme }) => ({
   color: '#007bff',
@@ -16,14 +16,13 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
     boxShadow: '0 0 2px 0px rgba(0, 0, 0, 0.1)',
     '&:focus, &:hover, &.Mui-active': {
       boxShadow: '0px 0px 3px 1px rgba(0, 0, 0, 0.1)',
-      // Reset on touch devices, it doesn't add specificity
       '@media (hover: none)': {
         boxShadow: iOSBoxShadow,
       },
     },
     '&:before': {
       boxShadow:
-        '0px 0px 1px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 1px 0px rgba(0,0,0,0.12)',
+          '0px 0px 1px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 1px 0px rgba(0,0,0,0.12)',
     },
   },
   '& .MuiSlider-valueLabel': {
@@ -57,19 +56,22 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   }),
 }));
 
-
 export default function CustomizedSlider({ value, onChange }) {
+  const handleChange = (event, newValue) => {
+    onChange(newValue);
+  };
+
   return (
-    <Box sx={{ width: 320 }}>
-      <IOSSlider
-        aria-label="ios slider"
-        defaultValue={1}
-        value={value}
-        onChange={onChange}
-        valueLabelDisplay="on"
-        min={1}
-        max={20}
-      />
-    </Box>
+      <Box sx={{ width: 320 }}>
+        <IOSSlider
+            aria-label="ios slider"
+            defaultValue={1}
+            value={value}
+            onChange={handleChange}
+            valueLabelDisplay="on"
+            min={1}
+            max={20}
+        />
+      </Box>
   );
 }
