@@ -18,15 +18,19 @@ import Button from '../../components/Buttons/Button/Button';
 import climateQns from "../../storage/ClimateQuestionBank.json"
 
 
-const Header = () => (
-    <div className="flex w-full justify-between items-center">
-        <h1 className="text-4xl font-bold">NUSC Prediction Market Study</h1>
-        <div className='flex-row flex space-x-4'>
-            <HelpButton2 text="Help" onClick={() => alert('Help button clicked!')} />
-            <SignOutButton text="Sign Out" onClick={() => alert('Sign Out button clicked!')} />
+const Header = () => {
+    const navigate = useNavigate();
+    return (
+        <div className="flex w-full justify-between items-center">
+            <h1 className="text-4xl font-bold">NUSC Prediction Market Study</h1>
+            <div className='flex-row flex space-x-4'>
+                <HelpButton2 text="Help" onClick={() => alert('Help button clicked!')} />
+                <Button text="Contact Us" onClick={() => navigate('/dashboard/contactus')} />
+                <SignOutButton text="Sign Out" onClick={() => alert('Sign Out button clicked!')} />
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 const CoinDisplay = ({ coins }) => (
     <div className="bg-white border-2 border-gray-300 shadow-sm p-4 flex justify-between gap-4 rounded-2xl">
