@@ -66,13 +66,11 @@ const Predict = () => {
     };
 
     const { id } = useParams();
-    console.log("Retrieved id:", id);
     const questionData = climateQns.find((qn) => qn.id === id);
 
     if (!questionData) {
       return <p>Question not found</p>;
     }
-    console.log("Retrieved question data:", questionData);
 
     return (
         <div className="bg-white flex flex-col">
