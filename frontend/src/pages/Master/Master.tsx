@@ -16,7 +16,7 @@ function Master() {
                     <img src={reactLogo} className="logo react" alt="React logo" />
                 </a>
             </div>
-            <h1>Vite + React</h1>
+            <h1>Master Page</h1>
             <div className="card">
                 <button onClick={() => setCount((count) => count + 1)}>
                     count is {count}
@@ -26,12 +26,12 @@ function Master() {
                 </p>
             </div>
             <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
+                Links below to pages
             </p>
             <div className="navigation-buttons">
                 <button onClick={() => window.location.href = '/dashboard'}>Dashboard Page</button>
                 <button onClick={() => window.location.href = '/login'}>Login Page</button>
-                <button onClick={() => window.location.href = '/contactus'}>Contact Us Page</button>
+                <button onClick={() => window.location.href = '/dashboard/contactus'}>Contact Us Page</button>
                 <button onClick={() => window.location.href = '/history'}>History Page</button>
                 <button onClick={() => window.location.href = '/predict'}>Predict Page</button>
                 <button onClick={() => window.location.href = '/reset'}>Reset Page</button>

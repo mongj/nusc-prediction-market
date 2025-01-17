@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Master />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/dashboard/contactus" element={<ContactUs />} />
         <Route path="/history" element={<History />} />
         <Route path="/predict/:id" element={<Predict />} />
         <Route path="/reset" element={<Reset />} />
