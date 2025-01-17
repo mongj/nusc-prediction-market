@@ -1,0 +1,182 @@
+[
+    {
+        "id": "1",
+        "title": "Pollutant Concentration",
+        "question": "Will the average sulphur dioxide concentration reading in Singapore exceed [number] on [date]?",
+        "source": "https://www.haze.gov.sg/resources/pollutant-concentrations"
+    },
+    {
+        "id": "2",
+        "title": "Solar Panels",
+        "question": "Will there be any articles on solar panels published on The Straits Times between [dates]?",
+        "source": "https://www.straitstimes.com/"
+    },
+    {
+        "id": "3",
+        "title": "Haze",
+        "question": "Will the PSI index in Singapore fall below [reading] on [date]?",
+        "source": "https://www.haze.gov.sg/resources/readings-over-the-last-24-hours"
+    },
+    {
+        "id": "4",
+        "title": "Air Quality",
+        "question": "Will the average Air Quality Index (AQI) reading throughout Singapore exceed [reading] on [date]?",
+        "source": "https://aqicn.org/city/singapore/central/"
+    },
+    {
+        "id": "5",
+        "title": "Surface Air Temperature",
+        "question": "Will average surface air temperature in the Southern Hemisphere exceed [reading] on [date]?",
+        "source": "https://climatereanalyzer.org/clim/t2_daily/?dm_id=sh "
+    },
+    {
+        "id": "6",
+        "title": "Sea Ice Extent",
+        "question": "Will sea ice extent in the Northern Hemisphere on [date] exceed [reading]?",
+        "source": "https://climatereanalyzer.org/clim/seaice_daily/"
+    },
+    {
+        "id": "7",
+        "title": "Extreme Heat",
+        "question": "Will the average daily maximum temperature in Singapore exceed [reading] between [dates]?",
+        "source": "https://www.weather.gov.sg/climate-historical-daily/ "
+    },
+    {
+        "id": "8",
+        "title": "Certificate of Entitlement (COE)",
+        "question": "Will COE prices in Singapore for CAT B cars drop below [reading] on [date]?",
+        "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/coe-open-bidding.html"
+    },
+    {
+        "id": "9",
+        "title": "Sea Surface Temperature ",
+        "question": "Will the average sea surface temperature globally from [dates] exceed [reading]?",
+        "source": "https://climatereanalyzer.org/clim/sst_daily/"
+    },
+    {
+        "id": "10",
+        "title": "Precipitation",
+        "question": "Will the precipitation levels on [date] in Singapore surpass the average precipitation levels in [date]?",
+        "source": "https://www.weather.gov.sg/climate-historical-daily/ "
+    },
+    {
+        "id": "11",
+        "title": "Heat Stress",
+        "question": "Will the Wet-Bulb Globe Temperature (WBGT) reading at 1200 hours on [date] at Bishan Stadium exceed [reading]?",
+        "source": "https://www.weather.gov.sg/heat-stress"
+    },
+    {
+        "id": "12",
+        "title": "Pollutant Concentration",
+        "question": "Will the average carbon monoxide reading in the West region of Singapore exceed readings in the Central region of Singapore on [date]?",
+        "source": "https://www.haze.gov.sg/resources/pollutant-concentrations"
+    },
+    {
+        "id": "13",
+        "title": "Natural Disasters",
+        "question": "Will there be any warnings of tropical cyclones in Singapore between [dates]?",
+        "source": "https://www.weather.gov.sg/warning-tropical-cyclone-information/"
+    },
+    {
+        "id": "14",
+        "title": "Extreme Heat",
+        "question": "Will the average temperature of the top 5 hottest cities in the world exceed 45 °C between [dates]? ",
+        "source": "https://www.eldoradoweather.com/climate/world-extremes/world-temp-rainfall-extremes.php"
+    },
+    {
+        "id": "15",
+        "title": "Traffic",
+        "question": "Will there be heavy traffic in Singapore at PIE Exit 24 towards BKE on between [times] on [date]?",
+        "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/traffic_information/traffic_updates_and_road_closures.html?type=tc"
+    },
+    {
+        "id": "16",
+        "title": "Wind Speed",
+        "question": "Will the highest recorded wind speed in Singapore on [date] exceed [number]?",
+        "source": "https://data.gov.sg/datasets?topics=environment&page=1&resultId=d_7677738484067741bf3b56ab5d69c7e9#tag/default/GET/wind-speed"
+    },
+    {
+        "id": "17",
+        "title": "Intense Rainfall",
+        "question": "Will average rainfall in Jakarta, Indonesia on [date] go above [reading]?",
+        "source": "https://www.visualcrossing.com/weather-history/Jakarta%2CIndonesia"
+    },
+    {
+        "id": "18",
+        "title": "Ultraviolet Index",
+        "question": "Will the average Ultraviolet Index (UVI) in Singapore from 12pm to 3pm on [date] exceed [number]?",
+        "source": "https://www.nea.gov.sg/corporate-functions/weather/ultraviolet-index"
+    },
+    {
+        "id": "19",
+        "title": "Traffic",
+        "question": "Will the average estimated travel times of expressways in Singapore on [date] from 0800 to 1000 hours exceed [reading]?",
+        "source": "https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html#Traffic"
+    },
+    {
+        "id": "20",
+        "title": "Solar Exposure",
+        "question": "Will the daily global solar exposure at Rosslyn Park (Seaview) weather station in Australia exceed [number] MJm-2 on [date]?",
+        "source": "http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=193&p_display_type=dailyDataFile&p_stn_num=023085&p_startYear="
+    },
+    {
+        "id": "21",
+        "title": "Public Transport",
+        "question": "Will the forecasted crowd density at [MRT station] exceed the real-time crowd density, on [date]?",
+        "source": "https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html#Traffic"
+    },
+    {
+        "id": "22",
+        "title": "Public Transport",
+        "question": "Will there be any train disruptions in Singapore on [date]?",
+        "source": "https://www.sbstransit.com.sg/train-delaydisruption-updates"
+    },
+    {
+        "id": "23",
+        "title": "Air Quality",
+        "question": "Will PM 2.5 readings in Western Singapore at 0900 hours exceed readings at 1700 hours, on [date]?",
+        "source": "https://www.haze.gov.sg/#3"
+    },
+    {
+        "id": "24",
+        "title": "Storms",
+        "question": "The Storm Prediction Center updates preliminary observations of tornadoes, hails, and winds in the USA every Saturday. Will the total number of Tornadoes, Hails, and Winds exceed [number] for the [month]?",
+        "source": "https://www.spc.noaa.gov/climo/summary/#Expiration"
+    },
+    {
+        "id": "25",
+        "title": "Floods",
+        "question": "The Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) monitors floods in Metro Manila. PAGASA classifies flood warnings into 4 categories in increasing levels of urgency - normal, alert, alarm and critical. There are multiple stations throughout Metro Manila to track water levels and issue flood warnings if necessary. On [date], will there be at least one station whose flood warning is at a critical level?",
+        "source": "https://bagong.pagasa.dost.gov.ph/products-and-services/flood-monitoring-for-metro-manila"
+    },
+    {
+        "id": "26",
+        "title": "Electric Buses",
+        "question": "Will there be any news on electric buses in The Straits Times in the next [number] days?",
+        "source": "https://www.straitstimes.com/"
+    },
+    {
+        "id": "27",
+        "title": "Electric Vehicles",
+        "question": "Will the local interest in the search term 'electric vehicles' remain above 50 between 0900 to 1700 hours on [date]? (N.B. The numbers on “Google Trends” represent search interest relative to the highest point on the chart for a given region and time. A value of 100 reflects the peak popularity for a term. A value of 50 means that the term is half as popular. A score of 0 means there was not enough data for this term.) ",
+        "source": "https://trends.google.com/trends/"
+    },
+    {
+        "id": "28",
+        "title": "CO2",
+        "question": "Will the global average carbon dioxide level in Earth's atmosphere on [date (2025)] exceed the recorded level on [date (2024)]?",
+        "source": "https://www.co2.earth/daily-co2"
+    },
+    {
+        "id": "29",
+        "title": "Sea Water Temperature",
+        "question": "Will average sea water temperature in Singapore on [date] exceed [number]?",
+        "source": "https://www.seatemperature.org/asia/singapore/singapore.htm"
+    },
+    {
+        "id": "30",
+        "title": "Wet Bulb Temperature",
+        "question": "Will the highest recorded Wet Bulb Temperature for Singapore on [date] exceed [number]?",
+        "source": "https://data.gov.sg/datasets/d_f222c70a7c00c5a5a9d4ec432d67f6e8/view"
+    }
+]

@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import ConfirmButton from "../../components/Buttons/ConfirmButton/ConfirmButton";
 import NoButton from "../../components/Buttons/NoButton/NoButton";
 import YesButton from "../../components/Buttons/YesButton/YesButton";
 import CoinSlider from "../../components/CoinSlider/CoinSlider";
 import GaugeComponent from "../../components/GaugeComponent/GaugeComponent";
+
+import climateQns from "../../storage/ClimateQuestionBank.json"
 
 const Question = ({ question }) => {
     const [UserAnswer, setUserAnswer] = useState('');
@@ -54,24 +57,29 @@ const OtherVotes = ({ yesCount, noCount }) => (
 );
 
 const Predict = () => {
-    const questionHeader = "Q1: Pollutant Concentration";
-    const question = "Will the average sulphur dioxide concentration reading in Singapore exceed [number] on [date]?";
     const yesCount = 69;
     const noCount = 23;
 
     const navigate = useNavigate();
     const handleBackClick = () => {
-        navigate("/dashboard"); // Navigate to the dashboard route
+        navigate("/dashboard");
     };
+
+    const { id } = useParams();
+    const questionData = climateQns.find((qn) => qn.id === id);
+
+    if (!questionData) {
+      return <p>Question not found</p>;
+    }
 
     return (
         <div className="bg-white flex flex-col">
             <div className="pb-4">
                 <BackButton onClick={handleBackClick} />
-                <h1 className="text-left pt-4 font-bold">{questionHeader}</h1>
+                <h1 className="text-left pt-4 font-bold">Q{questionData.id}: {questionData.title}</h1>
             </div>
             <div className="flex flex-row justify-between space-x-6">
-                <Question question={question} />
+                <Question question={questionData.question} />
                 <OtherVotes yesCount={yesCount} noCount={noCount} />
             </div>
         </div>

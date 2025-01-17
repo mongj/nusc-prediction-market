@@ -16,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/history" element={<History />} />
-        <Route path="/predict" element={<Predict />} />
+        <Route path="/predict/:id" element={<Predict />} />
         <Route path="/reset" element={<Reset />} />
       </Routes>
   );
