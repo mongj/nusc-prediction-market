@@ -1,0 +1,182 @@
+[
+    {
+        "id": "1",
+        "title": "Music",
+        "question": "The song 'XXX’ was released by an English group 'XXX’' on [date] and has been on the top 10 Billboard Chart for XXX weeks. Will it fall below the top 10 Billboard Chart by [date]?",
+        "source": "https://www.billboard.com/charts/hot-100/"
+    },
+    {
+        "id": "2",
+        "title": "Instagram",
+        "question": "JJ Lin ranks on the top 10 Instagram users in Singapore by follower count. Will the number of his followers exceed [number] by [date]?",
+        "source": "https://hypeauditor.com/top-instagram-all-singapore/"
+    },
+    {
+        "id": "3",
+        "title": "Film",
+        "question": "The film ‘XXX’ premiered in Singapore on [date]. Will the domestic box office earnings of ‘XXX’ gross over [number]?",
+        "source": "https://www.boxofficemojo.com/weekend/by-year/?area=SG"
+    },
+    {
+        "id": "4",
+        "title": "Netflix",
+        "question": "Will the Netflix film ‘XXX’ reach rank #1 in the top 10 films in Singapore by [date]?",
+        "source": "https://www.netflix.com/tudum/top10/singapore/tv"
+    },
+    {
+        "id": "5",
+        "title": "Instagram",
+        "question": "Will the average likes per Instagram post posted by Prime Minister Lawrence Wong in [month] exceed [number] by [date]?",
+        "source": "https://www.instagram.com/lawrencewongst/?hl=en"
+    },
+    {
+        "id": "6",
+        "title": "Twitter",
+        "question": "Will Elon Musk’s Twitter followers count exceed [number] by [date]?",
+        "source": "https://socialblade.com/twitter/user/elonmusk"
+    },
+    {
+        "id": "7",
+        "title": "Box Office Sales",
+        "question": "Will ‘XXX’ reach rank #1 in terms of box office sales in Singapore by [date]?",
+        "source": "https://www.boxofficemojo.com/weekend/by-year/?area=SG"
+    },
+    {
+        "id": "8",
+        "title": "Instagram",
+        "question": "Will Taylor Swift’s number of Instagram posts exceed [number] by [date]?",
+        "source": "https://www.instagram.com/taylorswift/"
+    },
+    {
+        "id": "9",
+        "title": "Amazon",
+        "question": "Amazon’s Best Seller Book List shows most popular books based on sales. Will [author]’s XXX remain in the top 25 of the Best Seller list at 23:59 SGT on [date]?",
+        "source": "https://www.amazon.com/Best-Sellers-Books/zgbs/books"
+    },
+    {
+        "id": "10",
+        "title": "YouTube",
+        "question": "Will Zermatt Neo upload more than one YouTube video between [dates]?",
+        "source": "https://www.youtube.com/@ZermattNeo"
+    },
+    {
+        "id": "11",
+        "title": "Netflix",
+        "question": "Will the total number of hours spent on watching [film] (in all languages) exceed [number] by [date]?",
+        "source": "https://flixpatrol.com/streaming-services/most-hours-first-month/netflix/#toc-tvshows"
+    },
+    {
+        "id": "12",
+        "title": "Football",
+        "question": "Will XXX win against XXX in the English Premier League match scheduled for [date]?",
+        "source": "https://www.eurosport.com/football/premier-league/calendar-results.shtml"
+    },
+    {
+        "id": "13",
+        "title": "TikTok",
+        "question": "Will Just Keep Thinking’s TikTok follower count exceed [number] by [date]?",
+        "source": "https://www.tiktok.com/@justkeepthinking?lang=en"
+    },
+    {
+        "id": "14",
+        "title": "IMDB Rating",
+        "question": "Will XXX receive an IMDB rating of above 7.5 by [date]?",
+        "source": "https://www.imdb.com/"
+    },
+    {
+        "id": "15",
+        "title": "Billboard",
+        "question": "Will [song] top the Billboard Charts by the end of [date]?",
+        "source": "https://www.billboard.com/charts/hot-100/"
+    },
+    {
+        "id": "16",
+        "title": "Instagram",
+        "question": "Will Aisyah Aziz’s average likes per post exceed [number] by [date]?",
+        "source": "https://www.instagram.com/aisyaah_aziz/?hl=en"
+    },
+    {
+        "id": "17",
+        "title": "Basketball",
+        "question": "Will XXX win against XXX in the National Basketball Association (NBA) match scheduled for [date]?",
+        "source": "https://www.espn.com.sg/nba/scoreboard/_/date/20241005"
+    },
+    {
+        "id": "18",
+        "title": "Formula One",
+        "question": "Will XXX emerge as the race champion for the race scheduled on [date]?",
+        "source": "https://www.formula1.com/"
+    },
+    {
+        "id": "19",
+        "title": "Football (Local)",
+        "question": "Will XXX win against XXX in the XXX Singapore Premier League match scheduled for [date]?",
+        "source": "https://www.flashscore.com/football/singapore/premier-league/"
+    },
+    {
+        "id": "20",
+        "title": "Channel News Asia",
+        "question": "Will the total views for the documentary XXX exceed [number] on [date]?",
+        "source": "https://www.youtube.com/@CNAInsider"
+    },
+    {
+        "id": "21",
+        "title": "Facebook",
+        "question": "Will the total number of likes for Grab’s Facebook page exceed [number] by [date]?",
+        "source": "https://www.facebook.com/Grab/"
+    },
+    {
+        "id": "22",
+        "title": "Instagram",
+        "question": "Will there be any new posts on the Singapore Armed Forces’ Instagram page (@oursingaporearmy) on [date]?",
+        "source": "https://www.instagram.com/oursingaporearmy/?hl=en"
+    },
+    {
+        "id": "23",
+        "title": "Telegram",
+        "question": "Will the number of subscribers to the Gov.sg Telegram channel exceed [number] on [date]?",
+        "source": "https://t.me/Govsg"
+    },
+    {
+        "id": "24",
+        "title": "Youtube",
+        "question": "Will Sneaky Sushii upload more than one YouTube video between [dates]?",
+        "source": "https://www.youtube.com/c/sneakysushii"
+    },
+    {
+        "id": "25",
+        "title": "Food",
+        "question": "Will there be a new product released by McDonalds between [date] and [date]?",
+        "source": "https://www.facebook.com/mcdsg/"
+    },
+    {
+        "id": "26",
+        "title": "Shopee",
+        "question": "Will handheld fans be listed as one of the top-selling products on Shopee on [date]?",
+        "source": "https://shopee.sg/"
+    },
+    {
+        "id": "27",
+        "title": "Animals",
+        "question": "Will the local interest in the search term 'cats' remain above 50 between 0900 to 1700 hours on [date]?  (N.B. The numbers on “Google Trends” represent search interest relative to the highest point on the chart for a given region and time. A value of 100 reflects the peak popularity for a term. A value of 50 means that the term is half as popular. A score of 0 means there was not enough data for this term.)",
+        "source": "https://trends.google.com/trends/"
+    },
+    {
+        "id": "28",
+        "title": "Instagram",
+        "question": "Will [app] make it into the Top 10 paid phone applications on Apple’s App Store?",
+        "source": "https://apps.apple.com/sg/charts/iphone"
+    },
+    {
+        "id": "29",
+        "title": "Spotify",
+        "question": "Will [artist]’s XXX make it into the Top 50 Singapore playlist on Spotify?",
+        "source": "https://open.spotify.com/playlist/37i9dQZEVXbK4gjvS1FjPY"
+    },
+    {
+        "id": "30",
+        "title": "Facebook",
+        "question": "Will the number of members in the Facebook group ‘Hawkers United’ exceed [number] on [date]?",
+        "source": "https://www.facebook.com/groups/HawkersUnited2020/"
+    }
+]
