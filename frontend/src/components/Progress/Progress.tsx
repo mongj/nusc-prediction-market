@@ -13,7 +13,7 @@ const Progress = ({ progress }) => (
                 <div className="bg-blue-500 h-full transition-width duration-300 ease-in-out" style={{ width: `${(progress.questionsAnswered / 30) * 100}%` }}></div>
             </div>
             {progress.milestones.map((milestone, index) => (
-                <div key={index} className="flex flex-col items-start py-2">
+                <div key={index} className="flex flex-col items-start py-2 overflow-auto">
                     <Accordion>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}

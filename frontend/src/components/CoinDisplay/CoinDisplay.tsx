@@ -17,7 +17,7 @@ const CoinDisplay = ({ coins }) => {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div className="bg-white border-2 border-gray-300 shadow-sm p-4 flex flex-col sm:flex-row w-28 sm:w-full justify-between gap-4 rounded-2xl">
+        <div className="bg-white border-2 border-gray-300 shadow-sm p-4 flex justify-between gap-4 rounded-2xl">
             <div className='flex flex-row space-x-2'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#D4AF37" className="bi bi-coin" viewBox="0 0 16 16">
                     <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z" />
@@ -26,7 +26,7 @@ const CoinDisplay = ({ coins }) => {
                 </svg>
                 <div className="flex flex-col text-left">
                     <div className="font-extrabold pt-1 sm:pt-0">{coins}</div>
-                    <div className="text-sm text-gray-400 hidden sm:visible">Total coins</div>
+                    <div className="text-sm text-gray-400">Total coins</div>
                 </div>
             </div>
             <a href="#" className="flex text-xs text-gray-500 items-end underline underline-offset-1 hover:text-gray-400" onClick={handleClick}>What is this?</a>

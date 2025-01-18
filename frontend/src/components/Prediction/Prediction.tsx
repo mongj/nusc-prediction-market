@@ -12,7 +12,7 @@ const Prediction = () => {
     return (
         <div className='flex flex-col text-lg space-y-1'>
             <h2 className='font-bold text-left'>Make Your Prediction</h2>
-            <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col justify-between rounded-2xl">
+            <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col justify-between rounded-2xl overflow-auto">
                 {climateQns.map((question) => (
                     <div className="border-gray-300 py-2 px-4 flex justify-between items-center" key={question.id}>
                         <div className="flex flex-row justify-between w-full pr-16">
