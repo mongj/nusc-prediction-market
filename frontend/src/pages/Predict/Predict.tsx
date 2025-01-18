@@ -46,7 +46,7 @@ const ConfirmWager = ({ UserAnswer, coins }) => (
 );
 
 const OtherVotes = ({ yesCount, noCount }) => (
-    <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col items-center justify-between rounded-2xl p-6">
+    <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col items-center justify-between rounded-2xl p-6 w-full">
         <p className="font-semibold">See how others have voted</p>
         <GaugeComponent yesCount={yesCount} noCount={noCount} />
         <div className="flex flex-row w-full justify-between">
@@ -78,7 +78,7 @@ const Predict = () => {
                 <BackButton onClick={handleBackClick} />
                 <h1 className="text-left pt-4 font-bold">Q{questionData.id}: {questionData.title}</h1>
             </div>
-            <div className="flex flex-row justify-between space-x-6">
+            <div className="flex flex-col gap-4 sm:flex-row justify-between sm:space-x-6">
                 <Question question={questionData.question} />
                 <OtherVotes yesCount={yesCount} noCount={noCount} />
             </div>
