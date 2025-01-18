@@ -25,7 +25,7 @@ const CoinDisplay = ({ coins }) => {
                     <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
                 </svg>
                 <div className="flex flex-col text-left">
-                    <div className="font-extrabold">{coins}</div>
+                    <div className="font-extrabold pt-1 sm:pt-0">{coins}</div>
                     <div className="text-sm text-gray-400">Total coins</div>
                 </div>
             </div>

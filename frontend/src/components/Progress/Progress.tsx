@@ -9,11 +9,11 @@ const Progress = ({ progress }) => (
         <div className="bg-white border-2 border-gray-300 shadow-sm flex flex-col justify-between rounded-2xl py-4 px-6">
             <h2 className='font-bold text-left'>My Progress</h2>
             <p className='text-sm font-semibold text-left pt-4 pb-2'>{progress.questionsAnswered}/30 questions answered</p>
-            <div className="progress-bar">
-                <div className="progress-fill" style={{ width: `${(progress.questionsAnswered / 30) * 100}%` }}></div>
+            <div className="bg-gray-300 h-3 rounded-lg relative overflow-hidden">
+                <div className="bg-blue-500 h-full transition-width duration-300 ease-in-out" style={{ width: `${(progress.questionsAnswered / 30) * 100}%` }}></div>
             </div>
             {progress.milestones.map((milestone, index) => (
-                <div key={index} className="flex flex-col items-start py-2">
+                <div key={index} className="flex flex-col items-start py-2 overflow-auto">
                     <Accordion>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
@@ -28,7 +28,7 @@ const Progress = ({ progress }) => (
                                 {[...Array(6)].map((_, i) => (
                                     <div
                                         key={i}
-                                        className={`milestone-circle ${i < milestone.answered ? 'completed' : ''}`}
+                                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${i < milestone.answered ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}
                                     >{i + 1}</div>
                                 ))}
                             </div>
