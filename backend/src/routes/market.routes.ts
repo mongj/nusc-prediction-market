@@ -1,0 +1,19 @@
+import { Router } from "express";
+
+import { MarketController } from "@/controllers";
+import { requireAdmin } from "@/middleware";
+
+const marketRouter = Router();
+const marketController = new MarketController();
+
+// Protected routes
+marketRouter.get("/markets", marketController.list);
+marketRouter.get("/markets/:id", marketController.getById);
+marketRouter.post("/markets/:id/bet", marketController.placeBet);
+
+// Admin routes
+marketRouter.post("/markets", requireAdmin, marketController.create);
+marketRouter.put("/markets/:id", requireAdmin, marketController.update);
+marketRouter.delete("/markets/:id", requireAdmin, marketController.delete);
+
+export default marketRouter;
