@@ -1,7 +1,7 @@
 import { Application, Router } from "express";
 
 import config from "@/config";
-import { requireAuth } from "@/middleware/auth.middleware";
+import { requireAuth } from "@/middleware/auth";
 
 import authProtectedRouter from "./auth.protected.routes";
 import authPublicRouter from "./auth.public.routes";
@@ -24,11 +24,11 @@ const initializeRoutes = (app: Application) => {
   protectedRouter.use("/", marketRouter);
 
   // Mount routers
-  app.use("/", publicRouter);
-  app.use("/", protectedRouter);
   if (config.nodeEnv === "development") {
     app.use("/", devRouter);
   }
+  app.use("/", publicRouter);
+  app.use("/", protectedRouter);
 };
 
 export { initializeRoutes };

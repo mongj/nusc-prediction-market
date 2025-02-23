@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 
 import { db } from "@/services";
@@ -32,13 +33,15 @@ export class UserController {
   }
 
   public async createParticipant(req: Request, res: Response) {
-    const { email, password_hash, in_control_group } = req.body;
+    const { friendly_id, password, in_control_group } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
       const participant = await db.user.create({
         data: {
-          email,
-          password_hash,
+          friendly_id,
+          password_hash: hashedPassword,
           Participant: {
             create: {
               in_control_group,
@@ -57,30 +60,11 @@ export class UserController {
     }
   }
 
-  public async update(req: Request, res: Response) {
-    const userId = Number(req.params.id);
-    const { email, password_hash } = req.body;
-
-    const user = await db.user.update({
-      where: { id: userId },
-      data: {
-        email,
-        password_hash,
-      },
-      include: {
-        Participant: true,
-      },
-    });
-
-    res.status(200).json({ data: user });
-  }
-
   public async delete(req: Request, res: Response) {
     const userId = Number(req.params.id);
 
-    // First delete related records due to foreign key constraints
     await db.$transaction([
-      db.participant.deleteMany({ where: { user_id: userId } }),
+      db.participant.delete({ where: { user_id: userId } }),
       db.user.delete({ where: { id: userId } }),
     ]);
 

@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
 import config from "@/config";
 import { db, logger } from "@/services";
@@ -10,13 +10,13 @@ export class AuthController {
   private static readonly SESSION_COOKIE = "session";
   private static readonly SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-  public async signIn(req: Request, res: Response) {
-    const { email, password } = req.body;
+  public signIn = async (req: Request, res: Response) => {
+    const { friendly_id, password } = req.body;
 
     try {
-      // Find user by email
+      // Find user by friendly_id
       const user = await db.user.findUnique({
-        where: { email },
+        where: { friendly_id },
         include: {
           Participant: true,
         },
@@ -28,10 +28,7 @@ export class AuthController {
       }
 
       // Verify password
-      const isPasswordValid = await bcrypt.compare(
-        password,
-        user.password_hash
-      );
+      const isPasswordValid = await bcrypt.compare(password, user.password_hash);
       if (!isPasswordValid) {
         res.status(401).json({ message: "Invalid credentials" });
         return;
@@ -44,8 +41,7 @@ export class AuthController {
       await this.setSessionCookie(res, sessionToken, sessionExpiry);
 
       // Return user info (excluding sensitive data)
-      const { password_hash, session_cookie, session_expiry, ...userInfo } =
-        user;
+      const { password_hash, session_cookie, session_expiry, ...userInfo } = user;
       res.status(200).json({
         data: userInfo,
       });
@@ -53,9 +49,9 @@ export class AuthController {
       logger.error("Error during sign in:", error as Error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
 
-  public async signOut(req: Request, res: Response) {
+  public signOut = async (req: Request, res: Response) => {
     try {
       const user = req.user;
 
@@ -73,15 +69,15 @@ export class AuthController {
       logger.error("Error during sign out:", error as Error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
 
-  public async resetPassword(req: Request, res: Response) {
-    const { email, current_password, new_password } = req.body;
+  public resetPassword = async (req: Request, res: Response) => {
+    const { friendly_id, current_password, new_password } = req.body;
 
     try {
-      // Find user by email
+      // Find user by friendly_id
       const user = await db.user.findUnique({
-        where: { email },
+        where: { friendly_id },
       });
 
       if (!user) {
@@ -90,10 +86,7 @@ export class AuthController {
       }
 
       // Verify current password
-      const isPasswordValid = await bcrypt.compare(
-        current_password,
-        user.password_hash
-      );
+      const isPasswordValid = await bcrypt.compare(current_password, user.password_hash);
       if (!isPasswordValid) {
         res.status(401).json({ message: "Invalid credentials" });
         return;
@@ -121,13 +114,11 @@ export class AuthController {
       logger.error("Error resetting password:", error as Error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
 
   private async renewSession(user: User) {
     const sessionToken = crypto.randomBytes(32).toString("hex");
-    const sessionExpiry = new Date(
-      Date.now() + AuthController.SESSION_DURATION
-    );
+    const sessionExpiry = new Date(Date.now() + AuthController.SESSION_DURATION);
 
     await db.user.update({
       where: { id: user.id },
@@ -144,11 +135,7 @@ export class AuthController {
     });
   }
 
-  private async setSessionCookie(
-    res: Response,
-    sessionToken: string,
-    sessionExpiry: Date
-  ) {
+  private async setSessionCookie(res: Response, sessionToken: string, sessionExpiry: Date) {
     res.cookie(AuthController.SESSION_COOKIE, sessionToken, {
       expires: sessionExpiry,
       httpOnly: true,

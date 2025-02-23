@@ -1,0 +1,122 @@
+[
+  {
+    "topic": "Traffic",
+    "question": "Will total taxi availability that is currently available for hire in Singapore at 1730 hours on [date] exceed [reading]?"
+  },
+  {
+    "topic": "Electricity Consumption",
+    "question": "Will household electricity consumption in Singapore exceed [reading] on [date], reflecting increased use of cooling systems due to higher temperatures?"
+  },
+  {
+    "topic": "Haze",
+    "question": "Will the PSI index in Singapore fall below [reading] on [date], indicating worsening air quality due to regional haze?"
+  },
+  {
+    "topic": "Air Quality",
+    "question": "Will AQI in Singapore exceed [reading] on [date]?"
+  },
+  {
+    "topic": "Precipitation",
+    "question": "Will precipitation levels in Singapore on [date] exceed [reading], suggesting an increase in extreme weather events due to climate change?"
+  },
+  {
+    "topic": "Economy",
+    "question": "Will the average price of natural gas exceed [reading] for [dates]?"
+  },
+  {
+    "topic": "Extreme Heat",
+    "question": "Will the average daily maximum temperature in Singapore exceed [reading] between [dates]?"
+  },
+  {
+    "topic": "Certificate of Entitlement",
+    "question": "Will COE in Singapore prices drop below [reading] on [date]?"
+  },
+  {
+    "topic": "Greenhouse Gas Emissions",
+    "question": "Will carbon dioxide emissions globally surpass [reading] from [date] to [date]?"
+  },
+  {
+    "topic": "Precipitation",
+    "question": "Will the precipitation levels on [date] surpass the average precipitation levels in [dates]?"
+  },
+  {
+    "topic": "Dry Spell",
+    "question": "Will Singapore experience a dry spell within the next [number] days?"
+  },
+  {
+    "topic": "Pollutant Concentrations",
+    "question": "Will overall pollutant concentration readings in the West region exceed readings in the Central region on [date]?"
+  },
+  {
+    "topic": "Natural Disasters",
+    "question": "Will there be any forest fires in Indonesia the next [number] days?"
+  },
+  {
+    "topic": "Extreme Heat",
+    "question": "Will the average daily temperature in Singapore on [date] fall below [reading]?"
+  },
+  {
+    "topic": "Traffic",
+    "question": "Will there be any traffic congestion in Singapore on [date]?"
+  },
+  {
+    "topic": "Passenger Volume",
+    "question": "Will the passenger volumes for public buses in Singapore exceed [reading] on [date]?"
+  },
+  {
+    "topic": "Intense Rainfall",
+    "question": "Will average rainfall in Bangkok [date] go above [reading]?"
+  },
+  {
+    "topic": "Electric Vehicle Usage",
+    "question": "Will electric vehicle usage in Singapore [date] exceed the monthly average usage in 2024?"
+  },
+  {
+    "topic": "Traffic",
+    "question": "Will the average estimated travel times of expressways in Singapore on [date] from 0800 to 1000 hours exceed [reading]?"
+  },
+  {
+    "topic": "Water Pollution",
+    "question": "Will there be any reported incidents of water pollution in Southeast Asia on [date]?"
+  },
+  {
+    "topic": "Public Transport",
+    "question": "Will the forecasted crowd density at [MRT station] exceed the real-time crowd density, on [date]?"
+  },
+  {
+    "topic": "Public Transport",
+    "question": "Will there be any train disruptions in Singapore on [date]?"
+  },
+  {
+    "topic": "Air Quality",
+    "question": "Will PM 2.5 readings in [location] at 0900 hours exceed readings at 1700 hours, on [date]?"
+  },
+  {
+    "topic": "Hotspots",
+    "question": "Will the number of hotspots within 100km radius of Singapore exceed [reading] on [date]?"
+  },
+  {
+    "topic": "Public Transport",
+    "question": "Will the [MRT line] have the highest average crowd density on [date]?"
+  },
+  {
+    "topic": "Electric Buses",
+    "question": "Will there be any news on electric buses in Singapore in the next [number] days?"
+  },
+  {
+    "topic": "Electric Vehicles",
+    "question": "Will the local interest in the search term 'electric vehicles' remain above 50 between 0900 to 1700 hours on [date]?"
+  },
+  {
+    "topic": "CO2",
+    "question": "Will the global average carbon dioxide level in the Earth atmosphere exceed [reading] between [dates]?"
+  },
+  {
+    "topic": "Active Mobility",
+    "question": "Will the total number of bicycle parking locations in Singapore exceed [reading] in [date], indicating growth in infrastructure supporting active, low-carbon transport?"
+  },
+  {
+    "topic": "Flood",
+    "question": "Will the number of floods within Singapore exceed [reading] on [month]?"
+  }
+]

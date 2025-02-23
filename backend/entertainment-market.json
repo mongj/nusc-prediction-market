@@ -1,0 +1,122 @@
+[
+  {
+    "topic": "Music",
+    "question": "The song 'XXX' was released by an English group 'XXX' on [date] and has been on the top 10 Billboard Chart for XXX weeks. Will it fall below the top 10 Billboard Chart by [date]?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "XXX ranks on the top 10 Instagram Users by follower count. Will the number of her followers exceed [number] by [date]?"
+  },
+  {
+    "topic": "Film",
+    "question": "The film 'XXX' premiered in Singapore on [date]. Will the domestic box office earnings of 'XXX' gross over [number]?"
+  },
+  {
+    "topic": "Netflix",
+    "question": "Will the total number of hours spent on watching XXX exceed [number] by [date]?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "Will LTA's average likes per Instagram post exceed XXX by [date]?"
+  },
+  {
+    "topic": "NUS",
+    "question": "Will NUS publish more than 1 article about XXX?"
+  },
+  {
+    "topic": "Netflix",
+    "question": "Will 'XXX' remain rank #1 in the top films in Singapore by [date]?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "Will the Ministry of the Environment and Water Resources' (MEWR) number of Instagram posts exceed [number] by [date]?"
+  },
+  {
+    "topic": "Amazon",
+    "question": "Amazon's Best Seller Book List shows most popular books based on sales. Will [author]'s XXX remain in the top 25 of the Best Seller list at 23:59 SGT on [date]?"
+  },
+  {
+    "topic": "YouTube",
+    "question": "Will LTA upload more than one YouTube video between [dates]?"
+  },
+  {
+    "topic": "TikTok",
+    "question": "XXX is a Singaporean singer who is very active on social media. Will XXX's uploads on TikTok exceed [number] posts by [date]?"
+  },
+  {
+    "topic": "Soccer",
+    "question": "Will XXX win against XXX in the XXX League match scheduled for [date]?"
+  },
+  {
+    "topic": "TikTok",
+    "question": "Will XXX's TikTok follower count exceed [number] by [date]?"
+  },
+  {
+    "topic": "IMDB Rating",
+    "question": "Will XXX receive an IMDB rating of above 7.5?"
+  },
+  {
+    "topic": "Billboard",
+    "question": "Will [song] top the Billboard Charts at the end of this week?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "Will MoNo SG's average likes per post exceed [number] by [date]?"
+  },
+  {
+    "topic": "Basketball",
+    "question": "Will XXX win against XXX in the XXX match scheduled for [date]?"
+  },
+  {
+    "topic": "Formula One",
+    "question": "Will XXX emerge as the race champion for the race scheduled on [date]?"
+  },
+  {
+    "topic": "Football (Local)",
+    "question": "Will XXX win against XXX in the XXX Singapore Premier League match scheduled for [date]?"
+  },
+  {
+    "topic": "Channel News Asia",
+    "question": "Will the total views for the documentary XXX exceed [number] on [date]?"
+  },
+  {
+    "topic": "Facebook",
+    "question": "Will the total number of likes for XXX's Facebook page exceed [number] by [date]?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "Will there be any Instagram posts by the Public Utilities Board on [date]?"
+  },
+  {
+    "topic": "Telegram",
+    "question": "Will the number of subscribers to the Gov.sg Telegram channel exceed [number] on [date]?"
+  },
+  {
+    "topic": "The Straits Times",
+    "question": "Will there be more than 25 articles published on The Straits Times on [date]?"
+  },
+  {
+    "topic": "Celebrity",
+    "question": "Will there be any news on XXX on [date]?"
+  },
+  {
+    "topic": "Shopee",
+    "question": "Will [product] be listed as one of the top-selling products on Shopee?"
+  },
+  {
+    "topic": "Animals",
+    "question": "Will the local interest in the search term 'cats' remain above 50 between 0900 to 1700 hours on [date]?"
+  },
+  {
+    "topic": "Instagram",
+    "question": "Will the total number of Instagram users exceed [number] on [date]?"
+  },
+  {
+    "topic": "Spotify",
+    "question": "Will [artist]'s XXX make it into the Top 50 Singapore playlist on Spotify?"
+  },
+  {
+    "topic": "Facebook",
+    "question": "Will the number of members in the Facebook group 'Freegan in Singapore' exceed [number] on [date]?"
+  }
+]

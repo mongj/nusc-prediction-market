@@ -8,7 +8,8 @@ declare namespace NodeJS {
     SERVER_PORT: string;
     NODE_ENV: "development" | "production" | "test";
     DATABASE_URL: string;
-    ADMIN_EMAIL: string;
+    ADMIN_ID: string;
     ADMIN_PASSWORD: string;
+    COOKIE_SECRET: string;
   }
 }

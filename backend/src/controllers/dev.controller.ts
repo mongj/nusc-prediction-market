@@ -21,22 +21,24 @@ export class DevController {
         WHERE schemaname = 'public'
       `;
 
+      const tablesToTruncate = tables.filter(({ tablename }) => tablename !== "_prisma_migrations");
+
       // Disable foreign key checks, truncate all tables, then re-enable checks
       await db.$transaction([
         // Disable foreign key checks
         db.$executeRaw`SET CONSTRAINTS ALL DEFERRED`,
 
-        // Truncate all tables
-        ...tables.map(({ tablename }) => db.$executeRaw(Prisma.sql`TRUNCATE TABLE "${tablename}" CASCADE`)),
+        // Truncate all tables except _prisma_migrations
+        ...tablesToTruncate.map(({ tablename }) => db.$executeRaw`TRUNCATE TABLE ${Prisma.sql([tablename])} CASCADE`),
 
         // Re-enable foreign key checks
         db.$executeRaw`SET CONSTRAINTS ALL IMMEDIATE`,
       ]);
 
-      logger.success("Database cleared successfully");
+      logger.info(`Successfully cleared tables: ${tablesToTruncate.map((t) => t.tablename).join(", ")}`);
       res.status(200).json({
         message: "Database cleared successfully",
-        tables: tables.map((t) => t.tablename),
+        tables: tablesToTruncate.map((t) => t.tablename),
       });
     } catch (error) {
       logger.error("Error clearing database:", error as Error);

@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id             Int          @id @unique @default(autoincrement())
-  email          String       @unique
+  friendly_id    String       @unique
   password_hash  String
   session_cookie String?
   session_expiry DateTime?    @db.Timestamptz
@@ -32,47 +32,65 @@ model Participant {
   cash_balance          Int              @default(0)
   created_at            DateTime         @default(now()) @db.Timestamptz
   updated_at            DateTime         @updatedAt @db.Timestamptz
-  bets                  ParticipantBet[]
+  bets                  Bet[]
+  SurveyResponse        SurveyResponse[]
 
   @@map("participants")
 }
 
 model Survey {
-  id         Int      @id @default(autoincrement())
-  name       String
-  link       String
-  open_on    DateTime @db.Timestamptz
-  close_on   DateTime @db.Timestamptz
-  is_closed  Boolean?
-  created_at DateTime @default(now()) @db.Timestamptz
-  updated_at DateTime @updatedAt @db.Timestamptz
+  id             Int              @id @default(autoincrement())
+  name           String
+  link           String
+  open_on        DateTime         @db.Timestamptz
+  close_on       DateTime         @db.Timestamptz
+  is_closed      Boolean?
+  created_at     DateTime         @default(now()) @db.Timestamptz
+  updated_at     DateTime         @updatedAt @db.Timestamptz
+  SurveyResponse SurveyResponse[]
 
   @@map("surveys")
 }
 
+model SurveyResponse {
+  id             Int         @id @default(autoincrement())
+  survey_id      Int
+  participant_id Int
+  created_at     DateTime    @default(now()) @db.Timestamptz
+  updated_at     DateTime    @updatedAt @db.Timestamptz
+  survey         Survey      @relation(fields: [survey_id], references: [id])
+  participant    Participant @relation(fields: [participant_id], references: [user_id])
+
+  @@map("survey_responses")
+}
+
 model Market {
-  id         Int              @id @default(autoincrement())
-  open_on    DateTime         @db.Timestamptz
-  close_on   DateTime         @db.Timestamptz
+  id         Int      @id @default(autoincrement())
+  name       String
+  question   String
+  open_on    DateTime @db.Timestamptz
+  close_on   DateTime @db.Timestamptz
   is_open    Boolean?
   is_control Boolean
-  created_at DateTime         @default(now()) @db.Timestamptz
-  updated_at DateTime         @updatedAt @db.Timestamptz
-  bets       ParticipantBet[]
+  resolution Boolean?
+  created_at DateTime @default(now()) @db.Timestamptz
+  updated_at DateTime @updatedAt @db.Timestamptz
+  bets       Bet[]
 
   @@map("markets")
 }
 
-model ParticipantBet {
-  id          Int         @id @default(autoincrement())
-  user_id     Int
-  market_id   Int
-  bet_outcome Boolean
-  bet_amount  Int
-  participant Participant @relation(fields: [user_id], references: [user_id])
-  market      Market      @relation(fields: [market_id], references: [id])
-  created_at  DateTime    @default(now()) @db.Timestamptz
-  updated_at  DateTime    @updatedAt @db.Timestamptz
+model Bet {
+  id             Int         @id @default(autoincrement())
+  user_id        Int
+  market_id      Int
+  bet_outcome    Boolean
+  bet_amount     Int
+  bet_resolution Boolean?
+  participant    Participant @relation(fields: [user_id], references: [user_id])
+  market         Market      @relation(fields: [market_id], references: [id])
+  created_at     DateTime    @default(now()) @db.Timestamptz
+  updated_at     DateTime    @updatedAt @db.Timestamptz
 
-  @@map("participant_bets")
+  @@map("bets")
 }

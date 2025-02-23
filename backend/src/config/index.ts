@@ -7,13 +7,12 @@ const requiredEnvVars = [
   "DB_HOST",
   "DB_PORT",
   "DB_USER",
-  "DB_PASSWORD",
   "DB_NAME",
-  "SERVER_PORT",
-  "NODE_ENV",
+  "DB_PASSWORD",
   "DATABASE_URL",
-  "ADMIN_EMAIL",
+  "ADMIN_ID",
   "ADMIN_PASSWORD",
+  "COOKIE_SECRET",
 ];
 
 const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
@@ -47,7 +46,7 @@ const config = {
     url: process.env.DATABASE_URL!,
   },
   port: (() => {
-    const port = parseInt(process.env.SERVER_PORT!);
+    const port = parseInt(process.env.SERVER_PORT || "3000");
     if (isNaN(port)) {
       console.error("❌ SERVER_PORT must be a valid number");
       process.exit(0);
@@ -59,8 +58,9 @@ const config = {
     return port;
   })(),
   nodeEnv: process.env.NODE_ENV || "production",
-  adminEmail: process.env.ADMIN_EMAIL!,
+  adminId: process.env.ADMIN_ID!,
   adminPassword: process.env.ADMIN_PASSWORD!,
+  cookieSecret: process.env.COOKIE_SECRET!,
 };
 
 export default config;

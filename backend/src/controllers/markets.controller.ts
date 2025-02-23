@@ -31,11 +31,13 @@ export class MarketController {
   }
 
   public async create(req: Request, res: Response) {
-    const { open_on, close_on, is_control } = req.body;
+    const { name, question, open_on, close_on, is_control } = req.body;
 
     try {
       const market = await db.market.create({
         data: {
+          name,
+          question,
           open_on: new Date(open_on),
           close_on: new Date(close_on),
           is_control,
@@ -124,7 +126,7 @@ export class MarketController {
 
       // Create bet and update participant's balance in a transaction
       const bet = await db.$transaction([
-        db.participantBet.create({
+        db.bet.create({
           data: {
             user_id,
             market_id: marketId,

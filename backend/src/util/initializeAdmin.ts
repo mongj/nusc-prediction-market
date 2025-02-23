@@ -7,13 +7,13 @@ const initializeAdminUser = () => {
   bcrypt.hash(config.adminPassword, 10).then((hashedPassword) => {
     return db.user
       .findUnique({
-        where: { email: config.adminEmail, is_admin: true },
+        where: { friendly_id: config.adminId, is_admin: true },
       })
       .then((existingAdmin) => {
         if (existingAdmin) {
           return db.user
             .update({
-              where: { email: config.adminEmail },
+              where: { friendly_id: config.adminId },
               data: { password_hash: hashedPassword },
             })
             .then(() => {
@@ -23,7 +23,7 @@ const initializeAdminUser = () => {
           return db.user
             .create({
               data: {
-                email: config.adminEmail,
+                friendly_id: config.adminId,
                 password_hash: hashedPassword,
                 is_admin: true,
               },

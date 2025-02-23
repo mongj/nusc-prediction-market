@@ -11,7 +11,7 @@
     "dock:down": "docker compose down",
     "check:env": "test -f .env || (echo 'Error: .env file not found in root directory' && exit 1)",
     "format": "prettier --write . && prisma format",
-    "prisma:migrate": "prisma format && prisma generate && prisma migrate dev",
+    "migrate": "prisma format && prisma generate && prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
   "author": "Ming Jun",
@@ -23,6 +23,7 @@
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.0",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.4",
     "dotenv-cli": "^8.0.0",
     "express": "^4.21.2",
@@ -36,9 +37,11 @@
   "dependencies": {
     "@prisma/client": "^6.4.1",
     "bcrypt": "^5.1.1",
-    "chalk": "^5.4.1",
+    "chalk": "^4.1.2",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
-    "helmet": "^8.0.0"
+    "es-toolkit": "^1.32.0",
+    "helmet": "^8.0.0",
+    "lodash": "^4.17.21"
   }
 }

@@ -1,4 +1,6 @@
-import { requireAdmin, requireAuth } from "./auth.middleware";
-import { requireUniqueEmail } from "./validation.middleware";
+import { requireAdmin, requireAuth } from "./auth";
+import { formatRequest, formatResponse } from "./format";
+import { logRequest } from "./logger";
+import { requireUniqueFriendlyId } from "./validation";
 
-export { requireAdmin, requireAuth, requireUniqueEmail };
+export { formatRequest, formatResponse, logRequest, requireAdmin, requireAuth, requireUniqueFriendlyId };
