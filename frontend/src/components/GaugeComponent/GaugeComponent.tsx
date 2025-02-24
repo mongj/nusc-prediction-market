@@ -1,4 +1,4 @@
-import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 
 const GaugeComponent = ({ yesCount, noCount }) => {
   const totalVotes = yesCount + noCount;
@@ -16,17 +16,17 @@ const GaugeComponent = ({ yesCount, noCount }) => {
       cornerRadius="50%"
       sx={(theme) => ({
         [`& .${gaugeClasses.valueText}`]: {
-          display: 'none',
+          display: "none",
         },
         [`& .${gaugeClasses.valueArc}`]: {
-          fill: '#52b202',
+          fill: "#52b202",
         },
         [`& .${gaugeClasses.referenceArc}`]: {
-          fill: '#ff0000',
+          fill: "#ff0000",
         },
       })}
     />
   );
-}
+};
 
-export default GaugeComponent
+export default GaugeComponent;

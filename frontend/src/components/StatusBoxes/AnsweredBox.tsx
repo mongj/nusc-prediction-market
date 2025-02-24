@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const AnsweredBox = () => (
-  <div className='bg-yellow-100 rounded-2xl'>
-    <p className='text-orange-500 font-normal text-base py-1 px-3'>Answered</p>
+  <div className="rounded-2xl bg-yellow-100">
+    <p className="px-3 py-1 text-base font-normal text-orange-500">Answered</p>
   </div>
 );
 
-export default AnsweredBox
+export default AnsweredBox;

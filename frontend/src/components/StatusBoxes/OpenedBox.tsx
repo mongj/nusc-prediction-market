@@ -1,7 +1,7 @@
 const OpenedBox = () => (
-    <div className='bg-gray-200 rounded-2xl'>
-        <p className='text-gray-500 font-normal text-base py-1 px-3'>Open</p>
-    </div>
+  <div className="rounded-2xl bg-gray-200">
+    <p className="px-3 py-1 text-base font-normal text-gray-500">Open</p>
+  </div>
 );
 
 export default OpenedBox;
