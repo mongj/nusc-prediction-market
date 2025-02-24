@@ -75,8 +75,8 @@ add_days() {
 }
 
 # Read market questions from JSON files
-entertainment_data=$(cat entertainment-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
-climate_data=$(cat climate-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
+entertainment_data=$(cat data/entertainment-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
+climate_data=$(cat data/climate-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
 
 # Convert data to arrays
 IFS=$'\n' read -d '' -r -a entertainment_array <<< "$entertainment_data"

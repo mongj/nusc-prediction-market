@@ -11,6 +11,7 @@ export class AuthController {
   private static readonly SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
   public signIn = async (req: Request, res: Response) => {
+    console.log("in signin");
     const { friendly_id, password } = req.body;
 
     try {
