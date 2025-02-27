@@ -4,7 +4,7 @@
 yarn setup
 ```
 
-2. run the db
+2. run the db (make sure docker is running first!)
 
 ```bash
 yarn dock:up
