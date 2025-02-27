@@ -9,7 +9,7 @@ const marketController = new MarketController();
 // Protected routes
 marketRouter.get("/markets", marketController.list);
 marketRouter.get("/markets/:id", marketController.getById);
-marketRouter.post("/markets/:id/bet", marketController.placeBet);
+marketRouter.post("/markets/:id/bets", marketController.placeBet);
 
 // Admin routes
 marketRouter.post("/markets", requireAdmin, marketController.create);

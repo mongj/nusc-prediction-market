@@ -4,8 +4,33 @@ import { db } from "@/services";
 
 export class SurveyController {
   public async list(req: Request, res: Response) {
-    const surveys = await db.survey.findMany();
-    res.status(200).json({ data: surveys });
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
+    const surveys = await db.survey.findMany({
+      include: {
+        SurveyResponse: {
+          where: {
+            participant_id: userId,
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+
+    const surveysWithCompletion = surveys.map((survey) => ({
+      ...survey,
+      completed: survey.SurveyResponse.length > 0,
+      SurveyResponse: undefined,
+    }));
+
+    res.status(200).json({ data: surveysWithCompletion });
   }
 
   public async getById(req: Request, res: Response) {
@@ -80,5 +105,43 @@ export class SurveyController {
       console.error("Error deleting survey:", error);
       res.status(500).json({ message: "Failed to delete survey" });
     }
+  }
+
+  public async createResponse(req: Request, res: Response) {
+    const surveyId = Number(req.params.id);
+    const { user_id } = req.body;
+
+    if (!user_id) {
+      res.status(400).json({ message: "User ID is required" });
+      return;
+    }
+
+    const participant = await db.participant.findUnique({
+      where: { user_id },
+    });
+
+    if (!participant) {
+      res.status(404).json({ message: "Participant not found" });
+      return;
+    }
+
+    if (isNaN(user_id)) {
+      res.status(400).json({ message: "User ID must be a number" });
+      return;
+    }
+
+    if (isNaN(surveyId)) {
+      res.status(400).json({ message: "Survey ID must be a number" });
+      return;
+    }
+
+    const surveyResponse = await db.surveyResponse.create({
+      data: {
+        survey_id: surveyId,
+        participant_id: user_id,
+      },
+    });
+
+    res.status(201).json({ data: surveyResponse });
   }
 }

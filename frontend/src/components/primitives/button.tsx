@@ -14,14 +14,14 @@ function Button({ text, color = "blue", variant = "primary", className, ...props
     variant === "primary"
       ? "text-white"
       : color === "green"
-        ? "text-green-500"
+        ? "text-lime-600"
         : color === "blue"
           ? "text-sky-500"
           : "text-red-500";
   const bgColor =
     variant === "primary"
       ? color === "green"
-        ? "bg-green-500"
+        ? "bg-lime-600"
         : color === "blue"
           ? "bg-sky-500"
           : "bg-red-500"
@@ -29,7 +29,7 @@ function Button({ text, color = "blue", variant = "primary", className, ...props
   const bgColorDark =
     variant === "primary"
       ? color === "green"
-        ? "bg-green-700"
+        ? "bg-lime-700"
         : color === "blue"
           ? "bg-sky-700"
           : "bg-red-700"

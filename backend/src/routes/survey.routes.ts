@@ -14,5 +14,6 @@ surveyRouter.get("/surveys/:id", surveyController.getById);
 surveyRouter.post("/surveys", requireAdmin, surveyController.create);
 surveyRouter.put("/surveys/:id", requireAdmin, surveyController.update);
 surveyRouter.delete("/surveys/:id", requireAdmin, surveyController.delete);
+surveyRouter.post("/surveys/:id/responses", requireAdmin, surveyController.createResponse);
 
 export default surveyRouter;

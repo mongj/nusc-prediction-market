@@ -5,8 +5,8 @@ import BackButton from "../../components/Buttons/BackButton/BackButton";
 import ConfirmButton from "../../components/Buttons/ConfirmButton/ConfirmButton";
 import NoButton from "../../components/Buttons/NoButton/NoButton";
 import YesButton from "../../components/Buttons/YesButton/YesButton";
-import CoinSlider from "../../components/CoinSlider/CoinSlider";
-import GaugeComponent from "../../components/GaugeComponent/GaugeComponent";
+import CoinSlider from "../../components/CoinSlider";
+import GaugeComponent from "../../components/GaugeComponent";
 import climateQns from "../../storage/ClimateQuestionBank.json";
 
 const Question = ({ question }) => {

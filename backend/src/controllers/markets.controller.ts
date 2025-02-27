@@ -4,12 +4,53 @@ import { db } from "@/services";
 
 export class MarketController {
   public async list(req: Request, res: Response) {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
+    const participant = await db.participant.findUnique({
+      where: { user_id: userId },
+    });
+
+    if (!participant) {
+      res.status(404).json({ message: "Participant not found" });
+      return;
+    }
+
+    const is_control = participant.in_control_group;
+
+    if (is_control === null) {
+      res.status(400).json({ message: "Participant is not in a control group nor a treatment group" });
+      return;
+    }
+
     const markets = await db.market.findMany({
+      where: {
+        is_control,
+      },
       include: {
-        bets: true,
+        bets: {
+          where: {
+            user_id: userId,
+          },
+        },
       },
     });
-    res.status(200).json({ data: markets });
+
+    const marketsWithAugmentedFields = markets.map((market) => ({
+      ...market,
+      hasAnswered: market.bets.length > 0,
+      isCorrect:
+        market.bets.length === 0 || market.resolution === null
+          ? null
+          : market.bets[0].bet_outcome === market.resolution,
+      bets: undefined,
+    }));
+
+    res.status(200).json({ data: marketsWithAugmentedFields });
   }
 
   public async getById(req: Request, res: Response) {
@@ -90,13 +131,18 @@ export class MarketController {
   }
 
   public async placeBet(req: Request, res: Response) {
-    const marketId = Number(req.params.id);
-    const { user_id, bet_outcome, bet_amount } = req.body;
+    const market_id = Number(req.params.id);
+    const user_id = req.user?.id;
+    const { bet_outcome, bet_amount } = req.body;
+
+    if (!user_id) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
 
     try {
-      // First check if the market is open
       const market = await db.market.findUnique({
-        where: { id: marketId },
+        where: { id: market_id },
       });
 
       if (!market) {
@@ -104,12 +150,11 @@ export class MarketController {
         return;
       }
 
-      if (!market.is_open) {
+      if (market.open_on > new Date() || market.close_on < new Date()) {
         res.status(400).json({ message: "Market is not open for betting" });
         return;
       }
 
-      // Check if participant has enough coins
       const participant = await db.participant.findUnique({
         where: { user_id },
       });
@@ -119,8 +164,22 @@ export class MarketController {
         return;
       }
 
+      // Check if participant has enough coins
       if (participant.coin_balance < bet_amount) {
         res.status(400).json({ message: "Insufficient coin balance" });
+        return;
+      }
+
+      // check if participant has already answered the market
+      const existingBet = await db.bet.findFirst({
+        where: {
+          user_id,
+          market_id,
+        },
+      });
+
+      if (existingBet) {
+        res.status(400).json({ message: "Participant has already placed a bet on this market" });
         return;
       }
 
@@ -129,7 +188,7 @@ export class MarketController {
         db.bet.create({
           data: {
             user_id,
-            market_id: marketId,
+            market_id,
             bet_outcome,
             bet_amount,
           },
@@ -142,7 +201,7 @@ export class MarketController {
         }),
       ]);
 
-      res.status(201).json({ data: bet[0] });
+      res.status(201).json({ data: bet });
     } catch (error) {
       console.error("Error placing bet:", error);
       res.status(500).json({ message: "Failed to place bet" });

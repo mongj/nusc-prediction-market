@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 
-import YetToStartBox from "../../components/StatusBoxes/YetToStartBox";
+import YetToStartBox from "../StatusBoxes/YetToStartBox";
 
 const Progress = ({ progress }) => (
   <div className="flex flex-col space-y-1 text-lg">

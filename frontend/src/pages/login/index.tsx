@@ -54,6 +54,7 @@ function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="P-000..."
+              autoComplete="username"
               required
               className="w-full rounded-md border border-neutral-300 p-2"
             />
@@ -68,12 +69,13 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
+              autoComplete="current-password"
               required
               className="w-full rounded-md border border-neutral-300 p-2"
             />
           </div>
           {errorMessage && <span className="text-sm text-red-500 text-left">{errorMessage}</span>}
-          <Button text="Log In" className="w-full mt-2" />
+          <Button text="Log In" className="w-full mt-2" color="green" />
         </form>
       </div>
     </div>

@@ -25,7 +25,7 @@ const Header = () => {
         <Button
           text="Contact Us"
           variant="secondary"
-          onClick={() => navigate("/dashboard/contactus")}
+          onClick={() => navigate("/dashboard/contact-us")}
           className="w-32"
         />
         <Button text="Sign Out" color="red" onClick={handleSignOut} className="w-24" />

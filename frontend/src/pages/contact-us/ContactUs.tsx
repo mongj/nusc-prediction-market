@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
 import BackButton from "../../components/Buttons/BackButton/BackButton";
-import CoinDisplay from "../../components/CoinDisplay/CoinDisplay";
+import CoinDisplay from "../../components/CoinDisplay";
 import Header from "../../components/Header";
-import Progress from "../../components/Progress/Progress";
+import Progress from "../../components/Progress";
 import "./ContactUs.css";
 
 const ContactDetails = () => (

@@ -1,5 +1,10 @@
 import axios, { AxiosInstance, HttpStatusCode } from "axios";
-import { useNavigate } from "react-router-dom";
+
+const apiEvents = {
+  onUnauthorized: () => {
+    window.dispatchEvent(new Event("api:unauthorized"));
+  },
+};
 
 const api: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -9,12 +14,11 @@ const api: AxiosInstance = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error);
     if (error.response.status === HttpStatusCode.Unauthorized && !error.config.url?.includes("auth/signin")) {
-      useNavigate()("/login");
+      apiEvents.onUnauthorized();
     }
     return Promise.reject(error);
   }
 );
 
-export default api;
+export { api, apiEvents };
