@@ -1,0 +1,24 @@
+# For development only!
+
+services:
+  db:
+    image: postgres:latest
+    container_name: eco-market-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - eco-market-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+
+networks:
+  eco-market-network:
+    driver: bridge

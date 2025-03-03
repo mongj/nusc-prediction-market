@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const CorrectBox = () => {
   return (
-    <div className='bg-amber-100 rounded-2xl'>
-      <p className='text-amber-600 font-normal text-base py-1 px-3'>Correct</p>
+    <div className="rounded-2xl bg-amber-100">
+      <p className="px-3 py-1 text-base font-normal text-amber-600">Correct</p>
     </div>
-  )
-}
+  );
+};
 
-export default CorrectBox
+export default CorrectBox;

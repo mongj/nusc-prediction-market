@@ -1,0 +1,49 @@
+{
+  "name": "eco-market-backend",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "yarn check:env && yarn install && nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js",
+    "setup": "cp .env.template .env && yarn install",
+    "dock:up": "yarn check:env && docker compose up -d",
+    "dock:down": "docker compose down",
+    "check:env": "test -f .env || (echo 'Error: .env file not found in root directory' && exit 1)",
+    "format": "prettier --write . && prisma format",
+    "migrate": "prisma format && prisma generate && prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "author": "Ming Jun",
+  "license": "MIT",
+  "description": "EcoMarket Backend",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/bcrypt": "^5.0.2",
+    "@types/compression": "^1.7.5",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/lodash": "^4.17.15",
+    "@types/node": "^22.13.4",
+    "dotenv-cli": "^8.0.0",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.2",
+    "prisma": "^6.4.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "bcrypt": "^5.1.1",
+    "chalk": "^4.1.2",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "es-toolkit": "^1.32.0",
+    "helmet": "^8.0.0",
+    "lodash": "^4.17.21"
+  }
+}

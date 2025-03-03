@@ -1,20 +1,17 @@
-import React from 'react';
+import React from "react";
 
 interface NoButtonProps {
-    onClick?: () => void;
+  onClick?: () => void;
 }
 
 const NoButton: React.FC<NoButtonProps> = ({ onClick }) => (
-    <div
-        className="relative h-full cursor-pointer hover:brightness-90"
-        onClick={onClick}
-    >
-        <div className="top-0 left-0 w-[150px] h-[44px] bg-red-800 rounded-[16px] transition-transform duration-200"></div>
-        <div className="absolute top-0 left-0 w-[150px] h-[40px] bg-red-500 rounded-[16px] transition-transform duration-200"></div>
-        <div className="absolute top-[10px] left-0 w-[150px] text-center text-white text-lg font-semibold leading-6">
-            No
-        </div>
+  <div className="relative h-full cursor-pointer hover:brightness-90" onClick={onClick}>
+    <div className="left-0 top-0 h-[44px] w-[150px] rounded-[16px] bg-red-800 transition-transform duration-200"></div>
+    <div className="absolute left-0 top-0 h-[40px] w-[150px] rounded-[16px] bg-red-500 transition-transform duration-200"></div>
+    <div className="absolute left-0 top-[10px] w-[150px] text-center text-lg font-semibold leading-6 text-white">
+      No
     </div>
+  </div>
 );
 
 export default NoButton;
