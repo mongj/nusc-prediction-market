@@ -34,7 +34,6 @@ const Header = () => {
       </div>
 
       <div className="flex w-fit gap-2">
-        <Button text="Help" variant="secondary" onClick={() => alert("Help button clicked!")} className="w-24" />
         <Button text="Contact Us" variant="secondary" onClick={handleOpenDialog} className="w-32" />
         <Button text="Sign Out" color="red" onClick={handleSignOut} className="w-24" />
         <ContactDialog open={isDialogOpen} handleClose={handleCloseDialog} />
