@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
-import { Dashboard, History, Login, Predict, Reset } from "@/pages";
+import { Dashboard, History, Login, Question, Reset } from "@/pages";
 
 function App() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/history" element={<History />} />
-      <Route path="/predict/:id" element={<Predict />} />
+      <Route path="/question/:id" element={<Question />} />
       <Route path="/reset" element={<Reset />} />
     </Routes>
   );

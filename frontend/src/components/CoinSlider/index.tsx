@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 const iOSBoxShadow = "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
 const IOSSlider = styled(Slider)(({ theme }) => ({
-  color: "#007bff",
+  color: "#00a6f4",
   height: 5,
   padding: "15px 0",
   "& .MuiSlider-thumb": {
@@ -54,9 +54,17 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   }),
 }));
 
-export default function CustomizedSlider({ value, onChange }) {
-  const handleChange = (event, newValue) => {
-    onChange(newValue);
+export default function CustomizedSlider({
+  value,
+  onChange,
+  disabled,
+}: {
+  value: number;
+  onChange: (value: number) => void;
+  disabled: boolean;
+}) {
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    onChange(Array.isArray(newValue) ? newValue[0] : newValue);
   };
 
   return (
@@ -69,6 +77,7 @@ export default function CustomizedSlider({ value, onChange }) {
         valueLabelDisplay="on"
         min={1}
         max={20}
+        disabled={disabled}
       />
     </Box>
   );

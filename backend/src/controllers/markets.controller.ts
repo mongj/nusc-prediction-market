@@ -53,6 +53,7 @@ export class MarketController {
     res.status(200).json({ data: marketsWithAugmentedFields });
   }
 
+  // User-specific handler
   public async getById(req: Request, res: Response) {
     const marketId = Number(req.params.id);
 
@@ -68,7 +69,18 @@ export class MarketController {
       return;
     }
 
-    res.status(200).json({ data: market });
+    const marketWithAugmentedFields = {
+      ...market,
+      totalYes: market.bets.filter((bet) => bet.bet_outcome === true).length,
+      totalNo: market.bets.filter((bet) => bet.bet_outcome === false).length,
+      userAnswer: market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_outcome,
+      userBetAmount: market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_amount,
+      userIsCorrect:
+        market.bets.length > 0 && market.resolution !== null
+          ? market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_outcome === market.resolution
+          : undefined,
+    };
+    res.status(200).json({ data: marketWithAugmentedFields });
   }
 
   public async create(req: Request, res: Response) {
