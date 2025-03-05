@@ -12,7 +12,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col place-items-center justify-start gap-5 bg-gray-100 p-16">
+    <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-5 bg-gray-100 p-16">
       <div className="max-w-7xl">
         <Header />
         <section className="grid w-full max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-3 mt-8">

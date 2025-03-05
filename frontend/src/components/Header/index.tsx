@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { api } from "@/api";
 import { Button } from "@/components/primitives";
+
+import ContactDialog from "./ContactDialog";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +14,16 @@ const Header = () => {
       toast.success("Signed out successfully");
       navigate("/login");
     });
+  };
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -22,13 +35,9 @@ const Header = () => {
 
       <div className="flex w-fit gap-2">
         <Button text="Help" variant="secondary" onClick={() => alert("Help button clicked!")} className="w-24" />
-        <Button
-          text="Contact Us"
-          variant="secondary"
-          onClick={() => navigate("/dashboard/contact-us")}
-          className="w-32"
-        />
+        <Button text="Contact Us" variant="secondary" onClick={handleOpenDialog} className="w-32" />
         <Button text="Sign Out" color="red" onClick={handleSignOut} className="w-24" />
+        <ContactDialog open={isDialogOpen} handleClose={handleCloseDialog} />
       </div>
     </div>
   );
