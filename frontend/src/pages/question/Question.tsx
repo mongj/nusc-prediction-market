@@ -43,7 +43,6 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
               onClick={() => setUserAnswer(true)}
               text="Yes"
               className="w-36"
-              disabled={userHasAnswered && market.userAnswer === false}
             />
             <Button
               variant={userAnswer === false ? "primary" : "secondary"}
@@ -51,14 +50,13 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
               onClick={() => setUserAnswer(false)}
               text="No"
               className="w-36"
-              disabled={userHasAnswered && market.userAnswer === true}
             />
           </div>
         )}
         {marketIsOpen && userAnswer !== null && (
           <>
             <p className="pb-4 text-center text-base font-semibold">How many coins will you wager on your answer?</p>
-            <CoinSlider value={coins} onChange={setCoins} disabled={userHasAnswered} />
+            <CoinSlider value={coins} onChange={setCoins} />
           </>
         )}
         {!marketIsOpen && <p className="font-semibold">This market is not open for betting.</p>}
@@ -68,7 +66,7 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
           userAnswer={userAnswer}
           coins={coins}
           handlePlaceBet={handlerPlaceBet}
-          allowBet={marketIsOpen && !userHasAnswered}
+          allowBet={marketIsOpen}
         />
       )}
     </div>

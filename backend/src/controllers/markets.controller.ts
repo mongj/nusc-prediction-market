@@ -191,7 +191,25 @@ export class MarketController {
       });
 
       if (existingBet) {
-        res.status(400).json({ message: "Participant has already placed a bet on this market" });
+        const updatedBet = await db.$transaction([
+          db.bet.update({
+            where: {
+              id: existingBet.id,
+            },
+            data: {
+              bet_outcome,
+              bet_amount,
+            },
+          }),
+          db.participant.update({
+            where: { user_id },
+            data: {
+              coin_balance: participant.coin_balance - bet_amount + existingBet.bet_amount,
+            },
+          }),
+        ]);
+
+        res.status(200).json({ data: updatedBet });
         return;
       }
 

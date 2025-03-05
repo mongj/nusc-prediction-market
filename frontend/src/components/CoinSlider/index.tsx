@@ -57,11 +57,11 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
 export default function CustomizedSlider({
   value,
   onChange,
-  disabled,
+  disabled = false,
 }: {
   value: number;
   onChange: (value: number) => void;
-  disabled: boolean;
+  disabled?: boolean;
 }) {
   const handleChange = (event: Event, newValue: number | number[]) => {
     onChange(Array.isArray(newValue) ? newValue[0] : newValue);
