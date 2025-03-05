@@ -48,3 +48,11 @@ yarn dev
 ```
 
 if unable to seed, try running the server first, then seed after!
+
+6. viewing the db via cli
+
+```bash
+docker exec -it eco-market-db psql -U postgres -d eco-market
+```
+
+to see all tables use \dt
