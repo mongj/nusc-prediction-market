@@ -43,6 +43,8 @@ bash seed.sh http://localhost:3000 <username> <password>
 
 5. run the server
 
+run this in bash as well!
+
 ```bash
 yarn dev
 ```
