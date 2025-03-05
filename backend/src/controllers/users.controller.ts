@@ -14,22 +14,24 @@ export class UserController {
     res.status(200).json({ data: users });
   }
 
-  public async getById(req: Request, res: Response) {
-    const userId = Number(req.params.id);
+  public async getCoins(req: Request, res: Response) {
+    const userId = req.user?.id;
 
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      include: {
-        Participant: true,
-      },
-    });
-
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
       return;
     }
 
-    res.status(200).json({ data: user });
+    const participant = await db.participant.findUnique({
+      where: { user_id: userId },
+    });
+
+    if (!participant) {
+      res.status(404).json({ message: "Participant not found" });
+      return;
+    }
+
+    res.status(200).json({ data: participant.coin_balance });
   }
 
   public async createParticipant(req: Request, res: Response) {

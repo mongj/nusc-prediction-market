@@ -5,7 +5,6 @@ import Progress from "@/components/Progress";
 import SurveySection from "@/components/SurveySection";
 
 const DashboardPage = () => {
-  const coins = 200;
   const progress = {
     questionsAnswered: 0,
     milestones: [{ answered: 0 }, { answered: 0 }, { answered: 0 }, { answered: 0 }, { answered: 0 }],
@@ -17,7 +16,7 @@ const DashboardPage = () => {
         <Header />
         <section className="grid w-full max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-3 mt-8">
           <div className="dashboard-left flex flex-col gap-4 sm:col-start-1 sm:col-end-2">
-            <CoinDisplay coins={coins} />
+            <CoinDisplay />
             <Progress progress={progress} />
           </div>
           <div className="dashboard-right flex flex-col gap-4 sm:col-start-2 sm:col-end-4">
