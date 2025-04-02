@@ -110,11 +110,13 @@ const AdminPage = () => {
                                             <Button
                                                 text="Yes"
                                                 color="green"
+                                                onClick={() => alert("Coins have been distributed among participants!")}
                                                 className="w-32"
                                             />
                                             <Button
                                                 text="No"
                                                 color="blue"
+                                                onClick={() => alert("Coins have been distributed among participants!")}
                                                 className="w-32"
                                             />
                                         </div>
@@ -146,11 +148,13 @@ const AdminPage = () => {
                                             <Button
                                                 text="Yes"
                                                 color="green"
+                                                onClick={() => alert("Coins have been distributed among participants!")}
                                                 className="w-32"
                                             />
                                             <Button
                                                 text="No"
                                                 color="blue"
+                                                onClick={() => alert("Coins have been distributed among participants!")}
                                                 className="w-32"
                                             />
                                         </div>
