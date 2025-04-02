@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
-import { Dashboard, History, Login, Question, Reset } from "@/pages";
+import { Dashboard, History, Login, Question, Reset, Admin } from "@/pages";
 
 function App() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ function App() {
       <Route path="/history" element={<History />} />
       <Route path="/question/:id" element={<Question />} />
       <Route path="/reset" element={<Reset />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }
