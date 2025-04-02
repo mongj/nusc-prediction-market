@@ -102,9 +102,8 @@ const MarketSection = () => {
                 <Button
                   text="Enter"
                   color="green"
-                  onClick={() => navigate(`/predict/${market.id}`)}
+                  onClick={() => navigate(`/question/${market.id}`)}
                   className="w-32"
-                  disabled={status !== MarketStatus.PENDING}
                 />
               </div>
             </div>

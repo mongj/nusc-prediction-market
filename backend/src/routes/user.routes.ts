@@ -8,7 +8,7 @@ const userController = new UserController();
 
 // Protected routes
 userRouter.get("/users", userController.list);
-userRouter.get("/users/:id", userController.getById);
+userRouter.get("/users/coins", userController.getCoins);
 
 // Admin routes
 userRouter.post("/participants", requireAdmin, requireUniqueFriendlyId, userController.createParticipant);

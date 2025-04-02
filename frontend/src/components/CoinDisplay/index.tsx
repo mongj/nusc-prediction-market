@@ -1,11 +1,21 @@
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const CoinDisplay = ({ coins }) => {
+import { APIResponse, api } from "@/api";
+
+const CoinDisplay = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [coins, setCoins] = useState(0);
 
-  const handleClick = (event) => {
+  useEffect(() => {
+    api.get<APIResponse<number>>("/users/coins").then((response) => {
+      setCoins(response.data.data);
+    });
+  }, []);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
