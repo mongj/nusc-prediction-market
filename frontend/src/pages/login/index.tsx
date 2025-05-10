@@ -33,19 +33,19 @@ function Login() {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-between">
-      <div className="hidden h-full w-[50vw] min-w-[800px] place-content-center place-items-end bg-[#f7faed] shadow-md 2xl:flex">
+    <div className="flex h-screen w-full flex-col md:flex-row items-center justify-between">
+      <div className="hidden h-full w-full md:w-[50vw] lg:min-w-[800px] place-content-center place-items-end bg-[#f7faed] shadow-md md:flex">
         <img src="/images/tree.png" alt="Poster" className="w-[80%] object-contain" />
       </div>
       <div className="relative flex h-full w-full place-content-center place-items-center">
-        <div className="absolute top-16 left-16">
-          <span className="text-2xl font-bold text-green-800">NUSC</span>
-          <span className="text-2xl font-bold text-green-600">Predict</span>
+        <div className="absolute top-6 sm:top-16 left-6 sm:left-16">
+          <span className="text-2xl sm:text-2xl font-bold text-green-800">NUSC</span>
+          <span className="text-2xl sm:text-2xl font-bold text-green-600">Predict</span>
         </div>
-        <form className="flex flex-col place-items-start gap-4 w-full p-8 max-w-96" onSubmit={handleSubmit}>
-          <h2 className="my-4 text-4xl font-bold">Log In</h2>
+        <form className="flex flex-col place-items-start gap-3 sm:gap-4 w-full p-5 sm:p-8 max-w-96" onSubmit={handleSubmit}>
+          <h2 className="my-2 sm:my-4 text-3xl sm:text-4xl font-bold">Log In</h2>
           <div className="flex w-full flex-col">
-            <label htmlFor="username" className="text-center text-sm font-normal leading-6 text-black sm:text-left">
+            <label htmlFor="username" className="text-sm font-normal leading-6 text-black">
               Participant ID
             </label>
             <input
@@ -60,7 +60,7 @@ function Login() {
             />
           </div>
           <div className="flex w-full flex-col">
-            <label htmlFor="password" className="text-center text-sm font-normal leading-6 text-black sm:text-left">
+            <label htmlFor="password" className="text-sm font-normal leading-6 text-black">
               Password
             </label>
             <input

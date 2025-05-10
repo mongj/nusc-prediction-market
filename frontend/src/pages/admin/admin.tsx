@@ -17,7 +17,6 @@ enum MarketStatus {
     CLOSED = "closed",
 }
 
-
 const AdminPage = () => {
     // const navigate = useNavigate();
     // const [markets, setMarkets] = useState<Market[]>([]);
@@ -80,44 +79,40 @@ const AdminPage = () => {
     //     return new Date(market.openOn) < now;
     //     })
     //     .sort((a, b) => new Date(a.openOn).getTime() - new Date(b.openOn).getTime());
-
+    
     return (
-        <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-5 bg-gray-100 p-16">
-            <div className="max-w-7xl">
+        <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gray-100 p-4 sm:p-16">
+            <div className="w-full max-w-7xl">
                 <Header />
-                <div className="w-full max-w-[1200px] mt-8">
+                <div className="w-full max-w-[1200px] mt-4 sm:mt-8">
                     <div className="flex flex-col space-y-2">
-                        <h2 className="text-xl font-extrabold">Climate Markets</h2>
+                        <h2 className="text-lg sm:text-xl font-extrabold">Climate Markets</h2>
                         <section className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
                             {climateqns.map((market) => {
-                                // const status = getMarketStatus(market);
-                                // const chipText = getChipText(status);
-                                // const chipColor = getChipColor(status);
-
                                 return (
                                     <div
                                         key={market.id}
-                                        className="grid grid-cols-[1fr_1fr_3fr_2fr] items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+                                        className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_3fr_2fr] gap-2 items-center px-3 py-3 sm:px-4 sm:py-2 border-b border-neutral-300 last:border-b-0"
                                     >
-                                        <p className="text-base font-medium">
+                                        <p className="text-sm sm:text-base font-medium">
                                             DD/MM/YYYY
                                         </p>
-                                        <p>
+                                        <p className="text-sm sm:text-base">
                                             Market {market.id}
                                         </p>
-                                        <p className="text-base font-medium">{market.question}</p>
-                                        <div className="flex justify-around">
+                                        <p className="text-sm sm:text-base font-medium">{market.question}</p>
+                                        <div className="flex flex-col sm:flex-row justify-between sm:justify-around gap-2 mt-2 sm:mt-0">
                                             <Button
                                                 text="Yes"
                                                 color="green"
                                                 onClick={() => alert("Coins have been distributed among participants!")}
-                                                className="w-32"
+                                                className="w-full sm:w-32"
                                             />
                                             <Button
                                                 text="No"
                                                 color="blue"
                                                 onClick={() => alert("Coins have been distributed among participants!")}
-                                                className="w-32"
+                                                className="w-full sm:w-32"
                                             />
                                         </div>
                                     </div>
@@ -125,37 +120,33 @@ const AdminPage = () => {
                             })}
                         </section>
 
-                        <h2 className="text-xl font-extrabold pt-6">Entertainment Markets</h2>
+                        <h2 className="text-lg sm:text-xl font-extrabold pt-4 sm:pt-6">Entertainment Markets</h2>
                         <section className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
                             {entertainmentqns.map((market) => {
-                                // const status = getMarketStatus(market);
-                                // const chipText = getChipText(status);
-                                // const chipColor = getChipColor(status);
-
                                 return (
                                     <div
                                         key={market.id}
-                                        className="grid grid-cols-[1fr_1fr_3fr_2fr] items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+                                        className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_3fr_2fr] gap-2 items-center px-3 py-3 sm:px-4 sm:py-2 border-b border-neutral-300 last:border-b-0"
                                     >
-                                        <p className="text-base font-medium">
+                                        <p className="text-sm sm:text-base font-medium">
                                             DD/MM/YYYY
                                         </p>
-                                        <p>
+                                        <p className="text-sm sm:text-base">
                                             Market {market.id}
                                         </p>
-                                        <p className="text-base font-medium">{market.question}</p>
-                                        <div className="flex justify-around">
+                                        <p className="text-sm sm:text-base font-medium">{market.question}</p>
+                                        <div className="flex flex-col sm:flex-row justify-between sm:justify-around gap-2 mt-2 sm:mt-0">
                                             <Button
                                                 text="Yes"
                                                 color="green"
                                                 onClick={() => alert("Coins have been distributed among participants!")}
-                                                className="w-32"
+                                                className="w-full sm:w-32"
                                             />
                                             <Button
                                                 text="No"
                                                 color="blue"
                                                 onClick={() => alert("Coins have been distributed among participants!")}
-                                                className="w-32"
+                                                className="w-full sm:w-32"
                                             />
                                         </div>
                                     </div>
@@ -170,3 +161,7 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+
+// const status = getMarketStatus(market);
+// const chipText = getChipText(status);
+// const chipColor = getChipColor(status);
