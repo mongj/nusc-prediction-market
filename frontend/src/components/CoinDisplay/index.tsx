@@ -1,5 +1,4 @@
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
 import { APIResponse, api } from "@/api";
@@ -42,13 +41,13 @@ const CoinDisplay = () => {
           <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
         </svg>
         <div className="flex flex-col text-left">
-          <div className="pt-1 font-extrabold sm:pt-0">{coins}</div>
-          <div className="text-sm text-gray-400">Total coins</div>
+          <div className="text-lg font-extrabold leading-tight tracking-wide sm:text-xl">{coins}</div>
+          <div className="text-xs font-medium text-gray-500 sm:text-sm">Total coins</div>
         </div>
       </div>
       <a
         href="#"
-        className="flex items-end text-xs text-gray-500 underline underline-offset-1 hover:text-gray-400"
+        className="flex items-end text-xs font-medium text-gray-500 underline underline-offset-2 hover:text-gray-400 transition-colors"
         onClick={handleClick}
       >
         What is this?
@@ -66,10 +65,19 @@ const CoinDisplay = () => {
           vertical: "top",
           horizontal: "center",
         }}
+        PaperProps={{
+          sx: {
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+            maxWidth: '280px'
+          }
+        }}
       >
-        <Typography sx={{ p: 1 }}>Total amount of coins you have earned.</Typography>
-        <Typography sx={{ p: 1 }}>You can use these coins to make predictions.</Typography>
-        <Typography sx={{ p: 1 }}>Converted to real currency at the end of the run.</Typography>
+        <div className="p-3 space-y-2 text-sm font-normal">
+          <p className="text-gray-800 leading-relaxed">Total amount of coins you have earned.</p>
+          <p className="text-gray-800 leading-relaxed">You can use these coins to make predictions.</p>
+          <p className="text-gray-800 leading-relaxed">Converted to real currency at the end of the run.</p>
+        </div>
       </Popover>
     </div>
   );
