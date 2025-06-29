@@ -26,7 +26,7 @@ const CoinDisplay = () => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className="flex justify-between gap-4 rounded-2xl border-2 border-gray-300 bg-white p-4 shadow-sm">
+    <div className="flex justify-between gap-4 rounded-2xl border border-neutral-300 bg-white p-4 shadow">
       <div className="flex flex-row space-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -67,10 +67,10 @@ const CoinDisplay = () => {
         }}
         PaperProps={{
           sx: {
-            borderRadius: '8px',
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-            maxWidth: '280px'
-          }
+            borderRadius: "8px",
+            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+            maxWidth: "280px",
+          },
         }}
       >
         <div className="p-3 space-y-2 text-sm font-normal">
