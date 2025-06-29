@@ -84,8 +84,8 @@ IFS=$'\n' read -d '' -r -a climate_array <<< "$climate_data"
 
 # Create 30 control (entertainment) markets
 for i in {1..30}; do
-    open_date=$(add_days "2025-02-20T00:00:00Z" $((i*2)))
-    close_date=$(add_days "2025-02-20T00:00:00Z" $((i*2 + 2)))
+    open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
+    close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
     
     # Get data from entertainment array, cycling through if needed
     data_index=$(( (i-1) % ${#entertainment_array[@]} ))
@@ -105,8 +105,8 @@ printf "%*s\r" $(tput cols) ""
 
 # Create 30 experiment (climate) markets
 for i in {1..30}; do
-    open_date=$(add_days "2025-02-20T00:00:00Z" $((i*2)))
-    close_date=$(add_days "2025-02-20T00:00:00Z" $((i*2 + 2)))
+    open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
+    close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
 
     # Get data from climate array, cycling through if needed
     data_index=$(( (i-1) % ${#climate_array[@]} ))
