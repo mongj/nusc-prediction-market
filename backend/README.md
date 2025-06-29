@@ -5,11 +5,13 @@ yarn setup
 ```
 
 for windows, do
+
 ```bash
 copy .env.template .env
 ```
 
 then, run
+
 ```bash
 yarn install
 ```
@@ -21,6 +23,7 @@ yarn dock:up
 ```
 
 for windows use
+
 ```bash
 docker compose up -d
 ```
@@ -31,17 +34,7 @@ docker compose up -d
 yarn migrate
 ```
 
-4. seed the db
-
-make sure to do this in bash terminal!
-
-```bash
-# replace <username> and <password> with whichever username and password you are using in the .env file
-# e.g. bash seed.sh http://localhost:3000 admin password123
-bash seed.sh http://localhost:3000 <username> <password>
-```
-
-5. run the server
+4. run the server
 
 run this in bash as well!
 
@@ -49,7 +42,15 @@ run this in bash as well!
 yarn dev
 ```
 
-if unable to seed, try running the server first, then seed after!
+5. seed the db
+
+make sure to do this in bash terminal! and server is running before seeding
+
+```bash
+# replace <username> and <password> with whichever username and password you are using in the .env file
+# e.g. bash seed.sh http://localhost:3000 admin password123
+bash seed.sh http://localhost:3000 <username> <password>
+```
 
 6. viewing the db via cli
 
