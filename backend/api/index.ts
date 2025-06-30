@@ -31,3 +31,5 @@ app.listen(config.port, () => {
   );
   console.log(`=================================\n`);
 });
+
+export default app;

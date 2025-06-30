@@ -12,7 +12,11 @@
     "check:env": "test -f .env || (echo 'Error: .env file not found in root directory' && exit 1)",
     "format": "prettier --write . && prisma format",
     "migrate": "prisma format && prisma generate && prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "dock:build": "docker build --platform linux/amd64 -t nusc-predict .",
+    "dock:push:production": "bash ./push_image_to_ecr.sh production",
+    "dock:push:staging": "bash ./push_image_to_ecr.sh staging",
+    "dock:push:pilot": "bash ./push_image_to_ecr.sh pilot"
   },
   "author": "Ming Jun",
   "license": "MIT",
