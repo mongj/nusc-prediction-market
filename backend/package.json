@@ -23,11 +23,11 @@
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
+    "@types/express": "^5.0.3",
     "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.4",
     "dotenv-cli": "^8.0.0",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.2",
     "prisma": "^6.4.1",
@@ -36,6 +36,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@netlify/functions": "^4.1.8",
     "@prisma/client": "^6.4.1",
     "bcrypt": "^5.1.1",
     "chalk": "^4.1.2",
@@ -44,6 +45,7 @@
     "cors": "^2.8.5",
     "es-toolkit": "^1.32.0",
     "helmet": "^8.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "serverless-http": "^3.2.0"
   }
 }

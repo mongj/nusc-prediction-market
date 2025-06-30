@@ -1,5 +1,6 @@
 /// <reference path="./types/express/index.d.ts" />
 import express from "express";
+import serverless from "serverless-http";
 
 import config from "@/config";
 import { initializeMiddleware } from "@/middleware/initialization";
@@ -31,3 +32,5 @@ app.listen(config.port, () => {
   );
   console.log(`=================================\n`);
 });
+
+export const handler = serverless(app);
