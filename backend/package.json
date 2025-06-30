@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "yarn check:env && yarn install && nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
-    "build": "prisma generate && tsc && tsc-alias",
+    "build": "yarn install && prisma generate && tsc && tsc-alias",
     "serve": "node dist/index.js",
     "setup": "cp .env.template .env && yarn install",
     "dock:up": "yarn check:env && docker compose up -d",
