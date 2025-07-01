@@ -1,8 +1,7 @@
+import Reset from "./Reset";
+import Admin from "./admin/admin";
 import Dashboard from "./dashboard";
-import History from "./history/History";
 import Login from "./login";
 import Question from "./question/Question";
-import Reset from "./Reset";
-import Admin from "./admin/admin"
 
-export { Dashboard, History, Login, Question, Reset, Admin };
+export { Admin, Dashboard, Login, Question, Reset };
