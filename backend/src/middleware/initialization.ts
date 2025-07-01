@@ -11,12 +11,7 @@ import { formatRequest, formatResponse } from "./format";
 import { logRequest } from "./logger";
 
 const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "https://nuscpredict.com",
-    "https://www.nuscpredict.com",
-    "https://nuscpredict.mingjun.dev",
-  ],
+  origin: ["http://localhost", "https://staging.nuscpredict.com", "https://nuscpredict.com"],
   credentials: true,
 };
 
