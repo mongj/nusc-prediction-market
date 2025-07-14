@@ -23,9 +23,14 @@ function Login() {
         friendlyId: username,
         password,
       })
-      .then(() => {
+      .then((response) => {
         toast.success("Signed in successfully");
-        navigate("/dashboard");
+        const isAdmin = response.data.data.isAdmin;
+        if (isAdmin) {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
         if (error.response?.status === HttpStatusCode.Unauthorized) {
