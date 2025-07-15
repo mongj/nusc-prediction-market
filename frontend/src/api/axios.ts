@@ -8,6 +8,7 @@ const apiEvents = {
 
 const api: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
+  // baseURL: "http://localhost:3000", // uncomment for local testing
   withCredentials: true,
 });
 
