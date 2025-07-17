@@ -61,8 +61,8 @@ climate_data=$(cat data/climate-market-internal.json | jq -r '.[] | "\(.topic)|\
 IFS=$'\n' read -d '' -r -a entertainment_array <<< "$entertainment_data"
 IFS=$'\n' read -d '' -r -a climate_array <<< "$climate_data"
 
-# Create 200 control group participants
-for i in {1..200}; do
+# Create 7 control group participants
+for i in {1..7}; do
     friendly_id="P-$(printf "%03d" $i)"
     make_request "POST" "/participants" "{
         \"friendlyId\": \"${friendly_id}\",
@@ -74,8 +74,8 @@ done
 
 printf "%*s\r" $(tput cols) ""
 
-# Create 600 experiment group participants
-for i in {1..600}; do
+# Create 7 experiment group participants
+for i in {1..7}; do
     friendly_id="P-$(printf "%03d" $((i + 200)))"
     make_request "POST" "/participants" "{
         \"friendlyId\": \"${friendly_id}\",
