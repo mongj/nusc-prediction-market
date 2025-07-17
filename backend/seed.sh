@@ -158,8 +158,6 @@ for i in {1..30}; do
     
     echo "Creating market $i: $topic"
     make_request "POST" "/markets" "$json_payload"
-    
-    sleep 0.5
 done
 
 printf "%*s\r" $(tput cols) ""
@@ -179,7 +177,7 @@ for i in {1..30}; do
         --arg question "$question" \
         --arg open_on "$open_date" \
         --arg close_on "$close_date" \
-        '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: true}')
+        '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: false}')
     
     echo "Creating market $i: $topic"
     make_request "POST" "/markets" "$json_payload"
@@ -188,6 +186,7 @@ for i in {1..30}; do
 done
 
 printf "%*s\r" $(tput cols) ""
+
 
 # Pre-study survey
 make_request "POST" "/surveys" '{
