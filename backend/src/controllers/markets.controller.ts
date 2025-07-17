@@ -53,6 +53,29 @@ export class MarketController {
     res.status(200).json({ data: marketsWithAugmentedFields });
   }
 
+  public async listAdmin(req: Request, res: Response) {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
+    const admin = await db.user.findFirst({
+      where: { is_admin: true },
+    });
+
+    if (!admin) {
+      res.status(404).json({ message: "Admin not found" });
+      return;
+    }
+
+    const markets = await db.market.findMany();
+
+    res.status(200).json({ data: markets });
+  }
+
+
   // User-specific handler
   public async getById(req: Request, res: Response) {
     const marketId = Number(req.params.id);
@@ -235,6 +258,81 @@ export class MarketController {
     } catch (error) {
       console.error("Error placing bet:", error);
       res.status(500).json({ message: "Failed to place bet" });
+    }
+  }
+
+  public async resolve(req: Request, res: Response) {
+    const market_id = Number(req.params.id);
+    const { resolution } = req.body; // true for "Yes", false for "No"
+  
+    try {
+      // First, update the market resolution
+      const market = await db.market.update({
+        where: { id: market_id },
+        data: { resolution },
+      });
+  
+      // Get all bets for this market
+      const bets = await db.bet.findMany({
+        where: { market_id },
+        include: {
+          participant: true,
+        },
+      });
+  
+      // Calculate total coins bet on each side
+      const totalYes = bets
+        .filter(bet => bet.bet_outcome === true)
+        .reduce((sum, bet) => sum + bet.bet_amount, 0);
+      
+      const totalNo = bets
+        .filter(bet => bet.bet_outcome === false)
+        .reduce((sum, bet) => sum + bet.bet_amount, 0);
+  
+      const totalPot = totalYes + totalNo;
+  
+      // Only distribute if there were bets
+      if (totalPot > 0) {
+        const winningBets = bets.filter(bet => bet.bet_outcome === resolution);
+        const totalWinningBets = resolution ? totalYes : totalNo;
+  
+        // Calculate each winner's share of the pot
+        const updates = winningBets.map(bet => {
+          const share = (bet.bet_amount / totalWinningBets) * totalPot;
+          return db.participant.update({
+            where: { user_id: bet.user_id },
+            data: { 
+              coin_balance: {
+                increment: share // They get their bet back plus winnings
+              }
+            }
+          });
+        });
+  
+        // Mark all bets as resolved
+        const betUpdates = bets.map(bet => 
+          db.bet.update({
+            where: { id: bet.id },
+            data: { bet_resolution: bet.bet_outcome === resolution }
+          })
+        );
+  
+        // Execute all updates in a transaction
+        await db.$transaction([...updates, ...betUpdates]);
+      }
+  
+      res.status(200).json({ 
+        message: "Market resolved and coins distributed",
+        data: {
+          resolution,
+          totalYes,
+          totalNo,
+          totalPot
+        }
+      });
+    } catch (error) {
+      console.error("Error resolving market:", error);
+      res.status(500).json({ message: "Failed to resolve market" });
     }
   }
 }

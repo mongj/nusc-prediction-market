@@ -8,6 +8,7 @@ const marketController = new MarketController();
 
 // Protected routes
 marketRouter.get("/markets", marketController.list);
+marketRouter.get("/markets/admin", marketController.listAdmin);
 marketRouter.get("/markets/:id", marketController.getById);
 marketRouter.post("/markets/:id/bets", marketController.placeBet);
 
@@ -15,5 +16,6 @@ marketRouter.post("/markets/:id/bets", marketController.placeBet);
 marketRouter.post("/markets", requireAdmin, marketController.create);
 marketRouter.put("/markets/:id", requireAdmin, marketController.update);
 marketRouter.delete("/markets/:id", requireAdmin, marketController.delete);
+marketRouter.post("/markets/:id/resolve", requireAdmin, marketController.resolve);
 
 export default marketRouter;

@@ -43,7 +43,13 @@ export class AuthController {
       // Return user info (excluding sensitive data)
       const { password_hash, session_cookie, session_expiry, ...userInfo } = user;
       res.status(200).json({
-        data: userInfo,
+        // data: userInfo,
+        data: {
+          id: user.id,
+          friendly_id: user.friendly_id,
+          is_admin: user.is_admin,  // Explicitly include
+          Participant: user.Participant, // Optional: include if needed
+        },
       });
     } catch (error) {
       logger.error("Error during sign in:", error as Error);

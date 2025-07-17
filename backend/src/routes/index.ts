@@ -10,6 +10,7 @@ import marketRouter from "./market.routes";
 import pingRouter from "./ping.routes";
 import surveyRouter from "./survey.routes";
 import userRouter from "./user.routes";
+import adminRouter from "./admin.routes";
 
 const initializeRoutes = (app: Application) => {
   const publicRouter = Router();
@@ -22,6 +23,9 @@ const initializeRoutes = (app: Application) => {
   protectedRouter.use("/", userRouter);
   protectedRouter.use("/", surveyRouter);
   protectedRouter.use("/", marketRouter);
+
+  const adminRouterInstance = Router();
+  adminRouterInstance.use("/admin", requireAuth, adminRouter);
 
   // Mount routers
   if (config.nodeEnv === "development") {
