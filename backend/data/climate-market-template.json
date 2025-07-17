@@ -1,0 +1,122 @@
+[
+  {
+    "topic": "Pollutant Concentration",
+    "question": "Will the average sulphur dioxide concentration reading in Singapore exceed [number] on [date]?"
+  },
+  {
+    "topic": "Solar Panels",
+    "question": "Will there be any articles on solar panels published on The Straits Times between [dates]?"
+  },
+  {
+    "topic": "Haze",
+    "question": "Will the PSI index in Singapore fall below [reading] on [date]?"
+  },
+  {
+    "topic": "Air Quality",
+    "question": "Will the average Air Quality Index (AQI) reading throughout Singapore exceed [reading] on [date]?"
+  },
+  {
+    "topic": "Surface Air Temperature",
+    "question": "Will average surface air temperature in the Southern Hemisphere exceed [reading] on [date]?"
+  },
+  {
+    "topic": "Sea Ice Extent",
+    "question": "Will sea ice extent in the Northern Hemisphere on [date] exceed [reading]?"
+  },
+  {
+    "topic": "Extreme Heat",
+    "question": "Will the average daily maximum temperature in Singapore exceed [reading] between [dates]?"
+  },
+  {
+    "topic": "Certificate of Entitlement (COE)",
+    "question": "Will COE prices in Singapore for CAT B cars drop below [reading] on [date]?"
+  },
+  {
+    "topic": "Sea Surface Temperature",
+    "question": "Will the average sea surface temperature globally from [dates] exceed [reading]?"
+  },
+  {
+    "topic": "Precipitation",
+    "question": "Will the precipitation levels on [date] in Singapore surpass the average precipitation levels in [date]?"
+  },
+  {
+    "topic": "Heat Stress",
+    "question": "Will the Wet-Bulb Globe Temperature (WBGT) reading at 1200 hours on [date] at Bishan Stadium exceed [reading]?"
+  },
+  {
+    "topic": "Pollutant Concentrations",
+    "question": "Will the average carbon monoxide reading in the West region of Singapore exceed readings in the Central region of Singapore on [date]?"
+  },
+  {
+    "topic": "Natural Disasters",
+    "question": "Will there be any warnings of tropical cyclones in Singapore between [dates]?"
+  },
+  {
+    "topic": "Extreme Heat",
+    "question": "Will the average temperature of the top 5 hottest cities in the world exceed 45 °C between [dates]?"
+  },
+  {
+    "topic": "Traffic",
+    "question": "Will there be heavy traffic in Singapore at PIE Exit 24 towards BKE on between [times] on [date]?"
+  },
+  {
+    "topic": "Wind Speed",
+    "question": "Will the highest recorded wind speed in Singapore on [date] exceed [number]?"
+  },
+  {
+    "topic": "Intense Rainfall",
+    "question": "Will average rainfall in Jakarta, Indonesia on [date] go above [reading]?"
+  },
+  {
+    "topic": "Ultraviolet Index",
+    "question": "Will the average Ultraviolet Index (UVI) in Singapore from 1200 to 1500 hours on [date] exceed [number]?"
+  },
+  {
+    "topic": "Traffic",
+    "question": "Will the average estimated travel times of expressways in Singapore on [date] from 0800 to 1000 hours exceed [reading]?"
+  },
+  {
+    "topic": "Solar Exposure",
+    "question": "The daily global solar exposure is the total solar energy for a day falling on a horizontal surface. It is measured from midnight to midnight. The values are usually highest in clear sun conditions during the summer and lowest during winter or very cloudy days. Will the daily global solar exposure at Rosslyn Park (Seaview) weather station in Australia exceed [number] MJm-2 on [date]?"
+  },
+  {
+    "topic": "Public Transport",
+    "question": "Will the forecasted crowd density at [MRT station] exceed the real-time crowd density, on [date]?"
+  },
+  {
+    "topic": "Public Transport",
+    "question": "Will there be any train disruptions in Singapore on [date]?"
+  },
+  {
+    "topic": "Air Quality",
+    "question": "Will PM 2.5 readings in Western Singapore at 0900 hours exceed readings at 1700 hours, on [date]?"
+  },
+  {
+    "topic": "Storms",
+    "question": "The Storm Prediction Center updates preliminary observations of tornadoes, hails, and winds in the USA every Saturday. Will the total number of Tornadoes, Hails, and Winds exceed [number] for the [month]?"
+  },
+  {
+    "topic": "Floods",
+    "question": "The Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) monitors floods in Metro Manila. PAGASA classifies flood warnings into 4 categories in increasing levels of urgency - normal, alert, alarm and critical.There are multiple stations throughout Metro Manila to track water levels and issue flood warnings if necessary.On [date], will there be at least one station whose flood warning is at a critical level?"
+  },
+  {
+    "topic": "Electric Buses",
+    "question": "Will there be any news on electric buses in The Straits Times in the next [number] days?"
+  },
+  {
+    "topic": "Electric Vehicles",
+    "question": "Will the local interest in the search term 'electric vehicles' remain above 50 between 0900 to 1700 hours on [date]?  (N.B. The numbers on “Google Trends” represent search interest relative to the highest point on the chart for a given region and time. A value of 100 reflects the peak popularity for a term. A value of 50 means that the term is half as popular. A score of 0 means there was not enough data for this term.)"
+  },
+  {
+    "topic": "CO2",
+    "question": "Will the global average carbon dioxide level in Earth’s atmosphere on [date (2025)] exceed the recorded level on [date (2024)]?"
+  },
+  {
+    "topic": "Sea Water Temperature",
+    "question": "Will average sea water temperature in Singapore on [date] exceed [number]?"
+  },
+  {
+    "topic": "Wet Bulb Temperature",
+    "question": "Will the highest recorded Wet Bulb Temperature for Singapore on [date] exceed [number]?"
+  }
+]
