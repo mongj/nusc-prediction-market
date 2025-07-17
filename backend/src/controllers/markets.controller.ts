@@ -54,24 +54,8 @@ export class MarketController {
   }
 
   public async listAdmin(req: Request, res: Response) {
-    const userId = req.user?.id;
-
-    if (!userId) {
-      res.status(401).json({ message: "Unauthorized" });
-      return;
-    }
-
-    const admin = await db.user.findFirst({
-      where: { is_admin: true },
-    });
-
-    if (!admin) {
-      res.status(404).json({ message: "Admin not found" });
-      return;
-    }
-
+    // No need to check for admin status here, the `requireAdmin` middleware handles it.
     const markets = await db.market.findMany();
-
     res.status(200).json({ data: markets });
   }
 

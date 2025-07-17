@@ -34,6 +34,8 @@ export class AuthController {
         return;
       }
 
+      logger.debug("User object from DB during signIn:", user);
+
       // Generate session
       const { sessionToken, sessionExpiry } = await this.renewSession(user);
 

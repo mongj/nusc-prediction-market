@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { Button } from "@/components/primitives";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+
+import { api } from "@/api";
+import { Button } from "@/components/primitives";
 
 function Reset() {
   const [username, setUsername] = useState("");
@@ -9,31 +12,36 @@ function Reset() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setErrorMessage("");
-    setIsLoading(true);
-    
-    // Example validation
+
     if (newPassword !== confirmPassword) {
-      setErrorMessage("Passwords don't match");
-      setIsLoading(false);
+      setErrorMessage("New passwords do not match.");
       return;
     }
-    
-    // Simulate API call
-    setTimeout(() => {
-      toast.success("Password reset successfully");
-      setIsLoading(false);
-      // Reset form
-      setUsername("");
-      setOldPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-    }, 1000);
-    
-    // Actual implementation would go here
+
+    setIsLoading(true);
+
+    api
+      .post("/auth/reset-password", {
+        friendly_id: username,
+        current_password: oldPassword,
+        new_password: newPassword,
+      })
+      .then(() => {
+        toast.success("Password reset successfully! You are now logged in.");
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || "Invalid details provided. Please try again.";
+        setErrorMessage(message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

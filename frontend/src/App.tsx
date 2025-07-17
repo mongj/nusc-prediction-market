@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
-import { Admin, Dashboard, Login, Question, Reset } from "@/pages";
+import { Admin, AdminResetPasswordPage, Dashboard, Login, Question, Reset } from "@/pages";
 
 function App() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ function App() {
       <Route path="/question/:id" element={<Question />} />
       <Route path="/reset" element={<Reset />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
     </Routes>
   );
 }

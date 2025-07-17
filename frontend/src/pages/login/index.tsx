@@ -24,6 +24,7 @@ function Login() {
         password,
       })
       .then((response) => {
+        console.log("Login successful. Full response data:", response.data);
         toast.success("Signed in successfully");
         const isAdmin = response.data.data.isAdmin;
         if (isAdmin) {
@@ -107,6 +108,15 @@ function Login() {
               color="green" 
               disabled={isLoading}
             />
+
+            <div className="w-full text-center mt-4">
+              <p className="text-sm text-gray-500">
+                Reset Password?{" "}
+                <a href="/reset" className="text-green-600 hover:underline">
+                  Click here to reset
+                </a>
+              </p>
+            </div>
             
             <div className="text-center w-full text-xs sm:text-sm text-gray-500 mt-4">
               Having trouble? Contact @predictionmarkets on Telegram

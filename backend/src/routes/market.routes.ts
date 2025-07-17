@@ -6,16 +6,14 @@ import { requireAdmin } from "@/middleware";
 const marketRouter = Router();
 const marketController = new MarketController();
 
-// Protected routes
-marketRouter.get("/markets", marketController.list);
-marketRouter.get("/markets/admin", marketController.listAdmin);
-marketRouter.get("/markets/:id", marketController.getById);
-marketRouter.post("/markets/:id/bets", marketController.placeBet);
-
-// Admin routes
+// Admin routes - specific routes must come before parameterized ones
+marketRouter.get("/markets/admin", requireAdmin, marketController.listAdmin);
 marketRouter.post("/markets", requireAdmin, marketController.create);
 marketRouter.put("/markets/:id", requireAdmin, marketController.update);
-marketRouter.delete("/markets/:id", requireAdmin, marketController.delete);
-marketRouter.post("/markets/:id/resolve", requireAdmin, marketController.resolve);
+
+// Protected routes
+marketRouter.get("/markets", marketController.list);
+marketRouter.get("/markets/:id", marketController.getById);
+marketRouter.post("/markets/:id/bets", marketController.placeBet);
 
 export default marketRouter;
