@@ -55,6 +55,18 @@ const AdminPage = () => {
     const climateMarkets = markets.filter(market => !market.isControl)
     const entertainmentMarkets = markets.filter(market => market.isControl)
 
+    const handleResolve = async (marketId: number, resolution: boolean) => {
+        try {
+          await api.post(`/markets/${marketId}/resolve`, { resolution });
+          // Refresh the markets list
+          const response = await api.get<APIResponse<Market[]>>("/markets/admin");
+          setMarkets(Object.values(response.data.data));
+          alert(`Market resolved as ${resolution}. Coins have been distributed among participants!`);
+        } catch (error) {
+          console.error("Error resolving market:", error);
+          alert("Failed to resolve market");
+        }
+    };
 
     return (
         <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gray-100 p-4 sm:p-16">
@@ -86,13 +98,13 @@ const AdminPage = () => {
                                                 <Button
                                                     text="Yes"
                                                     color="green"
-                                                    onClick={() => alert("Coins have been distributed among participants!")}
+                                                    onClick={() => handleResolve(market.id, true)}
                                                     className="w-full sm:w-32"
                                                 />
                                                 <Button
                                                     text="No"
                                                     color="blue"
-                                                    onClick={() => alert("Coins have been distributed among participants!")}
+                                                    onClick={() => handleResolve(market.id, false)}
                                                     className="w-full sm:w-32"
                                                 />
                                             </div>
@@ -126,13 +138,13 @@ const AdminPage = () => {
                                                 <Button
                                                     text="Yes"
                                                     color="green"
-                                                    onClick={() => alert("Coins have been distributed among participants!")}
+                                                    onClick={() => handleResolve(market.id, true)}
                                                     className="w-full sm:w-32"
                                                 />
                                                 <Button
                                                     text="No"
                                                     color="blue"
-                                                    onClick={() => alert("Coins have been distributed among participants!")}
+                                                    onClick={() => handleResolve(market.id, false)}
                                                     className="w-full sm:w-32"
                                                 />
                                             </div>
