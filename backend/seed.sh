@@ -42,7 +42,7 @@ make_request() {
 names=("james" "mary" "john" "patricia" "robert" "jennifer" "michael" "linda" "william" "elizabeth" "david" "barbara" "richard" "susan" "joseph" "jessica" "thomas" "sarah" "charles" "karen" "christopher" "nancy" "daniel" "lisa" "matthew" "betty" "anthony" "margaret" "donald" "sandra" "mark" "ashley" "paul" "kimberly" "steven" "emily" "andrew" "donna" "kenneth" "michelle" "joshua" "carol")
 
 # Create 200 control group participants
-for i in {1..5}; do
+for i in {1..200}; do
     random_name=${names[$RANDOM % ${#names[@]}]}
     friendly_id="${random_name}$(printf "%03d" $i)"
     make_request "POST" "/participants" "{
@@ -56,7 +56,7 @@ done
 printf "%*s\r" $(tput cols) ""
 
 # Create 600 experiment group participants
-for i in {1..5}; do
+for i in {1..600}; do
     random_name=${names[$RANDOM % ${#names[@]}]}
     friendly_id="${random_name}$(printf "%03d" $(( i + 200 )))"
     make_request "POST" "/participants" "{
