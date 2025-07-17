@@ -25,6 +25,8 @@ if [ -z "$COOKIE" ]; then
     exit 1
 fi
 
+SLEEP_TIME=0.5  # half second between requests
+
 # Function to make authenticated requests
 make_request() {
     local method=$1
@@ -40,7 +42,7 @@ make_request() {
 names=("james" "mary" "john" "patricia" "robert" "jennifer" "michael" "linda" "william" "elizabeth" "david" "barbara" "richard" "susan" "joseph" "jessica" "thomas" "sarah" "charles" "karen" "christopher" "nancy" "daniel" "lisa" "matthew" "betty" "anthony" "margaret" "donald" "sandra" "mark" "ashley" "paul" "kimberly" "steven" "emily" "andrew" "donna" "kenneth" "michelle" "joshua" "carol")
 
 # Create 200 control group participants
-for i in {1..200}; do
+for i in {1..5}; do
     random_name=${names[$RANDOM % ${#names[@]}]}
     friendly_id="${random_name}$(printf "%03d" $i)"
     make_request "POST" "/participants" "{
@@ -54,7 +56,7 @@ done
 printf "%*s\r" $(tput cols) ""
 
 # Create 600 experiment group participants
-for i in {1..600}; do
+for i in {1..5}; do
     random_name=${names[$RANDOM % ${#names[@]}]}
     friendly_id="${random_name}$(printf "%03d" $(( i + 200 )))"
     make_request "POST" "/participants" "{
@@ -74,6 +76,13 @@ add_days() {
     date -j -v+"${days_to_add}"d -f "%Y-%m-%dT%H:%M:%SZ" "${start_date}" "+%Y-%m-%dT%H:%M:%SZ"
 }
 
+# Function to add days to a date in linux/wsl
+add_days_linux() {
+    local start_date=$1
+    local days_to_add=$2
+    date -d "${start_date} + ${days_to_add} days" "+%Y-%m-%dT%H:%M:%SZ"
+}
+
 # Read market questions from JSON files
 entertainment_data=$(cat data/entertainment-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
 climate_data=$(cat data/climate-market.json | jq -r '.[] | "\(.topic)|\(.question)"')
@@ -82,44 +91,100 @@ climate_data=$(cat data/climate-market.json | jq -r '.[] | "\(.topic)|\(.questio
 IFS=$'\n' read -d '' -r -a entertainment_array <<< "$entertainment_data"
 IFS=$'\n' read -d '' -r -a climate_array <<< "$climate_data"
 
+
+#########################################MAC#########################################################
+
+# # Create 30 control (entertainment) markets
+# for i in {1..30}; do
+#     open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
+#     close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
+    
+#     # Get data from entertainment array, cycling through if needed
+#     data_index=$(( (i-1) % ${#entertainment_array[@]} ))
+#     IFS='|' read -r topic question <<< "${entertainment_array[$data_index]}"
+    
+#     make_request "POST" "/markets" "{
+#         \"name\": \"${topic}\",
+#         \"question\": \"${question}\",
+#         \"open_on\": \"${open_date}\",
+#         \"close_on\": \"${close_date}\",
+#         \"is_control\": true
+#     }"
+#     printf "Created control market %d/30 [%-20s] %d%%\r" $i $(printf '#%.0s' $(seq 1 $(($i * 20 / 30)))) $(($i * 100 / 30))
+# done
+
+# printf "%*s\r" $(tput cols) ""
+
+# # Create 30 experiment (climate) markets
+# for i in {1..30}; do
+#     open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
+#     close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
+
+#     # Get data from climate array, cycling through if needed
+#     data_index=$(( (i-1) % ${#climate_array[@]} ))
+#     IFS='|' read -r topic question <<< "${climate_array[$data_index]}"
+    
+#     make_request "POST" "/markets" "{
+#         \"name\": \"${topic}\",
+#         \"question\": \"${question}\",
+#         \"open_on\": \"${open_date}\",
+#         \"close_on\": \"${close_date}\",
+#         \"is_control\": false
+#     }"
+#     printf "Created experiment market %d/30 [%-20s] %d%%\r" $i $(printf '#%.0s' $(seq 1 $(($i * 20 / 30)))) $(($i * 100 / 30))
+# done
+
+# printf "%*s\r" $(tput cols) ""
+
+
+############################################LINUX################################################################
+
 # Create 30 control (entertainment) markets
 for i in {1..30}; do
-    open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
-    close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
+    open_date=$(add_days_linux "2025-07-01T00:00:00Z" $((i*2)))
+    close_date=$(add_days_linux "2025-07-01T00:00:00Z" $((i*2 + 2)))
     
     # Get data from entertainment array, cycling through if needed
     data_index=$(( (i-1) % ${#entertainment_array[@]} ))
     IFS='|' read -r topic question <<< "${entertainment_array[$data_index]}"
     
-    make_request "POST" "/markets" "{
-        \"name\": \"${topic}\",
-        \"question\": \"${question}\",
-        \"open_on\": \"${open_date}\",
-        \"close_on\": \"${close_date}\",
-        \"is_control\": true
-    }"
-    printf "Created control market %d/30 [%-20s] %d%%\r" $i $(printf '#%.0s' $(seq 1 $(($i * 20 / 30)))) $(($i * 100 / 30))
+    # Use jq to create properly escaped JSON
+    json_payload=$(jq -n \
+        --arg name "$topic" \
+        --arg question "$question" \
+        --arg open_on "$open_date" \
+        --arg close_on "$close_date" \
+        '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: true}')
+    
+    echo "Creating market $i: $topic"
+    make_request "POST" "/markets" "$json_payload"
+    
+    sleep 0.5
 done
 
 printf "%*s\r" $(tput cols) ""
 
 # Create 30 experiment (climate) markets
 for i in {1..30}; do
-    open_date=$(add_days "2025-06-01T00:00:00Z" $((i*2)))
-    close_date=$(add_days "2025-06-01T00:00:00Z" $((i*2 + 2)))
+    open_date=$(add_days_linux "2025-07-01T00:00:00Z" $((i*2)))
+    close_date=$(add_days_linux "2025-07-01T00:00:00Z" $((i*2 + 2)))
 
     # Get data from climate array, cycling through if needed
     data_index=$(( (i-1) % ${#climate_array[@]} ))
     IFS='|' read -r topic question <<< "${climate_array[$data_index]}"
     
-    make_request "POST" "/markets" "{
-        \"name\": \"${topic}\",
-        \"question\": \"${question}\",
-        \"open_on\": \"${open_date}\",
-        \"close_on\": \"${close_date}\",
-        \"is_control\": false
-    }"
-    printf "Created experiment market %d/30 [%-20s] %d%%\r" $i $(printf '#%.0s' $(seq 1 $(($i * 20 / 30)))) $(($i * 100 / 30))
+    # Use jq to create properly escaped JSON
+    json_payload=$(jq -n \
+        --arg name "$topic" \
+        --arg question "$question" \
+        --arg open_on "$open_date" \
+        --arg close_on "$close_date" \
+        '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: true}')
+    
+    echo "Creating market $i: $topic"
+    make_request "POST" "/markets" "$json_payload"
+
+    # printf "Created experiment market %d/30 [%-20s] %d%%\r" $i $(printf '#%.0s' $(seq 1 $(($i * 20 / 30)))) $(($i * 100 / 30))
 done
 
 printf "%*s\r" $(tput cols) ""
@@ -127,7 +192,7 @@ printf "%*s\r" $(tput cols) ""
 # Pre-study survey
 make_request "POST" "/surveys" '{
     "name": "Pre-Study Survey",
-    "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "link": "https://nus.syd1.qualtrics.com/jfe/form/SV_4H0mhef6WQA7GQK",
     "openOn": "2024-01-20T00:00:00Z",
     "closeOn": "2026-01-20T00:00:00Z"
 }'
@@ -136,7 +201,7 @@ printf "Created pre-study survey\r"
 # Post-study survey
 make_request "POST" "/surveys" '{
     "name": "Post-Study Survey",
-    "link": "https://forms.google.com/post-study",
+    "link": "https://nus.syd1.qualtrics.com/jfe/form/SV_3L6dF8n7FiPj0dU",
     "openOn": "2025-06-23T00:00:00Z",
     "closeOn": "2025-06-25T00:00:00Z"
 }'
