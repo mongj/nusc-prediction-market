@@ -8,6 +8,7 @@ const marketController = new MarketController();
 
 // Protected routes
 marketRouter.get("/markets", marketController.list);
+marketRouter.get("/markets/admin", marketController.listAdmin);
 marketRouter.get("/markets/:id", marketController.getById);
 marketRouter.post("/markets/:id/bets", marketController.placeBet);
 

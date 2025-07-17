@@ -53,6 +53,29 @@ export class MarketController {
     res.status(200).json({ data: marketsWithAugmentedFields });
   }
 
+  public async listAdmin(req: Request, res: Response) {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
+    const admin = await db.user.findFirst({
+      where: { is_admin: true },
+    });
+
+    if (!admin) {
+      res.status(404).json({ message: "Admin not found" });
+      return;
+    }
+
+    const markets = await db.market.findMany();
+
+    res.status(200).json({ data: markets });
+  }
+
+
   // User-specific handler
   public async getById(req: Request, res: Response) {
     const marketId = Number(req.params.id);
