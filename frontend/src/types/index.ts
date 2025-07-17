@@ -1,4 +1,5 @@
 import { Market } from "./market";
 import { Survey } from "./survey";
+import { User } from "./user";
 
-export { Market, Survey };
+export type { Market, Survey, User };

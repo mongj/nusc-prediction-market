@@ -26,6 +26,8 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
       return;
     }
 
+    logger.debug("User object attached to req.user in requireAuth:", user);
+
     // Add user to request object for use in route handlers
     req.user = user;
     next();
@@ -37,6 +39,8 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 
 const requireAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const user = req.user;
+
+  logger.debug("Checking for admin privileges in requireAdmin. User:", user);
 
   if (!user || !user.is_admin) {
     res.status(403).json({ message: "Unauthorized" });

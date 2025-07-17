@@ -1,7 +1,7 @@
 import { Application, Router } from "express";
 
 import config from "@/config";
-import { requireAuth } from "@/middleware/auth";
+import { requireAdmin, requireAuth } from "@/middleware";
 
 import authProtectedRouter from "./auth.protected.routes";
 import authPublicRouter from "./auth.public.routes";
@@ -23,9 +23,8 @@ const initializeRoutes = (app: Application) => {
   protectedRouter.use("/", userRouter);
   protectedRouter.use("/", surveyRouter);
   protectedRouter.use("/", marketRouter);
-
-  const adminRouterInstance = Router();
-  adminRouterInstance.use("/admin", requireAuth, adminRouter);
+  // All routes under /admin are now protected by requireAdmin
+  protectedRouter.use("/admin", requireAdmin, adminRouter);
 
   // Mount routers
   if (config.nodeEnv === "development") {
