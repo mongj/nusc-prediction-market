@@ -93,7 +93,7 @@
   },
   {
     "topic": "Storms",
-    "question": " The Storm Prediction Center updates preliminary observations of tornadoes, hails, and winds in the USA every Saturday. Will the total number of Tornadoes, Hails, and Winds exceed [number] for the [month]?"
+    "question": "The Storm Prediction Center updates preliminary observations of tornadoes, hails, and winds in the USA every Saturday. Will the total number of Tornadoes, Hails, and Winds exceed [number] for the [month]?"
   },
   {
     "topic": "Floods",
