@@ -1,23 +1,62 @@
 import { Request, Response } from "express";
-import { logger } from "@/services";
+
+import { db } from "@/services";
 
 export class WebhookController {
   public async handleQualtricsResponse(req: Request, res: Response) {
-    // --- Start of new simplified test code ---
+    const { friendlyId, surveyId } = req.body;
 
-    // Log everything we receive from Qualtrics for debugging.
-    // You will need to check your server logs (e.g., on Supabase or your hosting provider) to see this output.
-    logger.info("--- Qualtrics Test Webhook Triggered ---");
-    logger.info("Received headers from Qualtrics: " + JSON.stringify(req.headers, null, 2));
-    logger.info("Received body from Qualtrics: " + JSON.stringify(req.body, null, 2));
+    if (!friendlyId || !surveyId) {
+      return res.status(400).json({ message: "Missing friendlyId or surveyId from Qualtrics." });
+    }
 
-    // Immediately send a success response. We are not touching the database.
-    res.status(200).json({
-      status: "success",
-      message: "Test webhook received successfully. Check server logs for data.",
-      received_data: req.body,
-    });
+    try {
+      // Step 1 & 2: Find the user by friendly_id to get their user.id
+      const user = await db.user.findUnique({
+        where: { friendly_id: friendlyId },
+      });
 
-    // --- End of new simplified test code ---
+      if (!user) {
+        return res.status(404).json({ message: `User with friendlyId '${friendlyId}' not found.` });
+      }
+
+      // Step 3: Verify a participant record exists for this user.id
+      const participant = await db.participant.findUnique({
+        where: { user_id: user.id },
+      });
+
+      if (!participant) {
+        return res.status(404).json({ message: `Participant record not found for user '${friendlyId}'.` });
+      }
+
+      const survey = await db.survey.findUnique({
+        where: { qualtrics_id: surveyId },
+      });
+
+      if (!survey) {
+        return res.status(404).json({ message: `Survey with qualtrics_id '${surveyId}' not found.` });
+      }
+
+      let updateData = {};
+      if (survey.name.toLowerCase().includes("pre-study")) {
+        updateData = { completed_pre_survey: true };
+      } else if (survey.name.toLowerCase().includes("post-study")) {
+        updateData = { completed_post_survey: true };
+      } else {
+        console.warn(`Webhook received for unhandled survey: ${survey.name} (ID: ${survey.id})`);
+        return res.status(200).json({ message: "Webhook received for unhandled survey." });
+      }
+
+      // Step 4: Update the participant record using the user.id
+      await db.participant.update({
+        where: { user_id: user.id },
+        data: updateData,
+      });
+
+      res.status(200).json({ message: "Participant survey status updated successfully." });
+    } catch (error) {
+      console.error("Error handling Qualtrics webhook:", error);
+      res.status(500).json({ message: "Internal server error." });
+    }
   }
 }
