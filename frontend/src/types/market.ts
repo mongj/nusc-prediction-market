@@ -18,5 +18,6 @@ export type Market = {
 export type MarketWithUserSpecificData = Market & {
   userAnswer?: boolean;
   userBetAmount?: number;
+  userBetChangeCount?: number;
   userIsCorrect?: boolean;
 };
