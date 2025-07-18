@@ -11,11 +11,13 @@ import pingRouter from "./ping.routes";
 import surveyRouter from "./survey.routes";
 import userRouter from "./user.routes";
 import adminRouter from "./admin.routes";
+import webhookRouter from "./webhooks.routes";
 
 const initializeRoutes = (app: Application) => {
   const publicRouter = Router();
   publicRouter.use("/", pingRouter);
   publicRouter.use("/", authPublicRouter);
+  publicRouter.use("/webhooks", webhookRouter);
 
   const protectedRouter = Router();
   protectedRouter.use(requireAuth);
