@@ -25,7 +25,7 @@ const initializeMiddleware = (app: Application) => {
   app.use(cookieParser(config.cookieSecret));
   app.use(cors(corsOptions));
   app.use(logRequest);
-  //app.use(formatRequest);
+  app.use(formatRequest);
   app.use(formatResponse);
 };
 
