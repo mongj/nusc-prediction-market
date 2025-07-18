@@ -29,18 +29,18 @@ const DashboardPage = () => {
 
       {/* Main content area with consistent padding */}
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-6 sm:pb-12">
-        <div className="mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Dashboard</h1>
-          <p className="text-gray-500 text-sm sm:text-base">View your progress and market predictions</p>
-        </div>
-
         {isLoading ? (
           <div className="w-full py-20 flex justify-center items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
           </div>
         ) : (
-          <section className="grid w-full grid-cols-1 gap-4 sm:gap-6 lg:gap-8 sm:grid-cols-3">
+          <section className="grid w-full grid-cols-1 gap-4 sm:gap-6 lg:gap-8 sm:grid-cols-3 mt-0">
             <div className="dashboard-left flex flex-col gap-3 sm:gap-5 order-2 sm:order-1 sm:col-span-1">
+              {/* Move heading and subtitle here */}
+              <div className="mb-4 sm:mb-6">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Dashboard</h1>
+                <p className="text-gray-500 text-sm sm:text-base">View your progress and market predictions</p>
+              </div>
               <CoinDisplay />
               <Progress />
             </div>
