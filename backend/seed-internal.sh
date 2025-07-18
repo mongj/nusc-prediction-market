@@ -11,12 +11,11 @@ BASE_URL=$1
 FRIENDLY_ID=$2
 PASSWORD=$3
 
-# Date constants (adjust these as needed)
-MARKET_OPEN_DATE="2025-01-21T00:00:00Z"
 PRE_SURVEY_OPEN_DATE="2025-06-01T00:00:00Z"
 PRE_SURVEY_CLOSE_DATE="2025-07-01T00:00:00Z"
 POST_SURVEY_OPEN_DATE="2025-08-01T00:00:00Z"
 POST_SURVEY_CLOSE_DATE="2025-08-30T00:00:00Z"
+BASE_OPEN_DATE="2025-07-16T00:00:00Z"
 
 # Login and capture the cookie
 COOKIE=$(curl -sS -X POST "${BASE_URL}/auth/signin" \
@@ -32,19 +31,25 @@ if [ -z "$COOKIE" ]; then
     exit 1
 fi
 
-# Platform-independent add_days function
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  add_days() {
+# Function to add days to a date in macOS
+add_days() {
     local start_date=$1
     local days_to_add=$2
-    date -j -f "%Y-%m-%dT%H:%M:%SZ" "$start_date" -v+"${days_to_add}"d "+%Y-%m-%dT%H:%M:%SZ"
-  }
-else
-  add_days() {
+    date -j -v+"${days_to_add}"d -f "%Y-%m-%dT%H:%M:%SZ" "${start_date}" "+%Y-%m-%dT%H:%M:%SZ"
+}
+
+# Function to add days to a date in linux/wsl
+add_days_linux() {
     local start_date=$1
     local days_to_add=$2
     date -d "${start_date} + ${days_to_add} days" "+%Y-%m-%dT%H:%M:%SZ"
-  }
+}
+
+# Detect platform
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    add_days_func=add_days
+else
+    add_days_func=add_days_linux
 fi
 
 # Function to make authenticated requests
@@ -94,8 +99,8 @@ printf "%*s\r" $(tput cols) ""
 
 # Create 30 control (entertainment) markets
 for i in {1..30}; do
-    open_date=$(add_days "$MARKET_OPEN_DATE" $((i*2)))
-    close_date=$(add_days "$MARKET_OPEN_DATE" $((i*2 + 2)))
+    open_date=$($add_days_func "$BASE_OPEN_DATE" $(( (i-1)*2 )))
+    close_date=$($add_days_func "$BASE_OPEN_DATE" $(( i*2 )))
     data_index=$(( (i-1) % ${#entertainment_array[@]} ))
     IFS='|' read -r topic question <<< "${entertainment_array[$data_index]}"
     json_payload=$(jq -n --arg name "$topic" --arg question "$question" --arg open_on "$open_date" --arg close_on "$close_date" '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: true}')
@@ -107,8 +112,8 @@ printf "%*s\r" $(tput cols) ""
 
 # Create 30 experiment (climate) markets
 for i in {1..30}; do
-    open_date=$(add_days "$MARKET_OPEN_DATE" $((i*2)))
-    close_date=$(add_days "$MARKET_OPEN_DATE" $((i*2 + 2)))
+    open_date=$($add_days_func "$BASE_OPEN_DATE" $(( (i-1)*2 )))
+    close_date=$($add_days_func "$BASE_OPEN_DATE" $(( i*2 )))
     data_index=$(( (i-1) % ${#climate_array[@]} ))
     IFS='|' read -r topic question <<< "${climate_array[$data_index]}"
     json_payload=$(jq -n --arg name "$topic" --arg question "$question" --arg open_on "$open_date" --arg close_on "$close_date" '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: false}')
