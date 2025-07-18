@@ -1,31 +1,33 @@
 import { Request, Response } from "express";
 
-import { db } from "@/services";
+import { db, logger } from "@/services";
 
 export class WebhookController {
   public async handleQualtricsResponse(req: Request, res: Response) {
+    // The request body is now in camelCase because we are bypassing the formatRequest middleware.
     const { friendlyId, surveyId } = req.body;
 
     if (!friendlyId || !surveyId) {
+      logger.warn("Webhook received with missing friendlyId or surveyId", { body: req.body });
       return res.status(400).json({ message: "Missing friendlyId or surveyId from Qualtrics." });
     }
 
     try {
-      // Step 1 & 2: Find the user by friendly_id to get their user.id
       const user = await db.user.findUnique({
         where: { friendly_id: friendlyId },
       });
 
       if (!user) {
+        logger.warn(`Webhook: User with friendlyId '${friendlyId}' not found.`);
         return res.status(404).json({ message: `User with friendlyId '${friendlyId}' not found.` });
       }
 
-      // Step 3: Verify a participant record exists for this user.id
       const participant = await db.participant.findUnique({
         where: { user_id: user.id },
       });
 
       if (!participant) {
+        logger.warn(`Webhook: Participant record not found for user '${friendlyId}'.`);
         return res.status(404).json({ message: `Participant record not found for user '${friendlyId}'.` });
       }
 
@@ -34,6 +36,7 @@ export class WebhookController {
       });
 
       if (!survey) {
+        logger.warn(`Webhook: Survey with qualtrics_id '${surveyId}' not found.`);
         return res.status(404).json({ message: `Survey with qualtrics_id '${surveyId}' not found.` });
       }
 
@@ -43,20 +46,20 @@ export class WebhookController {
       } else if (survey.name.toLowerCase().includes("post-study")) {
         updateData = { completed_post_survey: true };
       } else {
-        console.warn(`Webhook received for unhandled survey: ${survey.name} (ID: ${survey.id})`);
-        return res.status(200).json({ message: "Webhook received for unhandled survey." });
+        logger.warn(`Webhook received for unhandled survey: ${survey.name} (ID: ${survey.id})`);
+        return res.status(200).json({ message: "Webhook received for unhandled survey, no action taken." });
       }
 
-      // Step 4: Update the participant record using the user.id
       await db.participant.update({
         where: { user_id: user.id },
         data: updateData,
       });
 
+      logger.info(`Successfully updated participant ${friendlyId} for survey ${surveyId}`);
       res.status(200).json({ message: "Participant survey status updated successfully." });
     } catch (error) {
-      console.error("Error handling Qualtrics webhook:", error);
-      res.status(500).json({ message: "Internal server error." });
+      logger.error("Error handling Qualtrics webhook:", error as Error);
+      res.status(500).json({ message: "Internal server error while processing webhook." });
     }
   }
 }
