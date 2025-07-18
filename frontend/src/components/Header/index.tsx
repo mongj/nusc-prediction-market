@@ -29,8 +29,8 @@ const Header = () => {
   return (
     <div className="flex w-full place-items-center place-content-between">
       <div className="text-4xl font-bold">
-        <span className="text-green-800">NUSC</span>
-        <span className="text-green-600">Predict</span>
+        <span className="text-sky-500">NUSC</span>
+        <span className="text-lime-600">Predict</span>
       </div>
 
       <div className="flex w-fit gap-2">

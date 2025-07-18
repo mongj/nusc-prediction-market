@@ -82,6 +82,7 @@ export class MarketController {
       totalNo: market.bets.filter((bet) => bet.bet_outcome === false).length,
       userAnswer: market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_outcome,
       userBetAmount: market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_amount,
+      userBetChangeCount: market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_change_count,
       userIsCorrect:
         market.bets.length > 0 && market.resolution !== null
           ? market.bets.find((bet) => bet.user_id === req.user?.id)?.bet_outcome === market.resolution
@@ -206,6 +207,9 @@ export class MarketController {
             data: {
               bet_outcome,
               bet_amount,
+              bet_change_count: {
+                increment: 1,
+              },
             },
           }),
           db.participant.update({
@@ -228,6 +232,7 @@ export class MarketController {
             market_id,
             bet_outcome,
             bet_amount,
+            bet_change_count: 0, // Initialize bet change count
           },
         }),
         db.participant.update({

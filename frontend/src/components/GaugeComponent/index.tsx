@@ -5,8 +5,8 @@ const GaugeComponent = ({ yesCount, noCount }: { yesCount: number; noCount: numb
   const percentageYes = totalVotes > 0 ? (yesCount / totalVotes) * 100 : 0;
 
   const settings = {
-    width: 200,
-    height: 200,
+    width: 260,   // Increased from 200 to 260
+    height: 260,  // Increased from 200 to 260
     value: percentageYes,
   };
 

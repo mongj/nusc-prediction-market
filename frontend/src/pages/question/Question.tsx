@@ -18,18 +18,41 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
   const marketIsOpen = new Date(market.openOn) < new Date() && new Date(market.closeOn) > new Date();
 
   const handlerPlaceBet = () => {
-    api
-      .post(`/markets/${marketId}/bets`, {
-        betOutcome: userAnswer,
-        betAmount: coins,
-      })
-      .then(() => {
+  api
+    .post(`/markets/${marketId}/bets`, {
+      betOutcome: userAnswer,
+      betAmount: coins,
+    })
+    .then(() => {
+      toast(
+        <span className="flex items-center gap-2">
+          <svg className="animate-spin h-8 w-8 text-green-500" viewBox="0 0 24 24">
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+              fill="none"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+          </svg>
+          Bet placed successfully! Refreshing the page to update status...
+        </span>
+      );
+      setTimeout(() => {
         window.location.reload();
-      })
-      .catch((error) => {
-        toast.error(`Failed to place bet: ${error.response.data.message}`);
-      });
-  };
+      }, 2000); // Delay reload by 2 seconds so the toast is visible
+    })
+    .catch((error) => {
+      toast.error(`Failed to place bet: ${error.response.data.message}`);
+    });
+};
 
   return (
     <div className="flex flex-col gap-4 w-full place-items-center place-content-center rounded-2xl border border-neutral-300 bg-white p-6 shadow">
@@ -67,6 +90,7 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
           coins={coins}
           handlePlaceBet={handlerPlaceBet}
           allowBet={marketIsOpen}
+          betChangeCount={market.userBetChangeCount}
         />
       )}
     </div>
@@ -78,33 +102,46 @@ const ConfirmationBox = ({
   coins,
   handlePlaceBet,
   allowBet,
+  betChangeCount,
 }: {
   userAnswer: boolean;
   coins: number;
   handlePlaceBet: () => void;
   allowBet: boolean;
+  betChangeCount?: number;
 }) => (
-  <div className="flex flex-row place-items-center justify-between space-x-6 rounded-2xl border-2 border-sky-500 bg-sky-50 p-4 shadow-sm w-full mt-auto">
-    <div className="flex flex-col">
+  <div className="relative flex flex-col rounded-2xl border-2 border-sky-500 bg-sky-50 p-4 shadow-sm w-full mt-auto">
+    <div className="flex flex-row items-center justify-between">
       <p className="text-lg">
         Your answer: <strong>{userAnswer ? "Yes" : "No"}</strong>
       </p>
-      <span className="flex flex-row space-x-1 pt-2 place-items-center">
-        <div className="text-lg flex place-items-center gap-1">
-          Cost: <img src="/images/coin.svg" alt="coin" className="w-5 h-5" />
-          <strong>
-            {coins} coin{coins > 1 ? "s" : ""}
-          </strong>
+        <div className="text-lg text-gray-600 ml-4">
+          Bet Changes: <strong>{(betChangeCount)}</strong>
         </div>
-      </span>
     </div>
-    {allowBet && <Button variant="secondary" color="blue" text="Confirm" className="w-36" onClick={handlePlaceBet} />}
+    <div className="flex flex-row items-center justify-between pt-2">
+      <div className="text-lg flex items-center gap-1">
+        Cost: <img src="/images/coin.svg" alt="coin" className="w-5 h-5" />
+        <strong>
+          {coins} coin{coins > 1 ? "s" : ""}
+        </strong>
+      </div>
+      {allowBet && (
+        <Button
+          variant="secondary"
+          color="blue"
+          text="Confirm"
+          className="w-36"
+          onClick={handlePlaceBet}
+        />
+      )}
+    </div>
   </div>
 );
 
 const MarketStats = ({ yesCount, noCount }: { yesCount: number; noCount: number }) => (
   <div className="flex w-full md:max-w-[50%] flex-col items-center justify-between rounded-2xl border border-neutral-300 bg-white p-6 shadow">
-    <p className="font-semibold text-xl">See how others have voted</p>
+    <p className="font-semibold text-2xl">See how others have voted</p>
     {yesCount + noCount > 0 ? (
       <GaugeComponent yesCount={yesCount} noCount={noCount} />
     ) : (
@@ -112,12 +149,12 @@ const MarketStats = ({ yesCount, noCount }: { yesCount: number; noCount: number 
     )}
     <div className="flex w-full flex-row justify-between">
       <div className="flex gap-2 place-items-center">
-        <div className="rounded-full bg-lime-600 w-4 h-4" />
-        <div className="font-semibold">{yesCount} Yes</div>
+        <div className="rounded-full bg-lime-600 w-6 h-6" />
+        <div className="font-semibold text-xl">{yesCount} Yes</div>
       </div>
       <div className="flex gap-2 place-items-center">
-        <div className="rounded-full bg-red-500 w-4 h-4" />
-        <div className="font-semibold">{noCount} No</div>
+        <div className="rounded-full bg-red-500 w-6 h-6" />
+        <div className="font-semibold text-xl">{noCount} No</div>
       </div>
     </div>
   </div>
@@ -127,12 +164,18 @@ function QuestionPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [marketData, setMarketData] = useState<MarketWithUserSpecificData | null>(null);
+  const [coinBalance, setCoinBalance] = useState<number | null>(null);
 
   useEffect(() => {
     if (!id) return;
 
     api.get<APIResponse<MarketWithUserSpecificData>>(`/markets/${id}`).then((response) => {
       setMarketData(response.data.data);
+    });
+
+    // Fetch user's coin balance
+    api.get<APIResponse<number>>("/users/coins").then((response) => {
+      setCoinBalance(response.data.data);
     });
   }, [id]);
 
@@ -144,7 +187,16 @@ function QuestionPage() {
     <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-5 bg-gray-100 p-16">
       <div className="max-w-7xl w-full flex flex-col gap-8">
         <BackButton onClick={() => navigate("/dashboard")} />
-        <h1 className="text-3xl font-bold">Today's Topic: {marketData.name}</h1>
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-3xl font-bold">Today's Topic: {marketData.name}</h1>
+          {coinBalance !== null && (
+            <div className="flex items-center gap-2 text-lg font-semibold bg-white rounded-xl px-4 py-2 shadow border border-neutral-200">
+              Balance:
+              <img src="/images/coin.svg" alt="coin" className="w-5 h-5" />
+              <span>{coinBalance}</span>
+            </div>
+          )}
+        </div>
         <section className="flex flex-col md:flex-row gap-4 min-h-[30vh]">
           <Question market={marketData} marketId={id} />
           <MarketStats yesCount={marketData.totalYes} noCount={marketData.totalNo} />

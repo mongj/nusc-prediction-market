@@ -86,6 +86,7 @@ model Bet {
   market_id      Int
   bet_outcome    Boolean
   bet_amount     Int
+  bet_change_count   Int
   bet_resolution Boolean?
   participant    Participant @relation(fields: [user_id], references: [user_id])
   market         Market      @relation(fields: [market_id], references: [id])
