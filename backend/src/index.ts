@@ -12,7 +12,7 @@ const app = express();
 // Initialize the application
 try {
   initializeMiddleware(app);
-  // initializeAdminUser();
+  initializeAdminUser();
   initializeRoutes(app);
 } catch (e) {
   // Require that initialization is successful
