@@ -49,13 +49,14 @@ export class SurveyController {
   }
 
   public async create(req: Request, res: Response) {
-    const { name, link, open_on, close_on } = req.body;
+    const { name, link, open_on, close_on, qualtrics_id } = req.body;
 
     try {
       const survey = await db.survey.create({
         data: {
           name,
           link,
+          qualtrics_id,
           open_on: new Date(open_on),
           close_on: new Date(close_on),
           is_closed: false,

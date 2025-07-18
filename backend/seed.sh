@@ -192,6 +192,7 @@ printf "%*s\r" $(tput cols) ""
 make_request "POST" "/surveys" '{
     "name": "Pre-Study Survey",
     "link": "https://nus.syd1.qualtrics.com/jfe/form/SV_4H0mhef6WQA7GQK",
+    "qualtricsId": "SV_4H0mhef6WQA7GQK",
     "openOn": "2024-01-20T00:00:00Z",
     "closeOn": "2026-01-20T00:00:00Z"
 }'
@@ -201,6 +202,7 @@ printf "Created pre-study survey\r"
 make_request "POST" "/surveys" '{
     "name": "Post-Study Survey",
     "link": "https://nus.syd1.qualtrics.com/jfe/form/SV_3L6dF8n7FiPj0dU",
+    "qualtricsId": "SV_3L6dF8n7FiPj0dU",
     "openOn": "2025-06-23T00:00:00Z",
     "closeOn": "2025-06-25T00:00:00Z"
 }'
