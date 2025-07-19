@@ -4,7 +4,7 @@ import { APIResponse, api } from "@/api";
 import { Button, Chip } from "@/components/primitives";
 import { ChipColor } from "@/components/primitives/Chip";
 import { Market } from "@/types";
-import Header from "@/components/Header";
+import AdminHeader from "@/components/Header/adminHeader";
 
 enum MarketStatus {
     PENDING = "pending",
@@ -54,9 +54,9 @@ const AdminPage = () => {
     };
 
     const climateMarkets = markets.filter(market => !market.isControl)
-        .sort((a, b) => new Date(b.openOn).getTime() - new Date(a.openOn).getTime());
+        .sort((a, b) => new Date(a.openOn).getTime() - new Date(b.openOn).getTime());
     const entertainmentMarkets = markets.filter(market => market.isControl)
-        .sort((a, b) => new Date(b.openOn).getTime() - new Date(a.openOn).getTime());
+        .sort((a, b) => new Date(a.openOn).getTime() - new Date(b.openOn).getTime());
 
     // Pagination logic for climate
     const climateTotalPages = Math.ceil(climateMarkets.length / itemsPerPage);
@@ -83,85 +83,88 @@ const AdminPage = () => {
         }
     };
 
-    const renderMarketTable = (markets: Market[], page: number, setPage: (n: number) => void, totalPages: number) => (
-        <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
-            <section>
-                {markets.map((market) => {
-                    const status = getMarketStatus(market);
-                    const chipText = getChipText(status);
-                    const chipColor = getChipColor(status);
+    const renderMarketTable = (markets: Market[], page: number, setPage: (n: number) => void, totalPages: number, totalMarkets: number) => (
+    <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
+        <section>
+            {markets.map((market) => {
+                const status = getMarketStatus(market);
+                const chipText = getChipText(status);
+                const chipColor = getChipColor(status);
+                const isResolved = market.resolution === true;
 
-                    return (
-                        <div
-                            key={market.id}
-                            className="grid grid-cols-[1fr_4fr_1fr_1fr] items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
-                        >
-                            <p className="text-base font-medium">
-                                {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
-                            </p>
-                            <p className="text-base font-medium">{market.question}</p>
-                            <div className="flex justify-center">
-                                <Chip text={chipText} color={chipColor} />
-                            </div>
-                            <div className="flex justify-end">
-                                <div className="flex flex-col sm:flex-row justify-between sm:justify-around gap-2 mt-2 sm:mt-0">
-                                    <Button
-                                        text="Yes"
-                                        color="green"
-                                        onClick={() => handleResolve(market.id, true)}
-                                        className="w-full sm:w-32"
-                                    />
-                                    <Button
-                                        text="No"
-                                        color="blue"
-                                        onClick={() => handleResolve(market.id, false)}
-                                        className="w-full sm:w-32"
-                                    />
-                                </div>
+                return (
+                    <div
+                        key={market.id}
+                        className="grid grid-cols-[1fr_4fr_1fr_1fr] items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+                    >
+                        <p className="text-base font-medium">
+                            {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                        </p>
+                        <p className="text-base font-medium">{market.question}</p>
+                        <div className="flex justify-center">
+                            <Chip text={chipText} color={chipColor} />
+                        </div>
+                        <div className="flex justify-end">
+                            <div className="flex flex-col sm:flex-row justify-between sm:justify-around gap-2 mt-2 sm:mt-0">
+                                <Button
+                                    text="Yes"
+                                    color="green"
+                                    onClick={() => handleResolve(market.id, true)}
+                                    className="w-full sm:w-32"
+                                    disabled={isResolved}
+                                />
+                                <Button
+                                    text="No"
+                                    color="blue"
+                                    onClick={() => handleResolve(market.id, false)}
+                                    className="w-full sm:w-32"
+                                    disabled={isResolved}
+                                />
                             </div>
                         </div>
-                    );
-                })}
-            </section>
-            {totalPages > 1 && (
-                <div className="flex items-center justify-between px-4 py-3 sm:px-6">
-                    <div>
-                        <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">{(page - 1) * itemsPerPage + 1}</span> to{" "}
-                            <span className="font-medium">{Math.min(page * itemsPerPage, markets.length)}</span> of{" "}
-                            <span className="font-medium">{markets.length}</span> results
-                        </p>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <Button
-                            onClick={() => setPage(page - 1)}
-                            disabled={page === 1}
-                            text="Previous"
-                            size="medium"
-                        />
-                        <Button
-                            onClick={() => setPage(page + 1)}
-                            disabled={page === totalPages}
-                            text="Next"
-                            size="medium"
-                        />
-                    </div>
+                );
+            })}
+        </section>
+        {totalPages > 1 && (
+            <div className="flex items-center justify-between px-4 py-3 sm:px-6">
+                <div>
+                    <p className="text-sm text-gray-700">
+                        Showing <span className="font-medium">{(page - 1) * itemsPerPage + 1}</span> to{" "}
+                        <span className="font-medium">{Math.min(page * itemsPerPage, totalMarkets)}</span> of{" "}
+                        <span className="font-medium">{totalMarkets}</span> results
+                    </p>
                 </div>
-            )}
-        </div>
-    );
+                <div className="flex items-center gap-4">
+                    <Button
+                        onClick={() => setPage(page - 1)}
+                        disabled={page === 1}
+                        text="Previous"
+                        size="medium"
+                    />
+                    <Button
+                        onClick={() => setPage(page + 1)}
+                        disabled={page === totalPages}
+                        text="Next"
+                        size="medium"
+                    />
+                </div>
+            </div>
+        )}
+    </div>
+);
 
     return (
         <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gray-100 p-4 sm:p-16">
             <div className="w-full max-w-7xl">
-                <Header />
+                <AdminHeader />
                 <div className="w-full max-w-[1200px] mt-4 sm:mt-8">
                     <div className="flex flex-col space-y-2">
                         <h2 className="text-lg sm:text-xl font-extrabold">Climate Markets</h2>
-                        {renderMarketTable(currentClimateMarkets, climatePage, setClimatePage, climateTotalPages)}
+                        {renderMarketTable(currentClimateMarkets, climatePage, setClimatePage, climateTotalPages, climateMarkets.length)}
 
                         <h2 className="text-lg sm:text-xl font-extrabold pt-4 sm:pt-6">Entertainment Markets</h2>
-                        {renderMarketTable(currentEntMarkets, entPage, setEntPage, entTotalPages)}
+                        {renderMarketTable(currentEntMarkets, entPage, setEntPage, entTotalPages, entertainmentMarkets.length)}
                     </div>
                 </div>
             </div>

@@ -47,6 +47,7 @@ export class MarketController {
         market.bets.length === 0 || market.resolution === null
           ? null
           : market.bets[0].bet_outcome === market.resolution,
+      winnings: market.bets.length > 0 ? market.bets[0].winnings : null,
       bets: undefined,
     }));
 
@@ -102,7 +103,7 @@ export class MarketController {
           open_on: new Date(open_on),
           close_on: new Date(close_on),
           is_control,
-          is_open: false,
+          is_open: true,
         },
       });
 
@@ -255,10 +256,14 @@ export class MarketController {
     const { resolution } = req.body; // true for "Yes", false for "No"
   
     try {
-      // First, update the market resolution
+      // Always set resolution to true, and set yes_no_flag to the actual outcome
       const market = await db.market.update({
         where: { id: market_id },
-        data: { resolution },
+        data: { 
+          is_open: false,
+          resolution: true,
+          yes_no_flag: resolution,
+        },
       });
   
       // Get all bets for this market
@@ -280,40 +285,58 @@ export class MarketController {
   
       const totalPot = totalYes + totalNo;
   
-      // Only distribute if there were bets
       if (totalPot > 0) {
-        const winningBets = bets.filter(bet => bet.bet_outcome === resolution);
-        const totalWinningBets = resolution ? totalYes : totalNo;
-  
-        // Calculate each winner's share of the pot
-        const updates = winningBets.map(bet => {
-          const share = (bet.bet_amount / totalWinningBets) * totalPot;
-          return db.participant.update({
-            where: { user_id: bet.user_id },
-            data: { 
-              coin_balance: {
-                increment: share // They get their bet back plus winnings
-              }
+        const participantUpdates = [];
+        const betUpdates = [];
+
+        for (const bet of bets) {
+          const isWinner = bet.bet_outcome === resolution;
+          let winnings = 0;
+          const totalWinningBets = resolution ? totalYes : totalNo;
+
+          if (isWinner) {
+            if (totalWinningBets > 0) {
+              const share = (bet.bet_amount / totalWinningBets) * totalPot;
+              winnings = share - bet.bet_amount;
+
+              // Add participant coin update for winners
+              participantUpdates.push(
+                db.participant.update({
+                  where: { user_id: bet.user_id },
+                  data: {
+                    coin_balance: {
+                      increment: Math.round(share),
+                    },
+                  },
+                }),
+              );
             }
-          });
-        });
-  
-        // Mark all bets as resolved
-        const betUpdates = bets.map(bet => 
-          db.bet.update({
-            where: { id: bet.id },
-            data: { bet_resolution: bet.bet_outcome === resolution }
-          })
-        );
+          } else {
+            // Loser's winnings are negative their bet amount
+            winnings = -bet.bet_amount;
+          }
+
+          // Add bet update for all bets
+          betUpdates.push(
+            db.bet.update({
+              where: { id: bet.id },
+              data: {
+                bet_resolution: isWinner,
+                winnings: Math.round(winnings),
+              },
+            }),
+          );
+        }
   
         // Execute all updates in a transaction
-        await db.$transaction([...updates, ...betUpdates]);
+        await db.$transaction([...participantUpdates, ...betUpdates]);
       }
   
       res.status(200).json({ 
         message: "Market resolved and coins distributed",
         data: {
-          resolution,
+          resolution: true,
+          yes_no_flag: resolution,
           totalYes,
           totalNo,
           totalPot

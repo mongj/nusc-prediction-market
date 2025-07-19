@@ -7,12 +7,14 @@ export type Market = {
   isOpen: boolean;
   isControl: boolean;
   resolution: boolean | null;
+  yes_no_flag?: boolean | null;
   createdAt: Date;
   updatedAt: Date;
   hasAnswered: boolean;
   isCorrect: boolean;
   totalYes: number;
   totalNo: number;
+  winnings?: number | null;
 };
 
 export type MarketWithUserSpecificData = Market & {
