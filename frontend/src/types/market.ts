@@ -14,6 +14,7 @@ export type Market = {
   isCorrect: boolean;
   totalYes: number;
   totalNo: number;
+  winnings?: number | null;
 };
 
 export type MarketWithUserSpecificData = Market & {

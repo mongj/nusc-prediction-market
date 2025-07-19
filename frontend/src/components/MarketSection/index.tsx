@@ -90,20 +90,38 @@ const MarketSection = () => {
       <h2 className="text-xl font-extrabold">Make Your Prediction</h2>
       <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
         <section>
+          <div className="hidden md:grid grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 font-bold text-gray-600">
+            <span>Date</span>
+            <span className="col-span-1">Market</span>
+            <span className="text-center">Winnings</span>
+            <span className="text-center">Status</span>
+            <span className="text-center">Action</span>
+          </div>
           {currentMarkets.map((market) => {
             const status = getMarketStatus(market);
             const chipText = getChipText(status);
             const chipColor = getChipColor(status);
+            const winnings = market.winnings;
 
             return (
               <div
                 key={market.id}
-                className="grid grid-cols-4 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+                className="grid grid-cols-3 md:grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
               >
-                <p className="text-base font-medium">
+                <p className="text-base font-medium hidden md:block">
                   {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                 </p>
-                <p className="text-base font-medium">{market.name}</p>
+                <p className="text-base font-medium col-span-1">{market.name}</p>
+                <div className="flex justify-center items-center gap-1">
+                  {winnings != null && (
+                    <>
+                      <img src="/images/coin.svg" alt="coin" className="w-4 h-4" />
+                      <span className={`font-bold ${winnings >= 0 ? "text-green-600" : "text-red-600"}`}>
+                        {winnings >= 0 ? `+${winnings}` : winnings}
+                      </span>
+                    </>
+                  )}
+                </div>
                 <div className="flex justify-center">
                   <Chip text={chipText} color={chipColor} />
                 </div>

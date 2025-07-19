@@ -126,6 +126,12 @@ function AdminResetPasswordPage() {
         const participantUsers = usersArray.filter(
           (user) => !user.isAdmin && user.participant?.needPasswordReset
         );
+        // Sort by ascending friendlyId
+        participantUsers.sort((a, b) => {
+          if (a.friendlyId < b.friendlyId) return -1;
+          if (a.friendlyId > b.friendlyId) return 1;
+          return 0;
+        });
         setAllParticipants(participantUsers);
       })
       .catch((error) => {
@@ -205,7 +211,7 @@ function AdminResetPasswordPage() {
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 px-1 text-left text-sm font-semibold text-gray-900 w-16"
+                      className="py-3.5 px-1 text-center text-sm font-semibold text-gray-900 w-16"
                     >
                       Status
                     </th>
@@ -218,7 +224,7 @@ function AdminResetPasswordPage() {
                         <td className="whitespace-nowrap py-4 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6">
                           {user.friendlyId}
                         </td>
-                        <td className="whitespace-nowrap py-3 px-2 text-sm text-center align-middle">
+                        <td className="whitespace-nowrap py-3 px-2 text-sm text-left align-middle">
                           <Button
                             text="Reset Password"
                             onClick={() => handleResetPassword(user.id)}
