@@ -74,6 +74,7 @@ model Market {
   is_open    Boolean?
   is_control Boolean
   resolution Boolean?
+  yes_no_flag   Boolean?
   created_at DateTime @default(now()) @db.Timestamptz
   updated_at DateTime @updatedAt @db.Timestamptz
   bets       Bet[]
