@@ -86,6 +86,9 @@ export class AuthController {
       // Find user by friendly_id
       const user = await db.user.findUnique({
         where: { friendly_id },
+        include: {
+          Participant: true, // Include Participant relation if needed
+        },
       });
 
       if (!user) {
@@ -110,6 +113,14 @@ export class AuthController {
           password_hash: hashedPassword,
         },
       });
+
+      // Set need_password_reset to false if participant exists
+      if (user.Participant) {
+        await db.participant.update({
+          where: { user_id: user.id },
+          data: { need_password_reset: false },
+        });
+      }
 
       // Renew session
       const { sessionToken, sessionExpiry } = await this.renewSession(user);
