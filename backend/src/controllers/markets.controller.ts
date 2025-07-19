@@ -255,10 +255,13 @@ export class MarketController {
     const { resolution } = req.body; // true for "Yes", false for "No"
   
     try {
-      // First, update the market resolution
+      // Always set resolution to true, and set yes_no_flag to the actual outcome
       const market = await db.market.update({
         where: { id: market_id },
-        data: { resolution },
+        data: { 
+          resolution: true,
+          yes_no_flag: resolution,
+        },
       });
   
       // Get all bets for this market
@@ -313,7 +316,8 @@ export class MarketController {
       res.status(200).json({ 
         message: "Market resolved and coins distributed",
         data: {
-          resolution,
+          resolution: true,
+          yes_no_flag: resolution,
           totalYes,
           totalNo,
           totalPot

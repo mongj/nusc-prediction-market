@@ -15,5 +15,6 @@ marketRouter.put("/markets/:id", requireAdmin, marketController.update);
 marketRouter.get("/markets", marketController.list);
 marketRouter.get("/markets/:id", marketController.getById);
 marketRouter.post("/markets/:id/bets", marketController.placeBet);
+marketRouter.post("/markets/:id/resolve", requireAdmin, marketController.resolve);
 
 export default marketRouter;
