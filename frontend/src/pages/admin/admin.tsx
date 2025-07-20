@@ -83,76 +83,84 @@ const AdminPage = () => {
         }
     };
 
-    const renderMarketTable = (markets: Market[], page: number, setPage: (n: number) => void, totalPages: number, totalMarkets: number) => (
-    <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
-        <section>
-            {markets.map((market) => {
-                const status = getMarketStatus(market);
-                const chipText = getChipText(status);
-                const chipColor = getChipColor(status);
-                const isResolved = market.resolution === true;
+    const renderMarketTable = (
+        markets: Market[],
+        page: number,
+        setPage: (n: number) => void,
+        totalPages: number,
+        totalMarkets: number
+    ) => (
+        <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
+            <section>
+                {markets.map((market) => {
+                    const status = getMarketStatus(market);
+                    const chipText = getChipText(status);
+                    const chipColor = getChipColor(status);
+                    const isResolved = market.resolution === true;
 
-                return (
-                    <div
-                        key={market.id}
-                        className="grid grid-cols-[1fr_4fr_1fr_1fr] items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
-                    >
-                        <p className="text-base font-medium">
-                            {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
-                        </p>
-                        <p className="text-base font-medium">{market.question}</p>
-                        <div className="flex justify-center">
-                            <Chip text={chipText} color={chipColor} />
-                        </div>
-                        <div className="flex justify-end">
-                            <div className="flex flex-col sm:flex-row justify-between sm:justify-around gap-2 mt-2 sm:mt-0">
-                                <Button
-                                    text="Yes"
-                                    color="green"
-                                    onClick={() => handleResolve(market.id, true)}
-                                    className="w-full sm:w-32"
-                                    disabled={isResolved}
-                                />
-                                <Button
-                                    text="No"
-                                    color="blue"
-                                    onClick={() => handleResolve(market.id, false)}
-                                    className="w-full sm:w-32"
-                                    disabled={isResolved}
-                                />
+                    return (
+                        <div
+                            key={market.id}
+                            className="grid grid-cols-1 sm:grid-cols-[1fr_4fr_1fr_1fr] items-start sm:items-center px-2 sm:px-4 py-2 border-b border-neutral-300 last:border-b-0 gap-y-2"
+                        >
+                            <p className="text-xs sm:text-base font-medium text-gray-700 sm:text-black">
+                                {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                            </p>
+                            <p className="text-xs sm:text-base font-medium text-gray-700 sm:text-black break-words">
+                                {market.question}
+                            </p>
+                            <div className="flex justify-center mt-1 sm:mt-0">
+                                <Chip text={chipText} color={chipColor} />
+                            </div>
+                            <div className="flex justify-end">
+                                <div className="flex flex-row sm:flex-row justify-end gap-2 mt-1 sm:mt-0 w-full">
+                                    <Button
+                                        text="Yes"
+                                        color="green"
+                                        onClick={() => handleResolve(market.id, true)}
+                                        className="w-1/2 sm:w-32 text-xs sm:text-base"
+                                        disabled={isResolved}
+                                    />
+                                    <Button
+                                        text="No"
+                                        color="blue"
+                                        onClick={() => handleResolve(market.id, false)}
+                                        className="w-1/2 sm:w-32 text-xs sm:text-base"
+                                        disabled={isResolved}
+                                    />
+                                </div>
                             </div>
                         </div>
+                    );
+                })}
+            </section>
+            {totalPages > 1 && (
+                <div className="flex flex-col sm:flex-row items-center justify-between px-2 sm:px-6 py-2 sm:py-3 gap-2 sm:gap-0">
+                    <div>
+                        <p className="text-xs sm:text-sm text-gray-700">
+                            Showing <span className="font-medium">{(page - 1) * itemsPerPage + 1}</span> to{" "}
+                            <span className="font-medium">{Math.min(page * itemsPerPage, totalMarkets)}</span> of{" "}
+                            <span className="font-medium">{totalMarkets}</span> results
+                        </p>
                     </div>
-                );
-            })}
-        </section>
-        {totalPages > 1 && (
-            <div className="flex items-center justify-between px-4 py-3 sm:px-6">
-                <div>
-                    <p className="text-sm text-gray-700">
-                        Showing <span className="font-medium">{(page - 1) * itemsPerPage + 1}</span> to{" "}
-                        <span className="font-medium">{Math.min(page * itemsPerPage, totalMarkets)}</span> of{" "}
-                        <span className="font-medium">{totalMarkets}</span> results
-                    </p>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        <Button
+                            onClick={() => setPage(page - 1)}
+                            disabled={page === 1}
+                            text="Previous"
+                            size="small"
+                        />
+                        <Button
+                            onClick={() => setPage(page + 1)}
+                            disabled={page === totalPages}
+                            text="Next"
+                            size="small"
+                        />
+                    </div>
                 </div>
-                <div className="flex items-center gap-4">
-                    <Button
-                        onClick={() => setPage(page - 1)}
-                        disabled={page === 1}
-                        text="Previous"
-                        size="medium"
-                    />
-                    <Button
-                        onClick={() => setPage(page + 1)}
-                        disabled={page === totalPages}
-                        text="Next"
-                        size="medium"
-                    />
-                </div>
-            </div>
-        )}
-    </div>
-);
+            )}
+        </div>
+    );
 
     return (
         <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gray-100 p-4 sm:p-16">
