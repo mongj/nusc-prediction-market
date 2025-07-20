@@ -31,16 +31,31 @@ const AdminHeader = () => {
   };
 
   return (
-    <div className="flex w-full place-items-center place-content-between">
-      <div className="text-4xl font-bold">
+    <div className="flex w-full flex-col sm:flex-row items-center sm:items-center justify-between gap-2 sm:gap-0">
+      <div className="text-2xl sm:text-4xl font-bold mb-2 sm:mb-0">
         <span className="text-sky-500">NUSC</span>
         <span className="text-lime-600">Predict</span>
       </div>
 
-      <div className="flex w-fit gap-2">
-        <Button text="Reset Password" variant="secondary" onClick={handleResetPassword} className="w-32" />
-        <Button text="Contact Us" variant="secondary" onClick={handleOpenDialog} className="w-32" />
-        <Button text="Sign Out" color="red" onClick={handleSignOut} className="w-24" />
+      <div className="flex flex-col sm:flex-row w-full sm:w-fit gap-2 sm:gap-2 items-center sm:items-center">
+        <Button
+          text="Reset Password"
+          variant="secondary"
+          onClick={handleResetPassword}
+          className="w-3/4 sm:w-32 text-xs sm:text-base"
+        />
+        <Button
+          text="Contact Us"
+          variant="secondary"
+          onClick={handleOpenDialog}
+          className="w-3/4 sm:w-32 text-xs sm:text-base"
+        />
+        <Button
+          text="Sign Out"
+          color="red"
+          onClick={handleSignOut}
+          className="w-3/4 sm:w-24 text-xs sm:text-base"
+        />
         <ContactDialog open={isDialogOpen} handleClose={handleCloseDialog} />
       </div>
     </div>

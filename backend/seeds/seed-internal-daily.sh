@@ -15,7 +15,7 @@ PRE_SURVEY_OPEN_DATE="2025-06-01T00:00:00Z"
 PRE_SURVEY_CLOSE_DATE="2025-07-01T00:00:00Z"
 POST_SURVEY_OPEN_DATE="2025-08-01T00:00:00Z"
 POST_SURVEY_CLOSE_DATE="2025-08-30T00:00:00Z"
-BASE_OPEN_DATE="2025-07-17T16:00:00Z"
+BASE_OPEN_DATE="2025-07-20T22:00:00Z"
 
 # Login and capture the cookie
 COOKIE=$(curl -sS -X POST "${BASE_URL}/auth/signin" \
@@ -73,7 +73,7 @@ IFS=$'\n' read -d '' -r -a climate_array <<< "$climate_data"
 
 # Create 7 control group participants
 for i in {1..7}; do
-    friendly_id="P-$(printf "%03d" $i)"
+    friendly_id="P-$(printf "%03d" $((i + 200)))"
     make_request "POST" "/participants" "{
         \"friendly_id\": \"${friendly_id}\",
         \"password\": \"password123\",
@@ -85,8 +85,8 @@ done
 printf "%*s\r" $(tput cols) ""
 
 # Create 7 experiment group participants
-for i in {1..7}; do
-    friendly_id="P-$(printf "%03d" $((i + 200)))"
+for i in {1..13}; do
+    friendly_id="P-$(printf "%03d" $i)"
     make_request "POST" "/participants" "{
         \"friendly_id\": \"${friendly_id}\",
         \"password\": \"password123\",
