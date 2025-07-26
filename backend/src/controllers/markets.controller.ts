@@ -46,7 +46,7 @@ export class MarketController {
       isCorrect:
         market.bets.length === 0 || market.resolution === null
           ? null
-          : market.bets[0].bet_outcome === market.resolution,
+          : market.bets[0].bet_outcome === market.yes_no_flag,
       winnings: market.bets.length > 0 ? market.bets[0].winnings : null,
       bets: undefined,
     }));
