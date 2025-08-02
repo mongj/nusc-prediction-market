@@ -93,7 +93,7 @@ const MarketSection = () => {
           <div className="hidden md:grid grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 font-bold text-gray-600">
             <span>Date</span>
             <span className="col-span-1">Market</span>
-            <span className="text-center">Winnings</span>
+            <span className="text-center">Net Winnings</span>
             <span className="text-center">Status</span>
             <span className="text-center">Action</span>
           </div>

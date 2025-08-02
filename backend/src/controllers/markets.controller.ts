@@ -297,7 +297,7 @@ export class MarketController {
           if (isWinner) {
             if (totalWinningBets > 0) {
               const share = (bet.bet_amount / totalWinningBets) * totalPot;
-              winnings = share - bet.bet_amount;
+              winnings = share - bet.bet_amount; // profit made per bet
 
               // Add participant coin update for winners
               participantUpdates.push(
