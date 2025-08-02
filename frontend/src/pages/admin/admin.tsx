@@ -97,6 +97,7 @@ const AdminPage = () => {
                     const chipText = getChipText(status);
                     const chipColor = getChipColor(status);
                     const isResolved = market.resolution === true;
+                    const marketResult = isResolved ? (market.yesNoFlag ? 'Y' : 'N') : null;
 
                     return (
                         <div
@@ -128,6 +129,7 @@ const AdminPage = () => {
                                         className="w-1/2 sm:w-32 text-xs sm:text-base"
                                         disabled={isResolved}
                                     />
+                                    <span>{marketResult}</span>
                                 </div>
                             </div>
                         </div>
