@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { db } from "@/services";
+import { MilestoneService } from "@/services/milestone.service";
 
 export class MarketController {
   public async list(req: Request, res: Response) {
@@ -221,6 +222,17 @@ export class MarketController {
           }),
         ]);
 
+        // Check for milestone completion after updating bet
+        try {
+          const newMilestonesCompleted = await MilestoneService.checkAndAwardMilestones(user_id);
+          if (newMilestonesCompleted > 0) {
+            console.log(`User ${user_id} completed ${newMilestonesCompleted} new milestone(s)!`);
+          }
+        } catch (milestoneError) {
+          console.error("Error checking milestones:", milestoneError);
+          // Don't fail the bet update if milestone check fails
+        }
+
         res.status(200).json({ data: updatedBet });
         return;
       }
@@ -243,6 +255,17 @@ export class MarketController {
           },
         }),
       ]);
+
+      // Check for milestone completion after placing bet
+      try {
+        const newMilestonesCompleted = await MilestoneService.checkAndAwardMilestones(user_id);
+        if (newMilestonesCompleted > 0) {
+          console.log(`User ${user_id} completed ${newMilestonesCompleted} new milestone(s)!`);
+        }
+      } catch (milestoneError) {
+        console.error("Error checking milestones:", milestoneError);
+        // Don't fail the bet placement if milestone check fails
+      }
 
       res.status(201).json({ data: bet });
     } catch (error) {
@@ -345,6 +368,23 @@ export class MarketController {
     } catch (error) {
       console.error("Error resolving market:", error);
       res.status(500).json({ message: "Failed to resolve market" });
+    }
+  }
+
+  public async getMilestoneStatus(req: Request, res: Response) {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
+    try {
+      const milestoneStatus = await MilestoneService.getMilestoneStatus(userId);
+      res.status(200).json({ data: milestoneStatus });
+    } catch (error) {
+      console.error("Error getting milestone status:", error);
+      res.status(500).json({ message: "Failed to get milestone status" });
     }
   }
 }

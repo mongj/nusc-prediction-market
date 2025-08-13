@@ -13,6 +13,7 @@ marketRouter.put("/markets/:id", requireAdmin, marketController.update);
 
 // Protected routes
 marketRouter.get("/markets", marketController.list);
+marketRouter.get("/markets/milestones", marketController.getMilestoneStatus);
 marketRouter.get("/markets/:id", marketController.getById);
 marketRouter.post("/markets/:id/bets", marketController.placeBet);
 marketRouter.post("/markets/:id/resolve", requireAdmin, marketController.resolve);

@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 
 import config from "@/config";
 import { db, logger } from "@/services";
+import { MilestoneService } from "@/services/milestone.service";
 
 export class AuthController {
   private static readonly SESSION_COOKIE = "session";
@@ -41,6 +42,19 @@ export class AuthController {
 
       // Set session cookie
       await this.setSessionCookie(res, sessionToken, sessionExpiry);
+
+      // Check and award milestone bonuses for existing data
+      if (user.Participant) {
+        try {
+          const newMilestonesCompleted = await MilestoneService.checkAndAwardMilestones(user.id);
+          if (newMilestonesCompleted > 0) {
+            logger.info(`User ${user.id} awarded ${newMilestonesCompleted} milestone bonus(es) on login!`);
+          }
+        } catch (milestoneError) {
+          logger.error("Error checking milestones on login:", milestoneError as Error);
+          // Don't fail login if milestone check fails
+        }
+      }
 
       // Return user info (excluding sensitive data)
       const { password_hash, session_cookie, session_expiry, ...userInfo } = user;
@@ -127,6 +141,19 @@ export class AuthController {
 
       // Set session cookie
       await this.setSessionCookie(res, sessionToken, sessionExpiry);
+
+      // Check and award milestone bonuses for existing data
+      if (user.Participant) {
+        try {
+          const newMilestonesCompleted = await MilestoneService.checkAndAwardMilestones(user.id);
+          if (newMilestonesCompleted > 0) {
+            logger.info(`User ${user.id} awarded ${newMilestonesCompleted} milestone bonus(es) on password reset!`);
+          }
+        } catch (milestoneError) {
+          logger.error("Error checking milestones on password reset:", milestoneError as Error);
+          // Don't fail password reset if milestone check fails
+        }
+      }
 
       res.status(200).json({ message: "Password reset successfully" });
     } catch (error) {

@@ -54,10 +54,18 @@ const Progress = () => {
 
   const questionsAnswered = markets.filter((market) => market.hasAnswered).length;
 
+  // Sort markets by ID to ensure correct milestone grouping
+  const sortedMarkets = [...markets].sort((a, b) => a.id - b.id);
+
+  // Determine if this is control group based on market IDs
+  // Control group: markets start from ID 1, Treatment group: markets start from ID 31
+  const isControlGroup = sortedMarkets.length > 0 && sortedMarkets[0].id < 31;
+  const baseMarketId = isControlGroup ? 1 : 31;
+
   const milestones = Array.from({ length: 5 }, (_, milestoneIndex) => {
     const milestoneMarkets = Array.from({ length: 6 }, (_, marketIndex) => {
-      const marketId = milestoneIndex * 6 + marketIndex + 1;
-      const market = markets.find((m) => m.id === marketId);
+      const expectedMarketId = baseMarketId + (milestoneIndex * 6) + marketIndex;
+      const market = sortedMarkets.find(m => m.id === expectedMarketId);
 
       if (!market) {
         return QuestionStatus.PENDING;
@@ -102,19 +110,26 @@ const Progress = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <div className="flex justify-start space-x-2">
-                  {milestone.map((status, marketIdx) => (
-                    <div
-                      key={marketIdx}
-                      className={`relative flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold border-2 cursor-pointer ${getBubbleStyleByStatus(status)}`}
-                    >
-                      {milestoneIdx * 6 + marketIdx + 1}
-                      {status === QuestionStatus.ATTEMPTED && (
-                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center border border-yellow-600">
-                          <span className="text-xs text-yellow-900">✓</span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  {milestone.map((status, marketIdx) => {
+                    const expectedMarketId = baseMarketId + (milestoneIdx * 6) + marketIdx;
+                    const market = sortedMarkets.find(m => m.id === expectedMarketId);
+                    const displayNumber = (milestoneIdx * 6) + marketIdx + 1; // Always show 1-30
+                    
+                    return (
+                      <div
+                        key={marketIdx}
+                        className={`relative flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold border-2 cursor-pointer ${getBubbleStyleByStatus(status)}`}
+                        title={market ? `Question ${displayNumber} (Market ${market.id}): ${market.name}` : `Question ${displayNumber} (Market ${expectedMarketId} not found)`}
+                      >
+                        {displayNumber}
+                        {status === QuestionStatus.ATTEMPTED && (
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center border border-yellow-600">
+                            <span className="text-xs text-yellow-900">✓</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
                 <p className="pt-1 text-left text-sm text-gray-500">{getMilestoneBonusText(milestone)}</p>
               </AccordionDetails>
