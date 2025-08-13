@@ -33,20 +33,20 @@ const Header = () => {
         <span className="text-lime-600">Predict</span>
       </div>
 
-      <div className="flex w-fit gap-1 sm:gap-2">
+      <div className="flex w-fit gap-2 sm:gap-3">
         <Button
           text="Contact Us"
           variant="secondary"
           onClick={handleOpenDialog}
-          className="w-20 sm:w-32 text-xs sm:text-base py-1 sm:py-2"
-          size="small"
+          className="w-28 sm:w-40 text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4"
+          size="medium"
         />
         <Button
           text="Sign Out"
           color="red"
           onClick={handleSignOut}
-          className="w-16 sm:w-24 text-xs sm:text-base py-1 sm:py-2"
-          size="small"
+          className="w-24 sm:w-32 text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4"
+          size="medium"
         />
         <ContactDialog open={isDialogOpen} handleClose={handleCloseDialog} />
       </div>

@@ -36,24 +36,27 @@ const AdminHeader = () => {
         NUSC<span className="text-sky-500">Predict</span>
       </div>
 
-      <div className="flex flex-col sm:flex-row w-full sm:w-fit gap-2 sm:gap-2 items-center sm:items-center">
+      <div className="flex flex-col sm:flex-row w-full sm:w-fit gap-2 sm:gap-3 items-center sm:items-center">
         <Button
           text="Reset Password"
           variant="secondary"
           onClick={handleResetPassword}
-          className="w-3/4 sm:w-32 text-xs sm:text-base"
+          className="w-3/4 sm:w-40 text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4"
+          size="medium"
         />
         <Button
           text="Contact Us"
           variant="secondary"
           onClick={handleOpenDialog}
-          className="w-3/4 sm:w-32 text-xs sm:text-base"
+          className="w-3/4 sm:w-40 text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4"
+          size="medium"
         />
         <Button
           text="Sign Out"
           color="red"
           onClick={handleSignOut}
-          className="w-3/4 sm:w-24 text-xs sm:text-base"
+          className="w-3/4 sm:w-32 text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4"
+          size="medium"
         />
         <ContactDialog open={isDialogOpen} handleClose={handleCloseDialog} />
       </div>
