@@ -90,7 +90,7 @@ const AdminPage = () => {
         totalPages: number,
         totalMarkets: number
     ) => (
-        <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
+        <div className="duolingo-card flex flex-col justify-between">
             <section>
                 {markets.map((market) => {
                     const status = getMarketStatus(market);
@@ -102,19 +102,19 @@ const AdminPage = () => {
                     return (
                         <div
                             key={market.id}
-                            className="grid grid-cols-1 sm:grid-cols-[1fr_4fr_1fr_1fr] items-start sm:items-center px-2 sm:px-4 py-2 border-b border-neutral-300 last:border-b-0 gap-y-2"
+                            className={`admin-row grid grid-cols-1 sm:grid-cols-[1fr_4fr_1fr_1fr] items-start sm:items-center px-2 sm:px-4 py-2 border-b border-neutral-300 last:border-b-0 gap-y-2 rounded-lg mx-2 my-1 ${isResolved ? 'admin-status-resolved' : 'admin-status-pending'}`}
                         >
-                            <p className="text-xs sm:text-base font-medium text-gray-700 sm:text-black">
+                            <p className="font-nunito text-xs sm:text-base font-medium text-gray-700 sm:text-black">
                                 {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                             </p>
-                            <p className="text-xs sm:text-base font-medium text-gray-700 sm:text-black break-words">
+                            <p className="font-nunito text-xs sm:text-base font-medium text-gray-700 sm:text-black break-words">
                                 {market.question}
                             </p>
                             <div className="flex justify-center mt-1 sm:mt-0">
                                 <Chip text={chipText} color={chipColor} />
                             </div>
                             <div className="flex justify-end">
-                                <div className="flex flex-row sm:flex-row justify-end gap-2 mt-1 sm:mt-0 w-full">
+                                <div className="admin-button-container flex-row sm:flex-row justify-end gap-2 mt-1 sm:mt-0 w-full">
                                     <Button
                                         text="Yes"
                                         color="green"
@@ -129,7 +129,11 @@ const AdminPage = () => {
                                         className="w-1/2 sm:w-32 text-xs sm:text-base"
                                         disabled={isResolved}
                                     />
-                                    <span>{marketResult}</span>
+                                    {marketResult && (
+                                        <div className={`market-result-badge ${market.yesNoFlag ? 'market-result-yes' : 'market-result-no'}`}>
+                                            {marketResult}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -139,7 +143,7 @@ const AdminPage = () => {
             {totalPages > 1 && (
                 <div className="flex flex-col sm:flex-row items-center justify-between px-2 sm:px-6 py-2 sm:py-3 gap-2 sm:gap-0">
                     <div>
-                        <p className="text-xs sm:text-sm text-gray-700">
+                        <p className="font-nunito text-xs sm:text-sm text-gray-700">
                             Showing <span className="font-medium">{(page - 1) * itemsPerPage + 1}</span> to{" "}
                             <span className="font-medium">{Math.min(page * itemsPerPage, totalMarkets)}</span> of{" "}
                             <span className="font-medium">{totalMarkets}</span> results
@@ -165,15 +169,15 @@ const AdminPage = () => {
     );
 
     return (
-        <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gray-100 p-4 sm:p-16">
+        <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-3 sm:gap-5 bg-gradient-to-br from-green-50 via-lime-50 to-yellow-50 p-4 sm:p-16">
             <div className="w-full max-w-7xl">
                 <AdminHeader />
                 <div className="w-full max-w-[1200px] mt-4 sm:mt-8">
                     <div className="flex flex-col space-y-2">
-                        <h2 className="text-lg sm:text-xl font-extrabold">Climate Markets</h2>
+                        <h2 className="font-nunito duolingo-heading text-lg sm:text-xl font-extrabold">Climate Markets</h2>
                         {renderMarketTable(currentClimateMarkets, climatePage, setClimatePage, climateTotalPages, climateMarkets.length)}
 
-                        <h2 className="text-lg sm:text-xl font-extrabold pt-4 sm:pt-6">Entertainment Markets</h2>
+                        <h2 className="font-nunito duolingo-heading text-lg sm:text-xl font-extrabold pt-4 sm:pt-6">Entertainment Markets</h2>
                         {renderMarketTable(currentEntMarkets, entPage, setEntPage, entTotalPages, entertainmentMarkets.length)}
                     </div>
                 </div>

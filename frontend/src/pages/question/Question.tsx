@@ -54,9 +54,9 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-xl md:max-w-2xl place-items-center place-content-center rounded-2xl border border-neutral-300 bg-white p-3 sm:p-6 shadow mx-auto">
+    <div className="duolingo-card flex flex-col gap-4 w-full max-w-xl md:max-w-2xl place-items-center place-content-center p-3 sm:p-6 mx-auto">
       <div className="flex flex-col gap-4 place-items-center place-content-center h-full w-full">
-        <p className="max-w-2xl pb-2 text-center text-base sm:text-2xl font-semibold">{market.question}</p>
+        <p className="font-nunito max-w-2xl pb-2 text-center text-base sm:text-2xl font-bold">{market.question}</p>
          {marketIsOpen && (
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 w-full justify-center items-center">
             <div className="flex flex-row w-full justify-center gap-2 sm:gap-6 max-w-xs sm:max-w-none">
@@ -81,13 +81,13 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
         )}
         {marketIsOpen && userAnswer !== null && (
           <>
-            <p className="pb-2 sm:pb-4 text-center text-sm sm:text-base font-semibold">How many coins will you wager on your answer?</p>
+            <p className="font-nunito pb-2 sm:pb-4 text-center text-sm sm:text-base font-bold">How many coins will you wager on your answer?</p>
             <div className="w-52 sm:w-[400px] flex justify-center">
               <CoinSlider value={coins} onChange={setCoins} />
             </div>
           </>
         )}
-        {!marketIsOpen && <p className="font-semibold text-sm sm:text-lg">This market is not open for betting.</p>}
+        {!marketIsOpen && <p className="font-nunito font-bold text-sm sm:text-lg">This market is not open for betting.</p>}
       </div>
       {userAnswer !== null && (
         <ConfirmationBox
@@ -115,17 +115,17 @@ const ConfirmationBox = ({
   allowBet: boolean;
   betChangeCount?: number;
 }) => (
-  <div className="relative flex flex-col rounded-2xl border-2 border-sky-500 bg-sky-50 p-3 sm:p-4 shadow-sm w-full mt-auto">
+  <div className="duolingo-interactive relative flex flex-col rounded-2xl border-2 border-sky-500 bg-gradient-to-br from-sky-50 to-blue-50 p-3 sm:p-4 shadow-lg w-full mt-auto">
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-      <p className="text-base sm:text-lg">
+      <p className="font-nunito text-base sm:text-lg">
         Your answer: <strong>{userAnswer ? "Yes" : "No"}</strong>
       </p>
-      <div className="text-base sm:text-lg text-gray-600">
+      <div className="font-nunito text-base sm:text-lg text-gray-600">
         Bet Changes: <strong>{betChangeCount}</strong>
       </div>
     </div>
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 gap-2">
-      <div className="text-base flex items-center gap-1">
+      <div className="font-nunito text-base flex items-center gap-1">
         Cost: <img src="/images/coin.svg" alt="coin" className="w-5 h-5" />
         <strong>
           {coins} coin{coins > 1 ? "s" : ""}
@@ -146,21 +146,21 @@ const ConfirmationBox = ({
 );
 
 const MarketStats = ({ yesCount, noCount }: { yesCount: number; noCount: number }) => (
-  <div className="flex w-full max-w-xs sm:max-w-[50%] flex-col items-center justify-between rounded-2xl border border-neutral-300 bg-white p-3 sm:p-6 shadow mx-auto">
-    <p className="font-semibold text-base sm:text-2xl">See how others have voted</p>
+  <div className="duolingo-card flex w-full max-w-xs sm:max-w-[50%] flex-col items-center justify-between p-3 sm:p-6 mx-auto">
+    <p className="font-nunito font-bold text-base sm:text-2xl">See how others have voted</p>
     {yesCount + noCount > 0 ? (
       <GaugeComponent yesCount={yesCount} noCount={noCount} />
     ) : (
-      <span className="text-neutral-500 text-sm sm:text-lg">No data</span>
+      <span className="font-nunito text-neutral-500 text-sm sm:text-lg">No data</span>
     )}
     <div className="flex w-full flex-row justify-between mt-2">
-      <div className="flex gap-2 place-items-center">
+      <div className="duolingo-interactive flex gap-2 place-items-center p-2 rounded-lg">
         <div className="rounded-full bg-lime-600 w-5 h-5 sm:w-6 sm:h-6" />
-        <div className="font-semibold text-base sm:text-xl">{yesCount} Yes</div>
+        <div className="font-nunito font-semibold text-base sm:text-xl">{yesCount} Yes</div>
       </div>
-      <div className="flex gap-2 place-items-center">
-        <div className="rounded-full bg-red-500 w-5 h-5 sm:w-6 sm:h-6" />
-        <div className="font-semibold text-base sm:text-xl">{noCount} No</div>
+      <div className="duolingo-interactive flex gap-2 place-items-center p-2 rounded-lg">
+        <div className="rounded-full bg-red-600 w-5 h-5 sm:w-6 sm:h-6" />
+        <div className="font-nunito font-semibold text-base sm:text-xl">{noCount} No</div>
       </div>
     </div>
   </div>
@@ -189,22 +189,22 @@ function QuestionPage() {
   }
 
   return (
-    <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-5 bg-gray-100 p-4 sm:p-16">
+    <div className="flex min-h-screen w-full flex-col place-items-center justify-start gap-5 bg-gradient-to-br from-green-50 via-lime-50 to-yellow-50 p-4 sm:p-16">
       <div className="max-w-7xl w-full flex flex-col gap-8">
         <BackButton onClick={() => navigate("/dashboard")} />
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-2">
-          <h1 className="text-2xl sm:text-3xl font-bold">Today's Topic: {marketData.name}</h1>
+          <h1 className="font-nunito duolingo-heading text-2xl sm:text-3xl font-extrabold">Today's Topic: {marketData.name}</h1>
           {/* Balance below topic on mobile, right on desktop */}
           <div className="flex sm:hidden w-full justify-center">
             {coinBalance !== null && (
-              <div className="flex items-center gap-2 text-base font-semibold bg-white rounded-xl px-4 py-2 shadow border border-neutral-200 mt-2">
+              <div className="duolingo-coin-card flex items-center gap-2 text-base font-nunito font-bold px-4 py-2 mt-2">
                 Balance:
                 <img src="/images/coin.svg" alt="coin" className="w-5 h-5" />
                 <span>{coinBalance}</span>
               </div>
             )}
           </div>
-          <div className="hidden sm:flex items-center gap-2 text-lg font-semibold bg-white rounded-xl px-4 py-2 shadow border border-neutral-200">
+          <div className="duolingo-coin-card hidden sm:flex items-center gap-2 text-lg font-nunito font-bold px-4 py-2">
             {coinBalance !== null && (
               <>
                 Balance:

@@ -36,7 +36,7 @@ function ContactDialog({ handleClose, open }: SimpleDialogProps) {
         </div>
         
         <div className="p-6 sm:p-8">
-          <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-4 pb-2 border-b border-gray-200">
+          <h3 className="text-xl sm:text-2xl font-bold font-nunito text-green-800 mb-4 pb-2 border-b border-gray-200">
             Contact Information
           </h3>
           
@@ -44,30 +44,30 @@ function ContactDialog({ handleClose, open }: SimpleDialogProps) {
             <div className="flex items-center gap-3">
               <TelegramIcon className="text-blue-500" />
               <div>
-                <p className="font-medium">Telegram</p>
-                <p className="text-gray-700">@predictionmarkets</p>
+                <p className="font-bold font-nunito">Telegram</p>
+                <p className="text-gray-700 font-semibold font-nunito">@predictionmarkets</p>
               </div>
             </div>
             
             <div className="flex items-center gap-3">
               <EmailIcon className="text-red-500" />
               <div>
-                <p className="font-medium">Email</p>
-                <p className="text-gray-700">jonus.ho@u.nus.edu</p>
+                <p className="font-bold font-nunito">Email</p>
+                <p className="text-gray-700 font-semibold font-nunito">jonus.ho@u.nus.edu</p>
               </div>
             </div>
             
             <div className="flex items-center gap-3">
               <SchoolIcon className="text-amber-700" />
               <div>
-                <p className="font-medium">Principal Investigator</p>
-                <p className="text-gray-700">Dr Michelle Lee</p>
+                <p className="font-bold font-nunito">Principal Investigator</p>
+                <p className="text-gray-700 font-semibold font-nunito">Dr Michelle Lee</p>
               </div>
             </div>
           </div>
           
           <div className="mt-6 pt-3 border-t border-gray-200">
-            <p className="text-sm text-gray-500 italic">
+            <p className="text-sm text-gray-500 font-semibold font-nunito">
               This is a research project under NUSCollege
             </p>
           </div>

@@ -87,10 +87,10 @@ const MarketSection = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <h2 className="text-xl font-extrabold">Make Your Prediction</h2>
-      <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
+      <h2 className="font-nunito duolingo-heading text-xl font-extrabold">Make Your Prediction</h2>
+      <div className="duolingo-card flex flex-col justify-between">
         <section>
-          <div className="hidden md:grid grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 font-bold text-gray-600">
+          <div className="hidden md:grid grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 font-nunito font-bold text-gray-600">
             <span>Date</span>
             <span className="col-span-1">Market</span>
             <span className="text-center">Net Winnings</span>
@@ -106,17 +106,17 @@ const MarketSection = () => {
             return (
               <div
                 key={market.id}
-                className="grid grid-cols-3 md:grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+                className="duolingo-interactive grid grid-cols-3 md:grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0 rounded-lg mx-2 my-1"
               >
-                <p className="text-base font-medium hidden md:block">
+                <p className="font-nunito text-base font-bold hidden md:block">
                   {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                 </p>
-                <p className="text-base font-medium col-span-1">{market.name}</p>
+                <p className="font-nunito text-base font-bold col-span-1">{market.name}</p>
                 <div className="flex justify-center items-center gap-1">
                   {winnings != null && (
                     <>
                       <img src="/images/coin.svg" alt="coin" className="w-4 h-4" />
-                      <span className={`font-bold ${winnings >= 0 ? "text-green-600" : "text-red-600"}`}>
+                      <span className={`font-nunito font-bold ${winnings >= 0 ? "text-green-600" : "text-red-600"}`}>
                         {winnings >= 0 ? `+${winnings}` : winnings}
                       </span>
                     </>
@@ -140,10 +140,10 @@ const MarketSection = () => {
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-4 py-3 sm:px-6">
             <div>
-              <p className="text-sm text-gray-700">
-                Showing <span className="font-medium">{indexOfFirstItem + 1}</span> to{" "}
-                <span className="font-medium">{Math.min(indexOfLastItem, displayedMarkets.length)}</span> of{" "}
-                <span className="font-medium">{displayedMarkets.length}</span> results
+              <p className="font-nunito text-sm text-gray-700">
+                Showing <span className="font-semibold">{indexOfFirstItem + 1}</span> to{" "}
+                <span className="font-semibold">{Math.min(indexOfLastItem, displayedMarkets.length)}</span> of{" "}
+                <span className="font-semibold">{displayedMarkets.length}</span> results
               </p>
             </div>
             <div className="flex items-center gap-4">

@@ -15,12 +15,12 @@ enum QuestionStatus {
 const getBubbleStyleByStatus = (status: QuestionStatus) => {
   switch (status) {
     case QuestionStatus.ATTEMPTED:
-      return "bg-lime-600 text-white";
+      return "bg-gradient-to-b from-lime-400 to-green-600 text-white border-green-700 shadow-lg transform scale-110 milestone-bubble completed";
     case QuestionStatus.MISSING:
-      return "bg-red-500 text-white";
+      return "bg-gradient-to-b from-red-400 to-red-600 text-white border-red-700 milestone-bubble";
     case QuestionStatus.PENDING:
     default:
-      return "bg-gray-200 text-gray-500";
+      return "bg-gradient-to-b from-gray-200 to-gray-300 text-gray-600 border-gray-400 milestone-bubble";
   }
 };
 
@@ -80,29 +80,39 @@ const Progress = () => {
 
   return (
     <div className="flex flex-col space-y-1 text-lg">
-      <div className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white px-6 py-4 shadow">
-        <h2 className="text-left font-bold">My Progress</h2>
-        <p className="pb-2 pt-4 text-left text-sm font-semibold">{questionsAnswered}/30 questions answered</p>
-        <div className="relative h-3 overflow-hidden rounded-lg bg-gray-300">
+      <div className="duolingo-card flex flex-col justify-between px-6 py-4">
+        <h2 className="text-left font-extrabold font-nunito">My Progress</h2>
+        <p className="pb-2 pt-4 text-left text-sm font-nunito font-bold">{questionsAnswered}/30 questions answered</p>
+        <div className="relative h-4 overflow-hidden rounded-lg bg-gray-300 border-2 border-gray-400">
           <div
-            className="transition-width h-full bg-lime-600 duration-300 ease-in-out"
+            className="progress-shine h-full bg-gradient-to-r from-lime-500 to-green-500 transition-all duration-500 ease-out"
             style={{ width: `${(questionsAnswered / 30) * 100}%` }}
           ></div>
+          {questionsAnswered === 30 && (
+            <div className="absolute -top-2 right-0 text-yellow-400 animate-bounce text-lg">
+              ⭐
+            </div>
+          )}
         </div>
         {milestones.map((milestone, milestoneIdx) => (
           <div key={milestoneIdx} className="flex flex-col items-start overflow-auto py-2">
             <Accordion>
               <AccordionSummary expandIcon={<ArrowDropDownIcon />} aria-controls="panel2-content" id="panel2-header">
-                <p className="text-md pr-10 font-medium">Milestone {milestoneIdx + 1}</p>
+                <p className="text-md pr-10 font-nunito font-bold">Milestone {milestoneIdx + 1}</p>
               </AccordionSummary>
               <AccordionDetails>
                 <div className="flex justify-start space-x-2">
                   {milestone.map((status, marketIdx) => (
                     <div
                       key={marketIdx}
-                      className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${getBubbleStyleByStatus(status)}`}
+                      className={`relative flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold border-2 cursor-pointer ${getBubbleStyleByStatus(status)}`}
                     >
                       {milestoneIdx * 6 + marketIdx + 1}
+                      {status === QuestionStatus.ATTEMPTED && (
+                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center border border-yellow-600">
+                          <span className="text-xs text-yellow-900">✓</span>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

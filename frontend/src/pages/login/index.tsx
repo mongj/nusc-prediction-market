@@ -52,8 +52,8 @@ function Login() {
       </div>
       <div className="relative flex h-full w-full place-content-center place-items-center bg-white">
         <div className="absolute top-6 sm:top-16 left-6 sm:left-16">
-          <span className="text-xl sm:text-2xl font-bold text-sky-500">NUSC</span>
-          <span className="text-xl sm:text-2xl font-bold text-lime-600">Predict</span>
+          <span className="text-xl sm:text-4xl font-extrabold font-nunito text-sky-500">NUSC</span>
+          <span className="text-xl sm:text-4xl font-extrabold font-nunito text-lime-600">Predict</span>
         </div>
         
         <div className="w-full max-w-96 px-5 sm:px-0">
@@ -61,11 +61,11 @@ function Login() {
             className="flex flex-col place-items-start gap-4 sm:gap-5 w-full p-5 sm:p-8 rounded-2xl border border-neutral-100 shadow-sm" 
             onSubmit={handleSubmit}
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-            <p className="text-sm text-gray-500 -mt-2">Enter your credentials to access your account</p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold font-nunito text-gray-800 mb-2">Welcome Back</h2>
+            <p className="text-sm text-gray-500 -mt-2 font-bold font-nunito">Enter your credentials to access your account</p>
             
             <div className="flex w-full flex-col space-y-1.5">
-              <label htmlFor="username" className="text-sm font-medium text-gray-700">
+              <label htmlFor="username" className="text-sm font-bold font-nunito text-gray-700">
                 Participant ID
               </label>
               <input
@@ -76,12 +76,12 @@ function Login() {
                 placeholder="P-000..."
                 autoComplete="username"
                 required
-                className="w-full rounded-md border border-neutral-300 p-2.5 text-gray-800 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                className="w-full rounded-md font-semibold font-nunito border border-neutral-300 p-2.5 text-gray-800 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
               />
             </div>
             
             <div className="flex w-full flex-col space-y-1.5">
-              <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="text-sm font-bold font-nunito text-gray-700">
                 Password
               </label>
               <input
@@ -92,7 +92,7 @@ function Login() {
                 placeholder="Enter your password"
                 autoComplete="current-password"
                 required
-                className="w-full rounded-md border border-neutral-300 p-2.5 text-gray-800 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                className="w-full rounded-md font-semibold font-nunito border border-neutral-300 p-2.5 text-gray-800 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
               />
             </div>
             
@@ -110,15 +110,16 @@ function Login() {
             />
 
             <div className="w-full text-center mt-4">
-              <p className="text-sm text-gray-500">
-                Reset Password?{" "}
+              <p className="text-sm text-gray-500 font-semibold font-nunito">
+                Reset Password? Or First Time Logging in?
+                <br />
                 <a href="/reset" className="text-green-600 hover:underline">
-                  Click here to reset
+                  Click Here To Reset Password
                 </a>
               </p>
             </div>
             
-            <div className="text-center w-full text-xs sm:text-sm text-gray-500 mt-4">
+            <div className="text-center w-full text-xs sm:text-sm text-gray-500 mt-4 font-semibold font-nunito">
               Having trouble? Contact @predictionmarkets on Telegram
             </div>
           </form>

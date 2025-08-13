@@ -11,10 +11,11 @@ const GaugeComponent = ({ yesCount, noCount }: { yesCount: number; noCount: numb
   };
 
   return (
-    <Gauge
-      {...settings}
-      cornerRadius="50%"
-      sx={() => ({
+    <div className="gauge-container">
+      <Gauge
+        {...settings}
+        cornerRadius="50%"
+        sx={() => ({
         [`& .${gaugeClasses.valueText}`]: {
           display: "none",
         },
@@ -24,8 +25,9 @@ const GaugeComponent = ({ yesCount, noCount }: { yesCount: number; noCount: numb
         [`& .${gaugeClasses.referenceArc}`]: {
           fill: "#fb2c36", // bg-red-500
         },
-      })}
-    />
+        })}
+      />
+    </div>
   );
 };
 

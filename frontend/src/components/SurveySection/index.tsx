@@ -68,8 +68,8 @@ const SurveySection = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <h2 className="text-xl font-extrabold">Surveys</h2>
-      <section className="flex flex-col justify-between rounded-2xl border border-neutral-300 bg-white shadow">
+      <h2 className="font-nunito duolingo-heading text-xl font-extrabold">Surveys</h2>
+      <section className="duolingo-card flex flex-col justify-between">
         {surveys.map((survey) => {
           const status = getCompletionStatus(survey);
           const chipText = getChipText(status);
@@ -78,9 +78,9 @@ const SurveySection = () => {
           return (
             <div
               key={survey.id}
-              className="grid grid-cols-3 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0"
+              className="duolingo-interactive grid grid-cols-3 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0 rounded-lg mx-2 my-1"
             >
-              <p className="text-base font-medium">{survey.name}</p>
+              <p className="font-nunito text-base font-bold">{survey.name}</p>
               <div className="flex justify-center">
                 <Chip text={chipText} color={chipColor} />
               </div>

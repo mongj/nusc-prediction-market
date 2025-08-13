@@ -26,7 +26,7 @@ const CoinDisplay = () => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className="flex justify-between gap-4 rounded-2xl border border-neutral-300 bg-white p-4 shadow">
+    <div className="duolingo-coin-card flex justify-between gap-4 p-4">
       <div className="flex flex-row space-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -41,13 +41,13 @@ const CoinDisplay = () => {
           <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
         </svg>
         <div className="flex flex-col text-left">
-          <div className="text-lg font-extrabold leading-tight tracking-wide sm:text-xl">{coins}</div>
-          <div className="text-xs font-medium text-gray-500 sm:text-sm">Total coins</div>
+          <div className="text-lg font-nunito font-extrabold leading-tight tracking-wide sm:text-xl">{coins}</div>
+          <div className="text-xs font-bold font-nunito text-gray-500 sm:text-sm">Total coins</div>
         </div>
       </div>
       <a
         href="#"
-        className="flex items-end text-xs font-medium text-gray-500 underline underline-offset-2 hover:text-gray-400 transition-colors"
+        className="flex items-end text-xs font-bold font-nunito text-gray-500 underline underline-offset-2 hover:text-gray-400 transition-colors"
         onClick={handleClick}
       >
         What is this?
@@ -74,8 +74,8 @@ const CoinDisplay = () => {
         }}
       >
         <div className="p-3 space-y-2 text-sm font-normal">
-          <p className="text-gray-800 leading-relaxed">This is the total amount of coins you have earned. Use these coins to make your predictions!</p>
-          <p className="text-gray-800 leading-relaxed">Your coins will be converted to real currency at the end of this study at a rate of 15c per coin.</p>
+          <p className="text-gray-800 font-nunito leading-relaxed">This is the total amount of coins you have earned. Use these coins to make your predictions!</p>
+          <p className="text-gray-800 font-nunito leading-relaxed">Your coins will be converted to real currency at the end of this study at a rate of 15c per coin.</p>
         </div>
       </Popover>
     </div>
