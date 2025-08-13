@@ -15,12 +15,12 @@ enum QuestionStatus {
 const getBubbleStyleByStatus = (status: QuestionStatus) => {
   switch (status) {
     case QuestionStatus.ATTEMPTED:
-      return "bg-gradient-to-b from-lime-400 to-green-600 text-white border-green-700 shadow-lg transform scale-110 milestone-bubble completed";
+      return "bg-lime-600 text-white shadow-lg transform scale-110 milestone-bubble completed";
     case QuestionStatus.MISSING:
-      return "bg-gradient-to-b from-red-400 to-red-600 text-white border-red-700 milestone-bubble";
+      return "bg-red-600 text-white milestone-bubble";
     case QuestionStatus.PENDING:
     default:
-      return "bg-gradient-to-b from-gray-200 to-gray-300 text-gray-600 border-gray-400 milestone-bubble";
+      return "bg-gradient-to-b from-gray-200 to-gray-300 text-gray-600 milestone-bubble";
   }
 };
 
@@ -90,10 +90,10 @@ const Progress = () => {
     <div className="flex flex-col space-y-1 text-lg">
       <div className="duolingo-card flex flex-col justify-between px-6 py-4">
         <h2 className="text-left font-extrabold font-nunito">My Progress</h2>
-        <p className="pb-2 pt-4 text-left text-sm font-nunito font-bold">{questionsAnswered}/30 questions answered</p>
+        <p className="pb-2 pt-4 text-left text-base font-nunito font-bold">{questionsAnswered}/30 Questions Answered</p>
         <div className="relative h-4 overflow-hidden rounded-lg bg-gray-300 border-2 border-gray-400">
           <div
-            className="progress-shine h-full bg-gradient-to-r from-lime-500 to-green-500 transition-all duration-500 ease-out"
+            className="progress-shine h-full bg-lime-500 transition-all duration-500 ease-out"
             style={{ width: `${(questionsAnswered / 30) * 100}%` }}
           ></div>
           {questionsAnswered === 30 && (
@@ -118,7 +118,7 @@ const Progress = () => {
                     return (
                       <div
                         key={marketIdx}
-                        className={`relative flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold border-2 cursor-pointer ${getBubbleStyleByStatus(status)}`}
+                        className={`relative flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold cursor-pointer ${getBubbleStyleByStatus(status)}`}
                         title={market ? `Question ${displayNumber} (Market ${market.id}): ${market.name}` : `Question ${displayNumber} (Market ${expectedMarketId} not found)`}
                       >
                         {displayNumber}

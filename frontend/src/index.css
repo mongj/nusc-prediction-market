@@ -95,15 +95,6 @@
   transform: scale(1.1);
 }
 
-.milestone-bubble.completed {
-  animation: pulse-success 2s infinite;
-}
-
-@keyframes pulse-success {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-  50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
-}
-
 /* Typography enhancements */
 .duolingo-heading {
   background: linear-gradient(135deg, #0f9e07, #58cc02);
