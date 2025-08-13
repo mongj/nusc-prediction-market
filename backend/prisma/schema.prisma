@@ -46,7 +46,7 @@ model Survey {
   open_on        DateTime         @db.Timestamptz
   close_on       DateTime         @db.Timestamptz
   is_closed      Boolean?
-  qualtrics_id String?  @unique
+  qualtrics_id   String?          @unique
   created_at     DateTime         @default(now()) @db.Timestamptz
   updated_at     DateTime         @updatedAt @db.Timestamptz
   SurveyResponse SurveyResponse[]
@@ -67,35 +67,35 @@ model SurveyResponse {
 }
 
 model Market {
-  id         Int      @id @default(autoincrement())
-  name       String
-  question   String
-  open_on    DateTime @db.Timestamptz
-  close_on   DateTime @db.Timestamptz
-  is_open    Boolean?
-  is_control Boolean
-  resolution Boolean?
-  yes_no_flag   Boolean?
-  created_at DateTime @default(now()) @db.Timestamptz
-  updated_at DateTime @updatedAt @db.Timestamptz
-  bets       Bet[]
+  id          Int      @id @default(autoincrement())
+  name        String
+  question    String
+  open_on     DateTime @db.Timestamptz
+  close_on    DateTime @db.Timestamptz
+  is_open     Boolean?
+  is_control  Boolean
+  resolution  Boolean?
+  yes_no_flag Boolean?
+  created_at  DateTime @default(now()) @db.Timestamptz
+  updated_at  DateTime @updatedAt @db.Timestamptz
+  bets        Bet[]
 
   @@map("markets")
 }
 
 model Bet {
-  id             Int         @id @default(autoincrement())
-  user_id        Int
-  market_id      Int
-  bet_outcome    Boolean
-  bet_amount     Int
-  bet_change_count   Int
-  bet_resolution Boolean?
-  winnings       Int?
-  participant    Participant @relation(fields: [user_id], references: [user_id])
-  market         Market      @relation(fields: [market_id], references: [id])
-  created_at     DateTime    @default(now()) @db.Timestamptz
-  updated_at     DateTime    @updatedAt @db.Timestamptz
+  id               Int         @id @default(autoincrement())
+  user_id          Int
+  market_id        Int
+  bet_outcome      Boolean
+  bet_amount       Int
+  bet_change_count Int
+  bet_resolution   Boolean?
+  winnings         Int?
+  participant      Participant @relation(fields: [user_id], references: [user_id])
+  market           Market      @relation(fields: [market_id], references: [id])
+  created_at       DateTime    @default(now()) @db.Timestamptz
+  updated_at       DateTime    @updatedAt @db.Timestamptz
 
   @@map("bets")
 }

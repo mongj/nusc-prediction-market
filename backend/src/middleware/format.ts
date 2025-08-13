@@ -3,14 +3,7 @@ import type { NextFunction, Request, Response } from "express";
 import { keysToCamelCase, keysToSnakeCase, serializeDates } from "@/util";
 
 const formatRequest = (req: Request, res: Response, next: NextFunction) => {
-  // Bypass this middleware for the Qualtrics webhook to avoid unintended transformations
-  if (req.originalUrl === "/api/webhooks/qualtrics") {
-    return next();
-  }
-
-  if (req.body && typeof req.body === "object") {
-    req.body = keysToSnakeCase(req.body);
-  }
+  req.body = keysToSnakeCase(req.body);
   next();
 };
 
