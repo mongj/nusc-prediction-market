@@ -15,7 +15,7 @@ PRE_SURVEY_OPEN_DATE="2025-06-01T00:00:00Z"
 PRE_SURVEY_CLOSE_DATE="2025-07-01T00:00:00Z"
 POST_SURVEY_OPEN_DATE="2025-08-01T00:00:00Z"
 POST_SURVEY_CLOSE_DATE="2025-08-30T00:00:00Z"
-BASE_OPEN_DATE="2025-08-17T22:00:00Z"
+BASE_OPEN_DATE="2025-08-24T22:00:00Z"
 
 # Login and capture the cookie
 COOKIE=$(curl -sS -X POST "${BASE_URL}/auth/signin" \
@@ -71,41 +71,15 @@ climate_data=$(cat data/climate-market-PILOT.json | jq -r '.[] | "\(.topic)|\(.q
 IFS=$'\n' read -d '' -r -a entertainment_array <<< "$entertainment_data"
 IFS=$'\n' read -d '' -r -a climate_array <<< "$climate_data"
 
-# Create 7 control group participants
-for i in {1..7}; do
-    friendly_id="P-$(printf "%03d" $((i + 200)))"
-    make_request "POST" "/participants" "{
-        \"friendly_id\": \"${friendly_id}\",
-        \"password\": \"password123\",
-        \"in_control_group\": true
-    }"
-    printf "Created control participant %d/7\r" $i
-done
-
-printf "%*s\r" $(tput cols) ""
-
-# Create 7 experiment group participants
-for i in {1..13}; do
+# Create 30 experiment group participants
+for i in {1..30}; do
     friendly_id="P-$(printf "%03d" $i)"
     make_request "POST" "/participants" "{
         \"friendly_id\": \"${friendly_id}\",
         \"password\": \"password123\",
         \"in_control_group\": false
     }"
-    printf "Created non-control participant %d/7\r" $i
-done
-
-printf "%*s\r" $(tput cols) ""
-
-# Create 30 control (entertainment) markets - every 2 days
-for i in {1..30}; do
-    open_date=$($add_days_func "$BASE_OPEN_DATE" $(((i-1)*2)))
-    close_date=$($add_days_func "$BASE_OPEN_DATE" $((i*2)))
-    data_index=$(( (i-1) % ${#entertainment_array[@]} ))
-    IFS='|' read -r topic question <<< "${entertainment_array[$data_index]}"
-    json_payload=$(jq -n --arg name "$topic" --arg question "$question" --arg open_on "$open_date" --arg close_on "$close_date" '{name: $name, question: $question, open_on: $open_on, close_on: $close_on, is_control: true}')
-    echo "Creating control market $i: $topic (opens: $open_date, closes: $close_date)"
-    make_request "POST" "/markets" "$json_payload"
+    printf "Created experiment participant %d/30\r" $i
 done
 
 printf "%*s\r" $(tput cols) ""
