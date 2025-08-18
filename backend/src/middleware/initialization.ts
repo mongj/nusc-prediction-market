@@ -14,7 +14,10 @@ const corsOptions = {
   origin: ["http://localhost", 
            "http://localhost:5173", 
            "https://staging.nuscpredict.com", 
-           "https://nuscpredict.com"],
+           "https://nuscpredict.com",
+           "https://nusclimate.com",
+           "https://staging.nusclimate.com"
+          ],
   credentials: true,
 };
 
