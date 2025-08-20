@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/api";
 import { APIResponse } from "@/api/types";
 import { Market } from "@/types/market";
+import { dateTransformer } from "@/utils/dateTransformer";
 
 enum QuestionStatus {
   ATTEMPTED = "attempted",
@@ -45,7 +46,10 @@ const Progress = () => {
     api
       .get<APIResponse<Market[]>>("/markets")
       .then((response) => {
-        setMarkets(Object.values(response.data.data));
+        const transformedMarkets = Object.values(response.data.data).map(market =>
+          dateTransformer(market, ['openOn', 'closeOn', 'createdAt', 'updatedAt'])
+        );
+        setMarkets(transformedMarkets);
       })
       .catch((error) => {
         console.error("Error fetching markets:", error);
@@ -76,7 +80,7 @@ const Progress = () => {
       }
 
       const now = new Date();
-      if (new Date(market.closeOn) < now) {
+      if (market.closeOn < now) {
         return QuestionStatus.MISSING;
       }
 

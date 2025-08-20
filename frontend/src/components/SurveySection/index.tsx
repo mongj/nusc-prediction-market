@@ -5,6 +5,7 @@ import { Button, Chip } from "@/components/primitives";
 import { ChipColor } from "@/components/primitives/Chip";
 import { Survey } from "@/types";
 import { openExternalLink } from "@/utils";
+import { dateTransformer } from "@/utils/dateTransformer";
 
 enum SurveyStatus {
   YET_TO_START = "yet_to_start",
@@ -20,7 +21,10 @@ const SurveySection = () => {
     api
       .get<APIResponse<Survey[]>>("/surveys")
       .then((response) => {
-        setSurveys(Object.values(response.data.data));
+        const transformedSurveys = Object.values(response.data.data).map(survey =>
+          dateTransformer(survey, ['openOn', 'closeOn', 'createdAt', 'updatedAt'])
+        );
+        setSurveys(transformedSurveys);
       })
       .catch((error) => {
         console.error("Error fetching surveys:", error);

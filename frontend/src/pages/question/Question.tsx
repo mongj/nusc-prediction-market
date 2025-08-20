@@ -6,6 +6,7 @@ import { APIResponse, api } from "@/api";
 import CoinSlider from "@/components/CoinSlider";
 import { Button } from "@/components/primitives";
 import { MarketWithUserSpecificData } from "@/types/market";
+import { dateTransformer } from "@/utils/dateTransformer";
 
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import GaugeComponent from "../../components/GaugeComponent";
@@ -14,7 +15,7 @@ const Question = ({ market, marketId }: { market: MarketWithUserSpecificData; ma
   const [userAnswer, setUserAnswer] = useState<boolean | null>(market.userAnswer ?? null);
   const [coins, setCoins] = useState(market.userBetAmount ?? 10);
 
-  const marketIsOpen = new Date(market.openOn) < new Date() && new Date(market.closeOn) > new Date();
+  const marketIsOpen = market.openOn < new Date() && market.closeOn > new Date();
 
   const handlerPlaceBet = () => {
     api
@@ -176,7 +177,8 @@ function QuestionPage() {
     if (!id) return;
 
     api.get<APIResponse<MarketWithUserSpecificData>>(`/markets/${id}`).then((response) => {
-      setMarketData(response.data.data);
+      const transformedMarket = dateTransformer(response.data.data, ['openOn', 'closeOn', 'createdAt', 'updatedAt']);
+      setMarketData(transformedMarket);
     });
 
     api.get<APIResponse<number>>("/users/coins").then((response) => {

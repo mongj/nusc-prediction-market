@@ -5,6 +5,7 @@ import { APIResponse, api } from "@/api";
 import { Button, Chip } from "@/components/primitives";
 import { ChipColor } from "@/components/primitives/Chip";
 import { Market } from "@/types";
+import { dateTransformer } from "@/utils/dateTransformer";
 
 enum MarketStatus {
   PENDING = "pending",
@@ -24,7 +25,10 @@ const MarketSection = () => {
     api
       .get<APIResponse<Market[]>>("/markets")
       .then((response) => {
-        setMarkets(Object.values(response.data.data));
+        const transformedMarkets = Object.values(response.data.data).map(market =>
+          dateTransformer(market, ['openOn', 'closeOn', 'createdAt', 'updatedAt'])
+        );
+        setMarkets(transformedMarkets);
       })
       .catch((error) => {
         console.error("Error fetching markets:", error);
@@ -32,7 +36,7 @@ const MarketSection = () => {
   }, []);
 
   const getMarketStatus = (market: Market): MarketStatus => {
-    const isOpen = new Date(market.openOn) < new Date() && new Date(market.closeOn) > new Date();
+    const isOpen = market.openOn < new Date() && market.closeOn > new Date();
     if (!market.hasAnswered) {
       return isOpen ? MarketStatus.PENDING : MarketStatus.CLOSED;
     }
@@ -75,9 +79,9 @@ const MarketSection = () => {
   const displayedMarkets = markets
     .filter((market) => {
       const now = new Date();
-      return new Date(market.openOn) < now;
+      return market.openOn < now;
     })
-    .sort((a, b) => new Date(b.openOn).getTime() - new Date(a.openOn).getTime());
+    .sort((a, b) => b.openOn.getTime() - a.openOn.getTime());
 
   // Pagination logic
   const totalPages = Math.ceil(displayedMarkets.length / itemsPerPage);
@@ -109,7 +113,7 @@ const MarketSection = () => {
                 className="duolingo-interactive grid grid-cols-3 md:grid-cols-5 items-center px-4 py-2 border-b border-neutral-300 last:border-b-0 rounded-lg mx-2 my-1"
               >
                 <p className="font-nunito text-base font-bold hidden md:block">
-                  {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                  {market.openOn.toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                 </p>
                 <p className="font-nunito text-base font-bold col-span-1">{market.name}</p>
                 <div className="flex justify-center items-center gap-1">

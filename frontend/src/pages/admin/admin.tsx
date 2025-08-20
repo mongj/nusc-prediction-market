@@ -5,6 +5,7 @@ import { Button, Chip } from "@/components/primitives";
 import { ChipColor } from "@/components/primitives/Chip";
 import { Market } from "@/types";
 import AdminHeader from "@/components/Header/adminHeader";
+import { dateTransformer } from "@/utils/dateTransformer";
 
 enum MarketStatus {
     PENDING = "pending",
@@ -21,7 +22,10 @@ const AdminPage = () => {
         api
             .get<APIResponse<Market[]>>("/markets/admin")
             .then((response) => {
-                setMarkets(Object.values(response.data.data));
+                const transformedMarkets = Object.values(response.data.data).map(market =>
+                    dateTransformer(market, ['openOn', 'closeOn', 'createdAt', 'updatedAt'])
+                );
+                setMarkets(transformedMarkets);
             })
             .catch((error) => {
                 console.error("Error fetching markets:", error);
@@ -54,9 +58,9 @@ const AdminPage = () => {
     };
 
     const climateMarkets = markets.filter(market => !market.isControl)
-        .sort((a, b) => new Date(a.openOn).getTime() - new Date(b.openOn).getTime());
+        .sort((a, b) => a.openOn.getTime() - b.openOn.getTime());
     const entertainmentMarkets = markets.filter(market => market.isControl)
-        .sort((a, b) => new Date(a.openOn).getTime() - new Date(b.openOn).getTime());
+        .sort((a, b) => a.openOn.getTime() - b.openOn.getTime());
 
     // Pagination logic for climate
     const climateTotalPages = Math.ceil(climateMarkets.length / itemsPerPage);
@@ -105,7 +109,7 @@ const AdminPage = () => {
                             className={`admin-row grid grid-cols-1 sm:grid-cols-[1fr_4fr_1fr_1fr] items-start sm:items-center px-2 sm:px-4 py-2 border-b border-neutral-300 last:border-b-0 gap-y-2 rounded-lg mx-2 my-1 ${isResolved ? 'admin-status-resolved' : 'admin-status-pending'}`}
                         >
                             <p className="font-nunito text-xs sm:text-base font-medium text-gray-700 sm:text-black">
-                                {new Date(market.openOn).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                                {market.openOn.toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                             </p>
                             <p className="font-nunito text-xs sm:text-base font-medium text-gray-700 sm:text-black break-words">
                                 {market.question}
