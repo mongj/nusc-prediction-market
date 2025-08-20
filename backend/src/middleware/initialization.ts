@@ -16,7 +16,7 @@ const corsOptions = {
            "https://staging.nuscpredict.com", 
            "https://nuscpredict.com",
            "https://nusclimate.com",
-           "https://staging.nusclimate.com"
+           "https://staging.nusclimate.com",
           ],
   credentials: true,
 };
