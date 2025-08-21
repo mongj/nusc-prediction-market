@@ -17,6 +17,8 @@ const corsOptions = {
            "https://nuscpredict.com",
            "https://nusclimate.com",
            "https://staging.nusclimate.com",
+           "https://frontend-two-sage-57.vercel.app",
+           "https://frontend-staging-beta.vercel.app"
           ],
   credentials: true,
 };
