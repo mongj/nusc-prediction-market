@@ -33,7 +33,7 @@ const AdminHeader = () => {
   return (
     <div className="flex w-full flex-col sm:flex-row items-center sm:items-center justify-between gap-2 sm:gap-0">
       <div className="font-nunito duolingo-heading text-2xl sm:text-4xl font-extrabold mb-2 sm:mb-0">
-        NUSC<span className="text-sky-500">Predict</span>
+        NUSC<span className="text-sky-500">limate</span>
       </div>
 
       <div className="flex flex-col sm:flex-row w-full sm:w-fit gap-2 sm:gap-3 items-center sm:items-center">

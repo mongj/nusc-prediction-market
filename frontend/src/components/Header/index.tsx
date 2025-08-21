@@ -30,7 +30,7 @@ const Header = () => {
     <div className="flex w-full items-center justify-between flex-wrap gap-2 py-2">
       <div className="font-nunito text-2xl sm:text-4xl font-extrabold">
         <span className="text-sky-500">NUSC</span>
-        <span className="text-lime-600">Predict</span>
+        <span className="text-lime-600">limate</span>
       </div>
 
       <div className="flex w-fit gap-2 sm:gap-3">

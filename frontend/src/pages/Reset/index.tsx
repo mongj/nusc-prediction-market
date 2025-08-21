@@ -52,7 +52,7 @@ function Reset() {
       <div className="relative flex h-full w-full place-content-center place-items-center bg-white">
         <div className="absolute top-6 sm:top-16 left-6 sm:left-16">
           <span className="text-xl sm:text-4xl font-extrabold font-nunito text-sky-500">NUSC</span>
-          <span className="text-xl sm:text-4xl font-extrabold font-nunito text-lime-600">Predict</span>
+          <span className="text-xl sm:text-4xl font-extrabold font-nunito text-lime-600">limate</span>
         </div>
         
         <div className="w-full max-w-96 px-5 sm:px-0 mt-8">
