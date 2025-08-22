@@ -187,6 +187,7 @@ export class AuthController {
       httpOnly: true,
       secure: config.nodeEnv === "production",
       signed: true,
+      sameSite: config.nodeEnv === "production" ? 'none' : 'lax',
     });
   }
 
