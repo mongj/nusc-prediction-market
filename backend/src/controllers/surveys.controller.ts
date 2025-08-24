@@ -11,6 +11,15 @@ export class SurveyController {
       return;
     }
 
+    // Get participant completion status
+    const participant = await db.participant.findUnique({
+      where: { user_id: userId },
+      select: {
+        completed_pre_survey: true,
+        completed_post_survey: true,
+      },
+    });
+
     const surveys = await db.survey.findMany({
       include: {
         SurveyResponse: {
@@ -24,11 +33,27 @@ export class SurveyController {
       },
     });
 
-    const surveysWithCompletion = surveys.map((survey) => ({
-      ...survey,
-      completed: survey.SurveyResponse.length > 0,
-      SurveyResponse: undefined,
-    }));
+    const surveysWithCompletion = surveys.map((survey) => {
+      let completed = false;
+      
+      // Check completion based on survey type and participant flags
+      if (participant) {
+        if (survey.name.toLowerCase().includes("pre-study")) {
+          completed = participant.completed_pre_survey;
+        } else if (survey.name.toLowerCase().includes("post-study")) {
+          completed = participant.completed_post_survey;
+        } else {
+          // Fallback to SurveyResponse check for other surveys
+          completed = survey.SurveyResponse.length > 0;
+        }
+      }
+
+      return {
+        ...survey,
+        completed,
+        SurveyResponse: undefined,
+      };
+    });
 
     res.status(200).json({ data: surveysWithCompletion });
   }
