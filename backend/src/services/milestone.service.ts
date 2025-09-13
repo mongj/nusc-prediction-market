@@ -22,7 +22,8 @@ export class MilestoneService {
     }
 
     // Determine base market ID based on control group
-    const baseMarketId = participant.in_control_group ? 1 : 31;
+    // const baseMarketId = participant.in_control_group ? 1 : 31; //uncomment for actual study
+    const baseMarketId = 1;
 
     // Get current milestone rewards (e.g., "11000" means milestones 1&2 rewarded)
     const currentRewards = participant.milestone_rewards;
