@@ -75,7 +75,7 @@ const CoinDisplay = () => {
       >
         <div className="p-3 space-y-2 text-sm font-normal">
           <p className="text-gray-800 font-nunito leading-relaxed">This is the total amount of coins you have earned. Use these coins to make your predictions!</p>
-          <p className="text-gray-800 font-nunito leading-relaxed">Your coins will be converted to real currency at the end of this study at a rate of 15c per coin.</p>
+          <p className="text-gray-800 font-nunito leading-relaxed">Your coins will be converted to real currency at the end of this study at a rate of 10c per coin.</p>
         </div>
       </Popover>
     </div>
